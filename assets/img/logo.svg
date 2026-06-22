@@ -1,0 +1,12 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Double MMK Management logo">
+  <!-- Placeholder brand mark: two overlapping rooftops ("Double") in Detroit navy + warm amber -->
+  <rect width="200" height="200" rx="40" fill="#16324f"/>
+  <!-- back house -->
+  <path d="M58 96 L100 60 L142 96 V150 H58 Z" fill="#1f4366"/>
+  <!-- amber roof accent -->
+  <path d="M44 100 L100 52 L156 100" stroke="#e0922f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- second roof (the "double") -->
+  <path d="M72 112 L100 88 L128 112" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- door -->
+  <rect x="90" y="120" width="20" height="30" rx="3" fill="#e0922f"/>
+</svg>
