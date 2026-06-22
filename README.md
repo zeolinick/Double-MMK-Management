@@ -72,9 +72,31 @@ Then remove the `data-demo` attribute so the browser submits normally.
 
 ## Deploying
 
-**GitHub Pages:** push to GitHub → Settings → Pages → deploy from the branch
-root. **Netlify / Cloudflare Pages:** connect the repo, no build command, publish
+**GitHub Pages (automated):** a workflow at `.github/workflows/deploy-pages.yml`
+deploys the site automatically. One-time setup: in the repo go to
+**Settings → Pages → Build and deployment → Source: "GitHub Actions"**. After
+that, every push to this branch (or `main`) publishes a live preview URL, shown
+in the Actions run and under Settings → Pages.
+
+**Netlify / Cloudflare Pages:** connect the repo, no build command, publish
 directory `/`.
+
+### Set your domain
+
+The site uses `https://www.doublemmk.com` as a placeholder in several SEO files.
+Once you know the final domain, update it in:
+
+- `sitemap.xml` and `robots.txt`
+- the `og:`/`twitter:`/`canonical` tags in each `*.html` `<head>`
+- the JSON-LD block in `index.html`
+
+## SEO & sharing
+
+Already included: per-page titles & descriptions, Open Graph + Twitter cards
+(with a branded share image at `assets/img/og-image.svg`), `sitemap.xml`,
+`robots.txt`, a `RealEstateAgent` JSON-LD block on the home page, and a custom
+`404.html`. For best social-preview compatibility, export `og-image.svg` to a
+1200×630 **PNG** and update the `og:image` / `twitter:image` URLs.
 
 ---
 
