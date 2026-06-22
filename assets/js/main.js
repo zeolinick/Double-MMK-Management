@@ -3,6 +3,16 @@
 (function () {
   "use strict";
 
+  /* ---- Highlight the current page in the nav ---- */
+  (function () {
+    var page = location.pathname.split("/").pop() || "index.html";
+    if (page === "") page = "index.html";
+    document.querySelectorAll(".nav-links a").forEach(function (a) {
+      var href = (a.getAttribute("href") || "").split("#")[0];
+      if (href === page) a.classList.add("active");
+    });
+  })();
+
   /* ---- Mobile nav toggle ---- */
   var toggle = document.querySelector(".nav-toggle");
   var menu = document.getElementById("nav-menu");
