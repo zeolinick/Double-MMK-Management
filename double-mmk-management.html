@@ -508,14 +508,21 @@ textarea:focus-visible, .btn:focus-visible {
 
 </style>
   <style>
-    /* --- single-page overrides --- */
+    /* --- single-file: no-JS navigation via :target --- */
     .page { display: none; }
-    .page.is-active { display: block; }
-    .reveal { opacity: 0; }
-    .page.is-active .reveal { animation: revealUp .6s ease forwards; }
-    @keyframes revealUp { from { opacity:0; transform:translateY(18px);} to { opacity:1; transform:none; } }
+    #home { display: block; }
+    .page:target { display: block; }
+    body:has(.page:target:not(#home)) #home { display: none; }
+    .reveal { opacity: 1 !important; transform: none !important; }
     [id] { scroll-margin-top: 100px; }
-    @media (prefers-reduced-motion: reduce){ .reveal,.page.is-active .reveal{opacity:1!important;animation:none!important;transform:none!important;} }
+    /* CSS-only mobile menu */
+    @media (max-width: 1000px) { #menu:target { transform: translateY(0); } }
+    /* native <details> FAQ */
+    summary.faq-q { list-style: none; cursor: pointer; }
+    summary.faq-q::-webkit-details-marker { display: none; }
+    details.faq-item .faq-a { max-height: 0; overflow: hidden; }
+    details.faq-item[open] .faq-a { max-height: 1500px; }
+    details.faq-item[open] summary.faq-q::after { content: "\2013"; }
   </style>
   <!-- Local business structured data for SEO (fill in real details before launch) -->
   <script type="application/ld+json">
@@ -556,10 +563,8 @@ textarea:focus-visible, .btn:focus-visible {
           <span class="brand-sub">Management LLC</span>
         </span>
       </a>
-      <button class="nav-toggle" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="nav-menu" id="nav-menu">
+      <a class="nav-toggle" href="#menu" role="button" aria-label="Open menu"><span></span><span></span><span></span></a>
+      <nav class="nav-menu" id="menu">
         <ul class="nav-links">
           <li><a href="#home">Home</a></li>
           <li><a href="#properties">Properties</a></li>
@@ -570,14 +575,14 @@ textarea:focus-visible, .btn:focus-visible {
         </ul>
         <div class="nav-cta">
           <a href="#tenants" class="btn btn--outline-light btn--sm">Tenant Login</a>
-          <a href="#owners/quote" class="btn btn--primary btn--sm">Get a Quote</a>
+          <a href="#owners" class="btn btn--primary btn--sm">Get a Quote</a>
         </div>
       </nav>
     </div>
   </header>
 
   <main>
-<div class="page is-active" id="home">
+<div class="page" id="home">
 
     <!-- ====================== HERO ====================== -->
     <section class="hero">
@@ -588,7 +593,7 @@ textarea:focus-visible, .btn:focus-visible {
             <h1>Detroit property,<br /><span class="accent">managed right.</span></h1>
             <p>Double MMK Management LLC keeps your properties occupied, maintained, and profitable — with hands-on service and straight answers. Three houses, one standard.</p>
             <div class="hero-actions">
-              <a href="#owners/quote" class="btn btn--primary">Get Your Free Rental Analysis</a>
+              <a href="#owners" class="btn btn--primary">Get Your Free Rental Analysis</a>
               <a href="#services" class="btn btn--outline-light">Explore Services</a>
             </div>
             <div class="hero-trust">
@@ -891,7 +896,7 @@ textarea:focus-visible, .btn:focus-visible {
         <div class="cta-band reveal">
           <h2>Ready to earn more from your property?</h2>
           <p>Get a free, no-obligation rental analysis and see how stress-free ownership can be with Double MMK Management.</p>
-          <a href="#owners/quote" class="btn btn--primary">Get My Free Rental Analysis</a>
+          <a href="#owners" class="btn btn--primary">Get My Free Rental Analysis</a>
         </div>
       </div>
     </section>
@@ -1170,11 +1175,11 @@ textarea:focus-visible, .btn:focus-visible {
           <h2>Questions owners ask us</h2>
         </div>
         <div class="faq">
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How much does property management cost?</button><div class="faq-a"><p>Our full-service management fee is a simple percentage of collected rent, with a one-time lease-up fee for placing new tenants. You'll receive an exact quote in your free proposal — with no hidden charges.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How quickly can you rent my property?</button><div class="faq-a"><p>Our average time to lease is about 21 days, depending on location, condition, and pricing. We'll give you an honest timeline during your rental analysis.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How are tenants screened?</button><div class="faq-a"><p>Every applicant undergoes credit, background, eviction-history, employment, and income verification to ensure we place reliable, qualified residents.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">When and how do I get paid?</button><div class="faq-a"><p>Owner payouts are sent via direct deposit each month once rent is collected, along with a detailed statement you can access anytime in your owner portal.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Do you handle maintenance and repairs?</button><div class="faq-a"><p>Yes. We coordinate all routine and emergency maintenance through our network of trusted, licensed Detroit contractors, with spending limits you control.</p></div></div>
+          <details class="faq-item reveal"><summary class="faq-q">How much does property management cost?</summary><div class="faq-a"><p>Our full-service management fee is a simple percentage of collected rent, with a one-time lease-up fee for placing new tenants. You'll receive an exact quote in your free proposal — with no hidden charges.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">How quickly can you rent my property?</summary><div class="faq-a"><p>Our average time to lease is about 21 days, depending on location, condition, and pricing. We'll give you an honest timeline during your rental analysis.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">How are tenants screened?</summary><div class="faq-a"><p>Every applicant undergoes credit, background, eviction-history, employment, and income verification to ensure we place reliable, qualified residents.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">When and how do I get paid?</summary><div class="faq-a"><p>Owner payouts are sent via direct deposit each month once rent is collected, along with a detailed statement you can access anytime in your owner portal.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">Do you handle maintenance and repairs?</summary><div class="faq-a"><p>Yes. We coordinate all routine and emergency maintenance through our network of trusted, licensed Detroit contractors, with spending limits you control.</p></div></details>
         </div>
       </div>
     </section>
@@ -1293,7 +1298,7 @@ textarea:focus-visible, .btn:focus-visible {
         <div class="cta-band reveal">
           <h2>Not sure which services you need?</h2>
           <p>Let's build a management plan around your property and your goals. Start with a free rental analysis.</p>
-          <a href="#owners/quote" class="btn btn--primary">Get My Free Analysis</a>
+          <a href="#owners" class="btn btn--primary">Get My Free Analysis</a>
         </div>
       </div>
     </section>
@@ -1325,7 +1330,7 @@ textarea:focus-visible, .btn:focus-visible {
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
             <h3>Maintenance Request</h3>
             <p>Submit and track repair requests anytime. For emergencies, call our 24/7 line right away.</p>
-            <a href="#tenants/request-form" class="btn btn--primary" style="margin-top:18px;">Submit a Request</a>
+            <a href="#tenants" class="btn btn--primary" style="margin-top:18px;">Submit a Request</a>
           </div>
           <div class="card portal-card reveal">
             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
@@ -1400,10 +1405,10 @@ textarea:focus-visible, .btn:focus-visible {
           <h2>Common tenant questions</h2>
         </div>
         <div class="faq">
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How do I pay my rent?</button><div class="faq-a"><p>Rent is paid online through the Landlord Studio tenant portal. You can pay by bank transfer or card and set up automatic payments so you never miss a due date.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What counts as a maintenance emergency?</button><div class="faq-a"><p>Emergencies include fire, flooding, gas leaks, no heat in freezing weather, or anything threatening safety. Call our 24/7 line at (313) 555-0142 immediately. Everything else can go through the request form.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How do I get access to the tenant portal?</button><div class="faq-a"><p>When your lease begins, we send a Landlord Studio invitation to your email so you can set up your resident account. Lost your invite? Contact our office and we'll resend it.</p></div></div>
-          <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">How do I renew my lease?</button><div class="faq-a"><p>We'll reach out before your lease ends with renewal options. You're also welcome to contact us anytime to discuss renewing early.</p></div></div>
+          <details class="faq-item reveal"><summary class="faq-q">How do I pay my rent?</summary><div class="faq-a"><p>Rent is paid online through the Landlord Studio tenant portal. You can pay by bank transfer or card and set up automatic payments so you never miss a due date.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">What counts as a maintenance emergency?</summary><div class="faq-a"><p>Emergencies include fire, flooding, gas leaks, no heat in freezing weather, or anything threatening safety. Call our 24/7 line at (313) 555-0142 immediately. Everything else can go through the request form.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">How do I get access to the tenant portal?</summary><div class="faq-a"><p>When your lease begins, we send a Landlord Studio invitation to your email so you can set up your resident account. Lost your invite? Contact our office and we'll resend it.</p></div></details>
+          <details class="faq-item reveal"><summary class="faq-q">How do I renew my lease?</summary><div class="faq-a"><p>We'll reach out before your lease ends with renewal options. You're also welcome to contact us anytime to discuss renewing early.</p></div></details>
         </div>
       </div>
     </section>
@@ -1488,7 +1493,7 @@ textarea:focus-visible, .btn:focus-visible {
         <div class="cta-band reveal">
           <h2>Let's work together</h2>
           <p>Experience property management the way it should be. Start with a free, no-obligation rental analysis.</p>
-          <a href="#owners/quote" class="btn btn--primary">Get My Free Analysis</a>
+          <a href="#owners" class="btn btn--primary">Get My Free Analysis</a>
         </div>
       </div>
     </section>
@@ -1520,7 +1525,7 @@ textarea:focus-visible, .btn:focus-visible {
               <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><div><strong>Hours</strong><span>Monday–Friday, 9:00am–5:00pm<br />24/7 emergency maintenance line</span></div></li>
             </ul>
             <div style="margin-top:24px;">
-              <a href="#owners/quote" class="btn btn--primary">I'm an Owner</a>
+              <a href="#owners" class="btn btn--primary">I'm an Owner</a>
               <a href="#tenants" class="btn btn--ghost" style="margin-left:8px;">I'm a Tenant</a>
             </div>
           </div>
@@ -1583,7 +1588,7 @@ textarea:focus-visible, .btn:focus-visible {
           </div>
         </div>
         <div><h4>Company</h4><ul class="footer-links"><li><a href="#about">About Us</a></li><li><a href="#services">Services</a></li><li><a href="#owners">For Owners</a></li><li><a href="#contact">Contact</a></li></ul></div>
-        <div><h4>Residents</h4><ul class="footer-links"><li><a href="#properties">Find a Rental</a></li><li><a href="#tenants">Tenant Portal</a></li><li><a href="#tenants/maintenance">Maintenance Request</a></li><li><a href="#tenants/pay-rent">Pay Rent</a></li></ul></div>
+        <div><h4>Residents</h4><ul class="footer-links"><li><a href="#properties">Find a Rental</a></li><li><a href="#tenants">Tenant Portal</a></li><li><a href="#tenants">Maintenance Request</a></li><li><a href="#tenants">Pay Rent</a></li></ul></div>
         <div><h4>Contact</h4><ul class="footer-links"><li><a href="tel:+13135550142">(313) 555-0142</a></li><li><a href="mailto:hello@doublemmk.com">hello@doublemmk.com</a></li><li>Detroit, Michigan</li><li>Mon–Fri, 9am–5pm</li></ul></div>
       </div>
       <div class="footer-bottom">
@@ -1596,35 +1601,18 @@ textarea:focus-visible, .btn:focus-visible {
   <script>
 (function () {
   "use strict";
-  var PAGES = ["home","properties","owners","services","tenants","about","contact"];
-  var menu = document.getElementById("nav-menu");
-  var toggle = document.querySelector(".nav-toggle");
-  function closeMenu(){ if(menu) menu.classList.remove("open"); if(toggle) toggle.setAttribute("aria-expanded","false"); }
-  if (toggle && menu) toggle.addEventListener("click", function(){ var o=menu.classList.toggle("open"); toggle.setAttribute("aria-expanded", o?"true":"false"); });
-  function setActiveNav(route){ document.querySelectorAll(".nav-links a").forEach(function(a){ var r=(a.getAttribute("href")||"").replace("#","").split("/")[0]; a.classList.toggle("active", r===route); }); }
-  function showPage(route, sub){
-    if (PAGES.indexOf(route)===-1) route="home";
-    document.querySelectorAll(".page").forEach(function(p){ p.classList.toggle("is-active", p.id===route); });
-    setActiveNav(route);
-    if (sub){ var el=document.getElementById(sub); if(el){ el.scrollIntoView(); return; } }
-    window.scrollTo(0,0);
-  }
-  function route(){
-    closeMenu();
-    var raw = location.hash.replace(/^#\/?/, "");
-    if(!raw){ showPage("home"); return; }
-    var parts = raw.split("/");
-    if(PAGES.indexOf(parts[0])===-1){ var el=document.getElementById(parts[0]); if(el) el.scrollIntoView(); return; }
-    showPage(parts[0], parts[1]);
-  }
-  window.addEventListener("hashchange", route); route();
+  var header=document.querySelector(".site-header");
+  if(header){ var os=function(){ header.classList.toggle("scrolled", window.scrollY>16); }; window.addEventListener("scroll",os,{passive:true}); os(); }
 
-  document.querySelectorAll(".faq-q").forEach(function(q){
-    q.addEventListener("click", function(){ var item=q.closest(".faq-item"); var a=item.querySelector(".faq-a"); var o=item.classList.toggle("open"); q.setAttribute("aria-expanded",o?"true":"false"); a.style.maxHeight=o?a.scrollHeight+"px":null; });
-  });
+  var reduceM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(el){ var raw=el.getAttribute("data-count")||el.textContent; el.setAttribute("data-count",raw); var m=raw.match(/^([\d.]+)(.*)$/); if(!m) return; if(reduceM){el.textContent=raw;return;} var target=parseFloat(m[1]),suffix=m[2],dec=m[1].indexOf(".")!==-1?1:0,start=null; function fr(ts){ if(start===null)start=ts; var p=Math.min((ts-start)/1400,1); var e=1-Math.pow(1-p,3); el.textContent=(target*e).toFixed(dec)+suffix; if(p<1)requestAnimationFrame(fr); else el.textContent=m[1]+suffix; } requestAnimationFrame(fr); }
+  var counters=document.querySelectorAll(".hero-trust strong, .stats .stat strong");
+  if("IntersectionObserver" in window && counters.length){ var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:0.4}); counters.forEach(function(el){cio.observe(el);}); }
+
   document.querySelectorAll("form[data-demo]").forEach(function(form){
     form.addEventListener("submit", function(e){ e.preventDefault(); var s=form.querySelector(".form-success"); if(s){ s.classList.add("show"); s.scrollIntoView({behavior:"smooth",block:"center"}); } form.reset(); });
   });
+
   var filterForm = document.getElementById("listing-filter");
   if (filterForm){
     var cards = Array.prototype.slice.call(document.querySelectorAll("[data-listing]"));
@@ -1642,14 +1630,6 @@ textarea:focus-visible, .btn:focus-visible {
     filterForm.addEventListener("submit", function(e){ e.preventDefault(); applyFilters(); });
     filterForm.addEventListener("reset", function(){ setTimeout(applyFilters,0); });
   }
-  var header=document.querySelector(".site-header");
-  if(header){ var os=function(){ header.classList.toggle("scrolled", window.scrollY>16); }; window.addEventListener("scroll",os,{passive:true}); os(); }
-
-  var reduceM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
-  function countUp(el){ var raw=el.getAttribute("data-count")||el.textContent; el.setAttribute("data-count",raw); var m=raw.match(/^([\d.]+)(.*)$/); if(!m) return; if(reduceM){el.textContent=raw;return;} var target=parseFloat(m[1]),suffix=m[2],dec=m[1].indexOf(".")!==-1?1:0,start=null; function fr(ts){ if(start===null)start=ts; var p=Math.min((ts-start)/1400,1); var e=1-Math.pow(1-p,3); el.textContent=(target*e).toFixed(dec)+suffix; if(p<1)requestAnimationFrame(fr); else el.textContent=m[1]+suffix; } requestAnimationFrame(fr); }
-  var counters=document.querySelectorAll(".hero-trust strong, .stats .stat strong");
-  if("IntersectionObserver" in window && counters.length){ var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:0.6}); counters.forEach(function(el){cio.observe(el);}); }
-
   var yr=document.getElementById("year"); if(yr) yr.textContent=new Date().getFullYear();
 })();
 </script>

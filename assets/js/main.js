@@ -23,7 +23,7 @@
     });
     // close menu when a link is tapped (mobile)
     menu.addEventListener("click", function (e) {
-      if (e.target.tagName === "A" && window.innerWidth <= 940) {
+      if (e.target.tagName === "A" && window.innerWidth <= 1000) {
         menu.classList.remove("open");
         toggle.setAttribute("aria-expanded", "false");
       }
