@@ -296,11 +296,15 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 @media (max-width: 880px) { .split { grid-template-columns: 1fr; gap: 38px; } .split.reverse .split-media { order: 0; } }
 .split-media img, .media-frame { border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .media-frame {
-  display: grid; place-items: center; gap: 8px; color: #9a9aa0;
-  background: var(--paper); border: 1px dashed var(--line); box-shadow: none;
-  font-family: var(--font-head); font-size: .9rem; text-transform: uppercase; letter-spacing: .05em;
+  display: grid; place-items: center; gap: 10px; color: #9a9aa0;
+  background: linear-gradient(150deg, #1c1c20 0%, #0f0f11 100%);
+  border: 1px solid var(--line-dark); box-shadow: none;
+  font-family: var(--font-head); font-size: .76rem; text-transform: uppercase; letter-spacing: .14em;
+  position: relative; overflow: hidden; text-align: center; padding: 12px;
 }
-.media-frame svg { width: 30px; height: 30px; opacity: .5; }
+.media-frame::before { content: ""; position: absolute; inset: 0; background: radial-gradient(60% 80% at 50% 0%, rgba(200,32,42,.18), transparent 62%); }
+.media-frame > * { position: relative; }
+.media-frame svg { width: 34px; height: 34px; opacity: .95; color: var(--red); }
 
 .checklist { list-style: none; padding: 0; margin: 22px 0 0; }
 .checklist li { position: relative; padding-left: 34px; margin-bottom: 13px; color: var(--body); }
@@ -345,6 +349,10 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
   position: relative; overflow: hidden;
 }
 .cta-band::after { content: ""; position: absolute; right: -80px; bottom: -120px; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.28), transparent 62%); }
+.cta-band::before {
+  content: ""; position: absolute; left: -24px; bottom: -34px; width: 240px; height: 192px; opacity: .12; z-index: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 320'%3E%3Cg fill='%23c8202a'%3E%3Cpolygon points='37,300 37,242 95,196 153,242 153,300'/%3E%3Cpolygon points='247,300 247,242 305,196 363,242 363,300'/%3E%3Cpolygon points='130,300 130,230 200,174 270,230 270,300'/%3E%3C/g%3E%3Ccircle cx='200' cy='70' r='46' fill='none' stroke='%23c8202a' stroke-width='10'/%3E%3C/svg%3E") left bottom / contain no-repeat;
+}
 .cta-band > * { position: relative; z-index: 1; }
 .cta-band h2 { color: var(--white); }
 .cta-band p { color: #9a9aa0; max-width: 580px; margin: 0 auto 26px; }
