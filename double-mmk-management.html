@@ -436,6 +436,39 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
   .btn:hover, .card:hover, .listing:hover { transform: none; }
 }
 
+/* ---- Scroll-condensed header --------------------------------------------- */
+.site-header .nav { transition: height var(--t); }
+.brand-emblem { transition: height var(--t); }
+.site-header.scrolled { background: rgba(15,15,17,.95); box-shadow: 0 10px 34px rgba(0,0,0,.45); }
+.site-header.scrolled .nav { height: 68px; }
+.site-header.scrolled .brand-emblem { height: 40px; }
+
+/* ---- Trust strip --------------------------------------------------------- */
+.trust-strip { background: var(--white); border-bottom: 1px solid var(--line); }
+.trust-strip ul { list-style: none; margin: 0; padding: 24px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px; }
+.trust-strip li { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 600; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--onyx); }
+.trust-strip svg { width: 20px; height: 20px; color: var(--red); flex: none; }
+@media (max-width: 600px) { .trust-strip ul { gap: 14px 22px; padding: 20px 0; } .trust-strip li { font-size: .72rem; } }
+
+/* ---- Focus-visible (keyboard accessibility) ------------------------------ */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible,
+textarea:focus-visible, .btn:focus-visible {
+  outline: 3px solid rgba(200,32,42,.55); outline-offset: 2px; border-radius: 6px;
+}
+
+/* ---- Detroit skyline motif ----------------------------------------------- */
+.hero { background-repeat: no-repeat; background-position: center bottom; background-size: 1100px auto; }
+.site-footer { position: relative; }
+.site-footer .container { position: relative; z-index: 1; }
+.site-footer::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 90px; z-index: 0;
+  background-position: center top; background-repeat: no-repeat; background-size: 100% 90px;
+  pointer-events: none;
+}
+
+.hero { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201440%20180%27%20preserveAspectRatio%3D%27none%27%3E%3Cg%20fill%3D%27%2523c8202a%27%20fill-opacity%3D%270.15%27%3E%3Crect%20x%3D%270%27%20y%3D%27134%27%20width%3D%2770%27%20height%3D%2746%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%2774%27%20y%3D%27110%27%20width%3D%2740%27%20height%3D%2770%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27118%27%20y%3D%27122%27%20width%3D%2752%27%20height%3D%2758%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27174%27%20y%3D%2788%27%20width%3D%2734%27%20height%3D%2792%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27212%27%20y%3D%27106%27%20width%3D%2758%27%20height%3D%2774%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27274%27%20y%3D%2776%27%20width%3D%2740%27%20height%3D%27104%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%27292.8%27%20y%3D%2758%27%20width%3D%272.4%27%20height%3D%2718%27%2F%3E%3Crect%20x%3D%27318%27%20y%3D%2794%27%20width%3D%2748%27%20height%3D%2786%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27370%27%20y%3D%2760%27%20width%3D%2730%27%20height%3D%27120%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27404%27%20y%3D%2752%27%20width%3D%2746%27%20height%3D%27128%27%20rx%3D%276%27%2F%3E%3Crect%20x%3D%27454%27%20y%3D%2730%27%20width%3D%2740%27%20height%3D%27150%27%20rx%3D%278%27%2F%3E%3Crect%20x%3D%27472.8%27%20y%3D%274%27%20width%3D%272.4%27%20height%3D%2726%27%2F%3E%3Crect%20x%3D%27498%27%20y%3D%2712%27%20width%3D%2758%27%20height%3D%27168%27%20rx%3D%2710%27%2F%3E%3Crect%20x%3D%27525.8%27%20y%3D%27-18%27%20width%3D%272.4%27%20height%3D%2730%27%2F%3E%3Crect%20x%3D%27560%27%20y%3D%2730%27%20width%3D%2740%27%20height%3D%27150%27%20rx%3D%278%27%2F%3E%3Crect%20x%3D%27578.8%27%20y%3D%274%27%20width%3D%272.4%27%20height%3D%2726%27%2F%3E%3Crect%20x%3D%27604%27%20y%3D%2752%27%20width%3D%2746%27%20height%3D%27128%27%20rx%3D%276%27%2F%3E%3Crect%20x%3D%27656%27%20y%3D%2784%27%20width%3D%2752%27%20height%3D%2796%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27712%27%20y%3D%2762%27%20width%3D%2734%27%20height%3D%27118%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27727.8%27%20y%3D%2742%27%20width%3D%272.4%27%20height%3D%2720%27%2F%3E%3Crect%20x%3D%27750%27%20y%3D%27108%27%20width%3D%2760%27%20height%3D%2772%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27814%27%20y%3D%2780%27%20width%3D%2744%27%20height%3D%27100%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%27862%27%20y%3D%2796%27%20width%3D%2752%27%20height%3D%2784%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27918%27%20y%3D%2750%27%20width%3D%2730%27%20height%3D%27130%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27931.8%27%20y%3D%2728%27%20width%3D%272.4%27%20height%3D%2722%27%2F%3E%3Crect%20x%3D%27952%27%20y%3D%27104%27%20width%3D%2758%27%20height%3D%2776%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271014%27%20y%3D%2772%27%20width%3D%2740%27%20height%3D%27108%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%271058%27%20y%3D%27116%27%20width%3D%2766%27%20height%3D%2764%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271128%27%20y%3D%2764%27%20width%3D%2736%27%20height%3D%27116%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%271144.8%27%20y%3D%2746%27%20width%3D%272.4%27%20height%3D%2718%27%2F%3E%3Crect%20x%3D%271168%27%20y%3D%2790%27%20width%3D%2750%27%20height%3D%2790%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271222%27%20y%3D%27110%27%20width%3D%2758%27%20height%3D%2770%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271284%27%20y%3D%2784%27%20width%3D%2740%27%20height%3D%2796%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%271328%27%20y%3D%27122%27%20width%3D%2752%27%20height%3D%2758%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271384%27%20y%3D%27134%27%20width%3D%2756%27%20height%3D%2746%27%20rx%3D%270%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+.site-footer::before { background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%201440%20180%27%20preserveAspectRatio%3D%27none%27%3E%3Cg%20fill%3D%27%2523c8202a%27%20fill-opacity%3D%270.16%27%3E%3Crect%20x%3D%270%27%20y%3D%27134%27%20width%3D%2770%27%20height%3D%2746%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%2774%27%20y%3D%27110%27%20width%3D%2740%27%20height%3D%2770%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27118%27%20y%3D%27122%27%20width%3D%2752%27%20height%3D%2758%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27174%27%20y%3D%2788%27%20width%3D%2734%27%20height%3D%2792%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27212%27%20y%3D%27106%27%20width%3D%2758%27%20height%3D%2774%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27274%27%20y%3D%2776%27%20width%3D%2740%27%20height%3D%27104%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%27292.8%27%20y%3D%2758%27%20width%3D%272.4%27%20height%3D%2718%27%2F%3E%3Crect%20x%3D%27318%27%20y%3D%2794%27%20width%3D%2748%27%20height%3D%2786%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27370%27%20y%3D%2760%27%20width%3D%2730%27%20height%3D%27120%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27404%27%20y%3D%2752%27%20width%3D%2746%27%20height%3D%27128%27%20rx%3D%276%27%2F%3E%3Crect%20x%3D%27454%27%20y%3D%2730%27%20width%3D%2740%27%20height%3D%27150%27%20rx%3D%278%27%2F%3E%3Crect%20x%3D%27472.8%27%20y%3D%274%27%20width%3D%272.4%27%20height%3D%2726%27%2F%3E%3Crect%20x%3D%27498%27%20y%3D%2712%27%20width%3D%2758%27%20height%3D%27168%27%20rx%3D%2710%27%2F%3E%3Crect%20x%3D%27525.8%27%20y%3D%27-18%27%20width%3D%272.4%27%20height%3D%2730%27%2F%3E%3Crect%20x%3D%27560%27%20y%3D%2730%27%20width%3D%2740%27%20height%3D%27150%27%20rx%3D%278%27%2F%3E%3Crect%20x%3D%27578.8%27%20y%3D%274%27%20width%3D%272.4%27%20height%3D%2726%27%2F%3E%3Crect%20x%3D%27604%27%20y%3D%2752%27%20width%3D%2746%27%20height%3D%27128%27%20rx%3D%276%27%2F%3E%3Crect%20x%3D%27656%27%20y%3D%2784%27%20width%3D%2752%27%20height%3D%2796%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27712%27%20y%3D%2762%27%20width%3D%2734%27%20height%3D%27118%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27727.8%27%20y%3D%2742%27%20width%3D%272.4%27%20height%3D%2720%27%2F%3E%3Crect%20x%3D%27750%27%20y%3D%27108%27%20width%3D%2760%27%20height%3D%2772%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27814%27%20y%3D%2780%27%20width%3D%2744%27%20height%3D%27100%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%27862%27%20y%3D%2796%27%20width%3D%2752%27%20height%3D%2784%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%27918%27%20y%3D%2750%27%20width%3D%2730%27%20height%3D%27130%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27931.8%27%20y%3D%2728%27%20width%3D%272.4%27%20height%3D%2722%27%2F%3E%3Crect%20x%3D%27952%27%20y%3D%27104%27%20width%3D%2758%27%20height%3D%2776%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271014%27%20y%3D%2772%27%20width%3D%2740%27%20height%3D%27108%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%271058%27%20y%3D%27116%27%20width%3D%2766%27%20height%3D%2764%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271128%27%20y%3D%2764%27%20width%3D%2736%27%20height%3D%27116%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%271144.8%27%20y%3D%2746%27%20width%3D%272.4%27%20height%3D%2718%27%2F%3E%3Crect%20x%3D%271168%27%20y%3D%2790%27%20width%3D%2750%27%20height%3D%2790%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271222%27%20y%3D%27110%27%20width%3D%2758%27%20height%3D%2770%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271284%27%20y%3D%2784%27%20width%3D%2740%27%20height%3D%2796%27%20rx%3D%273%27%2F%3E%3Crect%20x%3D%271328%27%20y%3D%27122%27%20width%3D%2752%27%20height%3D%2758%27%20rx%3D%270%27%2F%3E%3Crect%20x%3D%271384%27%20y%3D%27134%27%20width%3D%2756%27%20height%3D%2746%27%20rx%3D%270%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"); }
+
 </style>
   <style>
     /* --- single-page overrides --- */
@@ -550,6 +583,18 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
             </form>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ====================== TRUST STRIP ====================== -->
+    <section class="trust-strip">
+      <div class="container">
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg> Equal Housing Opportunity</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 9.5"/></svg> Licensed &amp; Insured</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Locally Owned &amp; Operated</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Powered by Landlord Studio</li>
+        </ul>
       </div>
     </section>
 
@@ -1497,6 +1542,14 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
     filterForm.addEventListener("submit", function(e){ e.preventDefault(); applyFilters(); });
     filterForm.addEventListener("reset", function(){ setTimeout(applyFilters,0); });
   }
+  var header=document.querySelector(".site-header");
+  if(header){ var os=function(){ header.classList.toggle("scrolled", window.scrollY>16); }; window.addEventListener("scroll",os,{passive:true}); os(); }
+
+  var reduceM = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(el){ var raw=el.getAttribute("data-count")||el.textContent; el.setAttribute("data-count",raw); var m=raw.match(/^([\d.]+)(.*)$/); if(!m) return; if(reduceM){el.textContent=raw;return;} var target=parseFloat(m[1]),suffix=m[2],dec=m[1].indexOf(".")!==-1?1:0,start=null; function fr(ts){ if(start===null)start=ts; var p=Math.min((ts-start)/1400,1); var e=1-Math.pow(1-p,3); el.textContent=(target*e).toFixed(dec)+suffix; if(p<1)requestAnimationFrame(fr); else el.textContent=m[1]+suffix; } requestAnimationFrame(fr); }
+  var counters=document.querySelectorAll(".hero-trust strong, .stats .stat strong");
+  if("IntersectionObserver" in window && counters.length){ var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){countUp(e.target);cio.unobserve(e.target);}});},{threshold:0.6}); counters.forEach(function(el){cio.observe(el);}); }
+
   var yr=document.getElementById("year"); if(yr) yr.textContent=new Date().getFullYear();
 })();
 </script>

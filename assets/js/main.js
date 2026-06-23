@@ -57,6 +57,46 @@
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
 
+  /* ---- Condense header on scroll ---- */
+  var header = document.querySelector(".site-header");
+  if (header) {
+    var onScroll = function () { header.classList.toggle("scrolled", window.scrollY > 16); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* ---- Animated count-up for stats ---- */
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function countUp(el) {
+    var raw = el.getAttribute("data-count") || el.textContent;
+    el.setAttribute("data-count", raw);
+    var m = raw.match(/^([\d.]+)(.*)$/);
+    if (!m) return;
+    if (reduceMotion) { el.textContent = raw; return; }
+    var target = parseFloat(m[1]);
+    var suffix = m[2];
+    var decimals = (m[1].indexOf(".") !== -1) ? 1 : 0;
+    var start = null, dur = 1400;
+    function frame(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = m[1] + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+  var counters = document.querySelectorAll(".hero-trust strong, .stats .stat strong");
+  if ("IntersectionObserver" in window && counters.length) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { countUp(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(function (el) { cio.observe(el); });
+  }
+
   /* ---- Demo form handling (no backend yet) ----
      Replace with a real handler (Formspree, Netlify Forms, or your CRM)
      when contact/owner details are connected. For now it shows a
