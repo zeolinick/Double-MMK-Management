@@ -3,6 +3,15 @@
 (function () {
   "use strict";
 
+  /* ============================================================
+     SET THIS to your free Web3Forms access key to start receiving
+     real leads by email. Get one in 30 seconds at https://web3forms.com
+     (enter Doublemmkmanagement@gmail.com, copy the key it emails you,
+     and paste it below). Until it's set, forms show the confirmation
+     message but do NOT send anything.
+     ============================================================ */
+  var WEB3FORMS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
+
   /* ---- Highlight the current page in the nav ---- */
   (function () {
     var page = location.pathname.split("/").pop() || "index.html";
@@ -128,19 +137,38 @@
     counters.forEach(function (el) { cio.observe(el); });
   }
 
-  /* ---- Demo form handling (no backend yet) ----
-     Replace with a real handler (Formspree, Netlify Forms, or your CRM)
-     when contact/owner details are connected. For now it shows a
-     confirmation message so the UX is complete. */
+  /* ---- Form handling: real delivery via Web3Forms when a key is set,
+          graceful confirmation-only fallback until then. ---- */
+  var keyReady = WEB3FORMS_KEY && WEB3FORMS_KEY.indexOf("REPLACE_") !== 0;
+  function showSuccess(form) {
+    var success = form.querySelector(".form-success");
+    if (success) {
+      success.classList.add("show");
+      success.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+    form.reset();
+  }
   document.querySelectorAll("form[data-demo]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var success = form.querySelector(".form-success");
-      if (success) {
-        success.classList.add("show");
-        success.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-      form.reset();
+      if (!keyReady) { showSuccess(form); return; }
+      var btn = form.querySelector("button[type=submit]");
+      var orig = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+      var data = new FormData(form);
+      data.append("access_key", WEB3FORMS_KEY);
+      data.append("subject", "New website lead — Double MMK Management");
+      data.append("from_name", "Double MMK Website");
+      fetch("https://api.web3forms.com/submit", { method: "POST", body: data })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res.success) { showSuccess(form); }
+          else { alert("Sorry — something went wrong sending your message. Please call us at (313) 603-6064."); }
+        })
+        .catch(function () {
+          alert("Sorry — we couldn't reach our server. Please call us at (313) 603-6064 or email Doublemmkmanagement@gmail.com.");
+        })
+        .finally(function () { if (btn) { btn.disabled = false; btn.innerHTML = orig; } });
     });
   });
 
