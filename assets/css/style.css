@@ -405,11 +405,12 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .text-muted { color: var(--muted); }
 .hide { display: none !important; }
 
-/* ---- Reveal -------------------------------------------------------------- */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* ---- Reveal (gated on .js so no-JS shows everything) --------------------- */
+.js .reveal { opacity: 0; transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); will-change: opacity, transform; }
+.js .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
   html { scroll-behavior: auto; }
   .btn:hover, .card:hover, .listing:hover { transform: none; }
 }
@@ -615,8 +616,8 @@ p, .lead { text-wrap: pretty; }
 .to-top:hover { background: var(--red); }
 .to-top svg { width: 20px; height: 20px; }
 
-/* Staggered reveals (multi-page, JS sets --d) */
-.reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+/* Staggered reveals (multi-page, JS sets delay) */
+.js .reveal { transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 
 /* ==========================================================================
    Polish round 2 — dark ribbon texture, angled dividers, sticky sub-nav
@@ -736,3 +737,84 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .svc-outcome { margin: 20px 0 0; padding: 13px 18px; background: rgba(200,32,42,.055);
   border-left: 3px solid var(--red); border-radius: 0 10px 10px 0; color: var(--body); font-size: 1rem; line-height: 1.55; }
 .svc-outcome strong { color: var(--onyx); font-family: var(--font-head); font-weight: 700; }
+
+/* ==========================================================================
+   IMMERSIVE LAYER — refined motion & depth (all gated behind .js)
+   ========================================================================== */
+
+/* --- Scroll progress bar -------------------------------------------------- */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300;
+  background: linear-gradient(90deg, var(--red), var(--red-bright));
+  transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+
+/* --- Directional reveal variants ----------------------------------------- */
+.js .reveal--left  { transform: translateX(-32px); }
+.js .reveal--right { transform: translateX(32px); }
+.js .reveal--scale { transform: scale(.94); }
+.js .reveal--blur  { filter: blur(10px); }
+.js .reveal--left.in, .js .reveal--right.in, .js .reveal--scale.in { transform: none; }
+.js .reveal--blur.in { filter: blur(0); }
+
+/* --- 3D tilt cards -------------------------------------------------------- */
+.js .tilt { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; will-change: transform; }
+.js .tilt:hover { box-shadow: var(--shadow-lg); }
+
+/* --- Magnetic buttons ----------------------------------------------------- */
+.js .magnetic { transition: transform .35s cubic-bezier(.2,.8,.2,1), background var(--t), box-shadow var(--t); will-change: transform; }
+
+/* --- Hero cinematic entrance --------------------------------------------- */
+@keyframes heroUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes heroGlow {
+  0%   { transform: translate(-4%, -2%) scale(1);    opacity: .9; }
+  50%  { transform: translate(6%, 4%) scale(1.12);   opacity: 1; }
+  100% { transform: translate(-4%, -2%) scale(1);    opacity: .9; }
+}
+.js .hero-copy > *, .js .hero-card { opacity: 0; animation: heroUp .9s cubic-bezier(.2,.7,.2,1) forwards; }
+.js .hero-copy > *:nth-child(1) { animation-delay: .15s; }
+.js .hero-copy > *:nth-child(2) { animation-delay: .26s; }
+.js .hero-copy > *:nth-child(3) { animation-delay: .37s; }
+.js .hero-copy > *:nth-child(4) { animation-delay: .48s; }
+.js .hero-copy > *:nth-child(5) { animation-delay: .59s; }
+.js .hero-card { animation-delay: .5s; }
+/* ambient drifting glow behind hero */
+.hero { position: relative; overflow: hidden; }
+.js .hero::after { content: ""; position: absolute; z-index: 0; top: -25%; right: -10%;
+  width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,32,42,.30), rgba(200,32,42,0) 62%);
+  filter: blur(8px); pointer-events: none; animation: heroGlow 14s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-copy > *, .js .hero-card { opacity: 1; animation: none; }
+  .js .hero::after { animation: none; }
+}
+
+/* --- Step-by-step progress (How it works / process) ---------------------- */
+.js .steps-progress { position: relative; }
+.js .steps-progress .step { transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+.js .steps-progress .step::before { transition: background .45s ease, color .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; }
+.js .steps-progress .step--active::before { background: var(--red); color: #fff; transform: scale(1.08); box-shadow: 0 10px 24px rgba(200,32,42,.32); }
+
+/* --- Neighborhood marquee (decorative) ----------------------------------- */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); margin-bottom: 34px; }
+.marquee-track { display: inline-flex; gap: 0; white-space: nowrap; will-change: transform; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span { font-family: var(--font-head); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .02em; font-size: clamp(1.4rem, 3vw, 2.2rem); color: transparent;
+  -webkit-text-stroke: 1px var(--steel); padding: 0 28px; display: inline-flex; align-items: center; }
+.marquee-track span::after { content: "•"; color: var(--red); -webkit-text-stroke: 0; margin-left: 56px; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* --- Page-load intro curtain --------------------------------------------- */
+body.intro-lock { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 9999; background: var(--onyx);
+  display: grid; place-items: center; transition: transform .8s cubic-bezier(.76,0,.24,1); }
+.intro--out { transform: translateY(-100%); }
+.intro-inner { text-align: center; opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.intro--show .intro-inner { opacity: 1; transform: none; }
+.intro-mark { display: block; font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+  letter-spacing: .02em; font-size: clamp(2rem, 7vw, 3.4rem);
+  background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.intro-mark em { font-style: normal; color: var(--red); -webkit-text-fill-color: var(--red); }
+.intro-sub { display: block; margin-top: 12px; font-family: var(--font-head); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--steel); }

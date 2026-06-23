@@ -430,11 +430,12 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .text-muted { color: var(--muted); }
 .hide { display: none !important; }
 
-/* ---- Reveal -------------------------------------------------------------- */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* ---- Reveal (gated on .js so no-JS shows everything) --------------------- */
+.js .reveal { opacity: 0; transform: translateY(24px);
+  transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); will-change: opacity, transform; }
+.js .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1 !important; transform: none !important; transition: none; }
   html { scroll-behavior: auto; }
   .btn:hover, .card:hover, .listing:hover { transform: none; }
 }
@@ -640,8 +641,8 @@ p, .lead { text-wrap: pretty; }
 .to-top:hover { background: var(--red); }
 .to-top svg { width: 20px; height: 20px; }
 
-/* Staggered reveals (multi-page, JS sets --d) */
-.reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+/* Staggered reveals (multi-page, JS sets delay) */
+.js .reveal { transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
 
 /* ==========================================================================
    Polish round 2 — dark ribbon texture, angled dividers, sticky sub-nav
@@ -762,6 +763,87 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   border-left: 3px solid var(--red); border-radius: 0 10px 10px 0; color: var(--body); font-size: 1rem; line-height: 1.55; }
 .svc-outcome strong { color: var(--onyx); font-family: var(--font-head); font-weight: 700; }
 
+/* ==========================================================================
+   IMMERSIVE LAYER — refined motion & depth (all gated behind .js)
+   ========================================================================== */
+
+/* --- Scroll progress bar -------------------------------------------------- */
+.scroll-progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 300;
+  background: linear-gradient(90deg, var(--red), var(--red-bright));
+  transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+
+/* --- Directional reveal variants ----------------------------------------- */
+.js .reveal--left  { transform: translateX(-32px); }
+.js .reveal--right { transform: translateX(32px); }
+.js .reveal--scale { transform: scale(.94); }
+.js .reveal--blur  { filter: blur(10px); }
+.js .reveal--left.in, .js .reveal--right.in, .js .reveal--scale.in { transform: none; }
+.js .reveal--blur.in { filter: blur(0); }
+
+/* --- 3D tilt cards -------------------------------------------------------- */
+.js .tilt { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; will-change: transform; }
+.js .tilt:hover { box-shadow: var(--shadow-lg); }
+
+/* --- Magnetic buttons ----------------------------------------------------- */
+.js .magnetic { transition: transform .35s cubic-bezier(.2,.8,.2,1), background var(--t), box-shadow var(--t); will-change: transform; }
+
+/* --- Hero cinematic entrance --------------------------------------------- */
+@keyframes heroUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes heroGlow {
+  0%   { transform: translate(-4%, -2%) scale(1);    opacity: .9; }
+  50%  { transform: translate(6%, 4%) scale(1.12);   opacity: 1; }
+  100% { transform: translate(-4%, -2%) scale(1);    opacity: .9; }
+}
+.js .hero-copy > *, .js .hero-card { opacity: 0; animation: heroUp .9s cubic-bezier(.2,.7,.2,1) forwards; }
+.js .hero-copy > *:nth-child(1) { animation-delay: .15s; }
+.js .hero-copy > *:nth-child(2) { animation-delay: .26s; }
+.js .hero-copy > *:nth-child(3) { animation-delay: .37s; }
+.js .hero-copy > *:nth-child(4) { animation-delay: .48s; }
+.js .hero-copy > *:nth-child(5) { animation-delay: .59s; }
+.js .hero-card { animation-delay: .5s; }
+/* ambient drifting glow behind hero */
+.hero { position: relative; overflow: hidden; }
+.js .hero::after { content: ""; position: absolute; z-index: 0; top: -25%; right: -10%;
+  width: 60vw; height: 60vw; max-width: 760px; max-height: 760px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,32,42,.30), rgba(200,32,42,0) 62%);
+  filter: blur(8px); pointer-events: none; animation: heroGlow 14s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .js .hero-copy > *, .js .hero-card { opacity: 1; animation: none; }
+  .js .hero::after { animation: none; }
+}
+
+/* --- Step-by-step progress (How it works / process) ---------------------- */
+.js .steps-progress { position: relative; }
+.js .steps-progress .step { transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1); }
+.js .steps-progress .step::before { transition: background .45s ease, color .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; }
+.js .steps-progress .step--active::before { background: var(--red); color: #fff; transform: scale(1.08); box-shadow: 0 10px 24px rgba(200,32,42,.32); }
+
+/* --- Neighborhood marquee (decorative) ----------------------------------- */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); margin-bottom: 34px; }
+.marquee-track { display: inline-flex; gap: 0; white-space: nowrap; will-change: transform; animation: marquee 38s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span { font-family: var(--font-head); font-weight: 800; text-transform: uppercase;
+  letter-spacing: .02em; font-size: clamp(1.4rem, 3vw, 2.2rem); color: transparent;
+  -webkit-text-stroke: 1px var(--steel); padding: 0 28px; display: inline-flex; align-items: center; }
+.marquee-track span::after { content: "•"; color: var(--red); -webkit-text-stroke: 0; margin-left: 56px; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* --- Page-load intro curtain --------------------------------------------- */
+body.intro-lock { overflow: hidden; }
+.intro { position: fixed; inset: 0; z-index: 9999; background: var(--onyx);
+  display: grid; place-items: center; transition: transform .8s cubic-bezier(.76,0,.24,1); }
+.intro--out { transform: translateY(-100%); }
+.intro-inner { text-align: center; opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+.intro--show .intro-inner { opacity: 1; transform: none; }
+.intro-mark { display: block; font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+  letter-spacing: .02em; font-size: clamp(2rem, 7vw, 3.4rem);
+  background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.intro-mark em { font-style: normal; color: var(--red); -webkit-text-fill-color: var(--red); }
+.intro-sub { display: block; margin-top: 12px; font-family: var(--font-head); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--steel); }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -769,7 +851,8 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     #home { display: block; }
     .page:target { display: block; }
     body:has(.page:target:not(#home)) #home { display: none; }
-    .reveal { opacity: 1 !important; transform: none !important; }
+    /* reveals are .js-gated in style.css: hidden only when immersive.js runs,
+       so no-JS still shows everything. No forced override needed here. */
     [id] { scroll-margin-top: 100px; }
     /* CSS-only mobile menu */
     @media (max-width: 1000px) { #menu:target { transform: translateY(0); } }
@@ -845,7 +928,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
-          <div class="reveal">
+          <div class="hero-copy">
             <span class="hero-badge"><span class="stars">★★★★★</span> Trusted by Detroit landlords</span>
             <h1>Detroit property,<br /><span class="accent">managed right.</span></h1>
             <p>Owning a rental shouldn't feel like a second job. We keep your Detroit property occupied, maintained, and profitable — and when you call, a real person picks up. No call centers, no runaround.</p>
@@ -861,7 +944,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           </div>
 
           <!-- Quick owner lead form -->
-          <div class="hero-card reveal">
+          <div class="hero-card">
             <h3>Free Rental Analysis</h3>
             <p>See what your property could earn in today's Detroit market.</p>
             <form data-demo>
@@ -1176,6 +1259,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <span class="eyebrow">Where We Work</span>
           <h2>Neighborhoods we serve</h2>
           <p class="lead">Boots-on-the-ground management across Detroit's neighborhoods — and growing.</p>
+        </div>
+        <div class="marquee reveal" aria-hidden="true">
+          <div class="marquee-track">
+            <span>Corktown</span><span>Midtown</span><span>Rosedale Park</span><span>East English Village</span><span>Bagley</span><span>Hubbard Farms</span><span>Woodbridge</span><span>Boston-Edison</span><span>Indian Village</span><span>Southwest</span><span>Grandmont</span><span>Sherwood Forest</span><span>Palmer Park</span>
+            <span>Corktown</span><span>Midtown</span><span>Rosedale Park</span><span>East English Village</span><span>Bagley</span><span>Hubbard Farms</span><span>Woodbridge</span><span>Boston-Edison</span><span>Indian Village</span><span>Southwest</span><span>Grandmont</span><span>Sherwood Forest</span><span>Palmer Park</span>
+          </div>
         </div>
         <div class="hoods reveal">
           <a class="hood" href="#properties"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Corktown</a>
@@ -2208,6 +2297,215 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   window.addEventListener("scroll", function(){ toTop.classList.toggle("show", window.scrollY>600); }, {passive:true});
 
   var yr=document.getElementById("year"); if(yr) yr.textContent=new Date().getFullYear();
+})();
+</script>
+  <script>/* Double MMK Management — immersive layer
+   ------------------------------------------------------------------
+   Self-contained, dependency-free. Auto-enhances existing markup.
+   Everything is gated behind the `.js` class and respects
+   prefers-reduced-motion, so the no-JS experience is fully intact.
+   ------------------------------------------------------------------ */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  root.classList.add("js");
+
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia && matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var lerp = function (a, b, n) { return (1 - n) * a + n * b; };
+  var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+
+  /* ============================================================
+     1) SCROLL-REVEAL — staggered, with directional variants
+     ============================================================ */
+  (function reveals() {
+    var els = document.querySelectorAll(".reveal");
+    if (!els.length) return;
+    if (reduce || !("IntersectionObserver" in window)) {
+      els.forEach(function (el) { el.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (el) {
+      var parent = el.parentElement;
+      var idx = parent ? Array.prototype.indexOf.call(parent.children, el) : 0;
+      if (!el.style.transitionDelay) el.style.transitionDelay = (Math.min(idx, 8) * 75) + "ms";
+      io.observe(el);
+    });
+  })();
+
+  /* ============================================================
+     2) SCROLL PROGRESS BAR (top)
+     ============================================================ */
+  var bar = document.createElement("div");
+  bar.className = "scroll-progress";
+  bar.setAttribute("aria-hidden", "true");
+  document.body.appendChild(bar);
+
+  /* ============================================================
+     3) 3D TILT on cards (subtle, refined)
+     ============================================================ */
+  if (finePointer && !reduce) {
+    var tiltEls = document.querySelectorAll(".card, .path-card, .portal-card, .quote");
+    tiltEls.forEach(function (el) {
+      el.classList.add("tilt");
+      var raf = null, tx = 0, ty = 0;
+      el.addEventListener("mousemove", function (ev) {
+        var r = el.getBoundingClientRect();
+        var px = (ev.clientX - r.left) / r.width - 0.5;
+        var py = (ev.clientY - r.top) / r.height - 0.5;
+        tx = clamp(-py * 6, -6, 6);
+        ty = clamp(px * 6, -6, 6);
+        if (!raf) raf = requestAnimationFrame(function apply() {
+          el.style.transform = "perspective(900px) rotateX(" + tx + "deg) rotateY(" + ty + "deg) translateY(-4px)";
+          raf = null;
+        });
+      });
+      el.addEventListener("mouseleave", function () {
+        el.style.transform = "";
+      });
+    });
+  }
+
+  /* ============================================================
+     4) MAGNETIC buttons (primary CTAs)
+     ============================================================ */
+  if (finePointer && !reduce) {
+    document.querySelectorAll(".btn--primary").forEach(function (btn) {
+      btn.classList.add("magnetic");
+      btn.addEventListener("mousemove", function (ev) {
+        var r = btn.getBoundingClientRect();
+        var mx = ev.clientX - (r.left + r.width / 2);
+        var my = ev.clientY - (r.top + r.height / 2);
+        btn.style.transform = "translate(" + (mx * 0.18) + "px," + (my * 0.28) + "px)";
+      });
+      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+    });
+  }
+
+  /* ============================================================
+     5) STEP-BY-STEP progress (How it works / process)
+     ============================================================ */
+  var stepGroups = [].slice.call(document.querySelectorAll(".steps"));
+  stepGroups.forEach(function (g) { g.classList.add("steps-progress"); });
+
+  /* ============================================================
+     6) PARALLAX — photo bands + tagged elements
+     ============================================================ */
+  var parallaxEls = [];
+  document.querySelectorAll(".photo-band, [data-parallax]").forEach(function (el) {
+    parallaxEls.push({
+      el: el,
+      isBand: el.classList.contains("photo-band"),
+      speed: parseFloat(el.getAttribute("data-parallax")) || 0.18
+    });
+  });
+
+  /* ============================================================
+     7) AGGREGATE SCROLL-DRIVEN EFFECTS (single rAF loop)
+     ============================================================ */
+  var vh = window.innerHeight;
+  window.addEventListener("resize", function () { vh = window.innerHeight; }, { passive: true });
+
+  var ticking = false;
+  function onScrollEffects() {
+    var y = window.scrollY || window.pageYOffset;
+    var docH = document.documentElement.scrollHeight - vh;
+    bar.style.transform = "scaleX(" + (docH > 0 ? clamp(y / docH, 0, 1) : 0) + ")";
+
+    if (!reduce) {
+      // parallax
+      for (var i = 0; i < parallaxEls.length; i++) {
+        var p = parallaxEls[i], r = p.el.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) continue;
+        var center = r.top + r.height / 2 - vh / 2;
+        var shift = -center * p.speed;
+        if (p.isBand) {
+          p.el.style.backgroundPosition = "center calc(50% + " + shift.toFixed(1) + "px)";
+        } else {
+          p.el.style.transform = "translate3d(0," + shift.toFixed(1) + "px,0)";
+        }
+      }
+      // step progress
+      for (var s = 0; s < stepGroups.length; s++) {
+        var g = stepGroups[s], gr = g.getBoundingClientRect();
+        var prog = clamp((vh * 0.85 - gr.top) / (gr.height + vh * 0.2), 0, 1);
+        g.style.setProperty("--progress", prog.toFixed(3));
+        var steps = g.children, n = steps.length;
+        for (var k = 0; k < n; k++) {
+          if (prog >= (k + 0.4) / n) steps[k].classList.add("step--active");
+        }
+      }
+    }
+    ticking = false;
+  }
+  function requestScroll() { if (!ticking) { ticking = true; requestAnimationFrame(onScrollEffects); } }
+  window.addEventListener("scroll", requestScroll, { passive: true });
+  window.addEventListener("resize", requestScroll, { passive: true });
+  onScrollEffects();
+
+  /* ============================================================
+     8) PAGE-LOAD INTRO (homepage only, once per session)
+     ============================================================ */
+  (function intro() {
+    if (reduce) return;
+    var isHome = !!document.querySelector(".hero") || !!document.getElementById("home");
+    if (!isHome) return;
+    try { if (sessionStorage.getItem("dmmk_intro")) return; sessionStorage.setItem("dmmk_intro", "1"); } catch (e) {}
+
+    var c = document.createElement("div");
+    c.className = "intro";
+    c.setAttribute("aria-hidden", "true");
+    c.innerHTML =
+      '<div class="intro-inner">' +
+      '<span class="intro-mark">Double <em>MMK</em></span>' +
+      '<span class="intro-sub">Detroit property, managed right.</span>' +
+      '</div>';
+    document.body.appendChild(c);
+    document.body.classList.add("intro-lock");
+    requestAnimationFrame(function () { c.classList.add("intro--show"); });
+    setTimeout(function () { c.classList.add("intro--out"); document.body.classList.remove("intro-lock"); }, 1500);
+    setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, 2400);
+  })();
+
+  /* ============================================================
+     9) SMOOTH MOMENTUM SCROLL (desktop fine-pointer only)
+         scrollTo-based so sticky headers + anchor links keep working.
+         Set ENABLE_MOMENTUM = false to turn off.
+     ============================================================ */
+  var ENABLE_MOMENTUM = true;
+  if (ENABLE_MOMENTUM && finePointer && !reduce && !("ontouchstart" in window)) {
+    var target = window.scrollY, current = window.scrollY, running = false;
+    var maxY = function () { return document.documentElement.scrollHeight - window.innerHeight; };
+
+    function frame() {
+      current = lerp(current, target, 0.14);
+      if (Math.abs(target - current) < 0.4) { current = target; running = false; }
+      window.scrollTo(0, current);
+      if (running) requestAnimationFrame(frame);
+    }
+    function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
+
+    window.addEventListener("wheel", function (e) {
+      if (e.ctrlKey) return;                 // pinch-zoom
+      if (e.deltaMode !== 0) return;         // line/page mode — let native handle
+      target = clamp(target + e.deltaY, 0, maxY());
+      e.preventDefault();
+      kick();
+    }, { passive: false });
+
+    // keep target synced when scroll comes from elsewhere (keyboard, anchors, drag)
+    window.addEventListener("scroll", function () {
+      if (!running) { target = current = window.scrollY; }
+    }, { passive: true });
+    window.addEventListener("resize", function () { target = current = window.scrollY; });
+  }
+
 })();
 </script>
 </body>

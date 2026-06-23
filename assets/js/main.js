@@ -50,26 +50,7 @@
     });
   });
 
-  /* ---- Reveal on scroll ---- */
-  var reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && reveals.length) {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(function (el) {
-      var parent = el.parentElement;
-      var idx = parent ? Array.prototype.indexOf.call(parent.children, el) : 0;
-      el.style.transitionDelay = (Math.min(idx, 7) * 70) + "ms";
-      io.observe(el);
-    });
-  } else {
-    reveals.forEach(function (el) { el.classList.add("in"); });
-  }
+  /* ---- Reveal on scroll: handled by immersive.js ---- */
 
   /* ---- Back to top ---- */
   var toTop = document.createElement("button");
