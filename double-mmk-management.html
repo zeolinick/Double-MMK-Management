@@ -757,6 +757,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 @media (max-width: 980px) { .steps--4 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 560px) { .steps--4 { grid-template-columns: 1fr; } }
 
+/* ---- Services: "what this means for you" outcome callout ----------------- */
+.svc-outcome { margin: 20px 0 0; padding: 13px 18px; background: rgba(200,32,42,.055);
+  border-left: 3px solid var(--red); border-radius: 0 10px 10px 0; color: var(--body); font-size: 1rem; line-height: 1.55; }
+.svc-outcome strong { color: var(--onyx); font-family: var(--font-head); font-weight: 700; }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1359,7 +1364,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         </div>
 
         <!-- Note for owner -->
-        <div class="card reveal center" style="margin-top:42px; background:var(--cream); border-color:var(--line);">
+        <div class="card reveal center" style="margin-top:42px; background:var(--paper); border-color:var(--line);">
           <p class="mb-0 text-muted">These are sample listings. Connect your Landlord Studio or listing feed to display live availability — or we can update this page manually as properties become available.</p>
         </div>
       </div>
@@ -1597,6 +1602,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <li>Prompt showings and applicant follow-up</li>
               <li>Market-based rent pricing to reduce vacancy</li>
             </ul>
+            <p class="svc-outcome"><strong>What this means for you:</strong> fewer empty months, a qualified resident in place faster, and rent set right the first time.</p>
           </div>
         </div>
       </div>
@@ -1616,6 +1622,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <li>Rental history and reference review</li>
               <li>Compliant, attorney-reviewed lease agreements</li>
             </ul>
+            <p class="svc-outcome"><strong>What this means for you:</strong> residents who pay on time and stay for years — fewer turnovers, fewer headaches, steadier income.</p>
           </div>
         </div>
       </div>
@@ -1635,6 +1642,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <li>Online maintenance requests &amp; tracking</li>
               <li>Preventative upkeep and seasonal checks</li>
             </ul>
+            <p class="svc-outcome"><strong>What this means for you:</strong> small issues caught before they get expensive, tenants who feel cared for, and a property that holds its value.</p>
           </div>
         </div>
       </div>
@@ -1654,6 +1662,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <li>Monthly owner statements &amp; direct deposit</li>
               <li>Year-end financials for tax time</li>
             </ul>
+            <p class="svc-outcome"><strong>What this means for you:</strong> rent that lands on time and books that are always tax-ready — so you can see exactly how your investment is performing.</p>
           </div>
         </div>
       </div>
@@ -1673,6 +1682,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <li>City of Detroit rental compliance &amp; certification</li>
               <li>Documentation and photo records</li>
             </ul>
+            <p class="svc-outcome"><strong>What this means for you:</strong> no surprise violations or fines, and full documentation if a dispute ever comes up — your property stays protected.</p>
           </div>
         </div>
       </div>
@@ -1684,7 +1694,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <div class="cta-band reveal">
           <h2>Not sure which services you need?</h2>
           <p>Let's build a management plan around your property and your goals. Start with a free rental analysis.</p>
-          <a href="#owners" class="btn btn--primary">Get My Free Analysis</a>
+          <a href="#owners" class="btn btn--primary">Get a Free Rental Analysis</a>
         </div>
       </div>
     </section>
@@ -1798,7 +1808,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           </div>
         </div>
 
-        <div class="card reveal center" style="margin-top:32px; background:var(--cream); border-color:var(--line);">
+        <div class="card reveal center" style="margin-top:32px; background:var(--paper); border-color:var(--line);">
           <p class="mb-0 text-muted">Double MMK uses <strong>Landlord Studio</strong> for rent payments and resident accounts. Once your portal links are ready, the buttons above will take residents straight to the Landlord Studio login.</p>
         </div>
       </div>
@@ -1921,7 +1931,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <section class="section--tight section--navy section--angled">
       <div class="container">
         <div class="stats">
-          <div class="stat reveal"><strong>500+</strong><span>Units under management</span></div>
+          <div class="stat reveal"><strong>500+</strong><span>Units managed</span></div>
           <div class="stat reveal"><strong>98%</strong><span>Average occupancy</span></div>
           <div class="stat reveal"><strong>100%</strong><span>Detroit-focused</span></div>
           <div class="stat reveal"><strong>4.9★</strong><span>Owner satisfaction</span></div>
@@ -1939,7 +1949,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
             <h2>Mohamad Kahala</h2>
             <p style="font-family:var(--font-head); font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:.1em; font-size:.82rem; margin:-4px 0 14px;">Owner &middot; Double MMK Management LLC</p>
             <p class="text-muted">Mohamad founded Double MMK Management to give Detroit landlords a partner they can actually reach. He leads every part of the business hands-on &mdash; from leasing and tenant screening to maintenance and monthly reporting &mdash; with straight answers and no runaround.</p>
-            <p class="text-muted">It all comes back to one promise: three houses, one standard. He treats every property like his own and every resident like a neighbor.</p>
+            <p class="text-muted">It all comes back to one promise: every door, one standard. He treats every property like his own and every resident like a neighbor.</p>
             <ul class="checklist">
               <li>Hands-on, owner-led management</li>
               <li>Deep local knowledge of Detroit neighborhoods</li>
@@ -1976,7 +1986,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <div class="grid grid-3">
           <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><h3>Same-day response</h3><p>Owners and residents hear back from a real person the same business day — not a ticket number.</p></div>
           <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6.5H10a3.5 3.5 0 0 0 0 7h4a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>No hidden fees</h3><p>Flat, transparent pricing. You'll always know exactly what you pay and why.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5.4 5.4 0 0 0-7.7 0L12 6.7l-1.1-1.1a5.4 5.4 0 1 0-7.7 7.7L12 22l8.8-8.7a5.4 5.4 0 0 0 0-7.7z"/></svg></div><h3>Managed like our own</h3><p>Every door held to one standard — three houses, one promise.</p></div>
+          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5.4 5.4 0 0 0-7.7 0L12 6.7l-1.1-1.1a5.4 5.4 0 1 0-7.7 7.7L12 22l8.8-8.7a5.4 5.4 0 0 0 0-7.7z"/></svg></div><h3>Managed like our own</h3><p>Every door held to one standard — your property, our priority.</p></div>
         </div>
       </div>
     </section>
@@ -1986,7 +1996,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <div class="cta-band reveal">
           <h2>Let's work together</h2>
           <p>Experience property management the way it should be. Start with a free, no-obligation rental analysis.</p>
-          <a href="#owners" class="btn btn--primary">Get My Free Analysis</a>
+          <a href="#owners" class="btn btn--primary">Get a Free Rental Analysis</a>
         </div>
       </div>
     </section>
@@ -2010,11 +2020,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <div class="reveal">
             <span class="eyebrow">Get in Touch</span>
             <h2>Reach Double MMK Management</h2>
-            <p class="text-muted">We'd love to hear from you. Reach out using any method below, or send a message and we'll respond within one business day.</p>
+            <p class="text-muted">We'd love to hear from you. Reach out any way you like below — you'll get a real person, often the owner himself, and a reply within one business day.</p>
             <ul class="info-list" style="margin-top:24px;">
               <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><strong>Phone</strong><a href="tel:+13136036064">(313) 603-6064</a></div></li>
               <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg></div><div><strong>Email</strong><a href="mailto:Doublemmkmanagement@gmail.com">Doublemmkmanagement@gmail.com</a></div></li>
-              <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><strong>Office</strong><span>Detroit, Michigan<br />(Add your street address)</span></div></li>
+              <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><strong>Office</strong><span>Detroit, Michigan<br />Serving Detroit &amp; the metro area</span></div></li>
               <li><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><div><strong>Hours</strong><span>Monday–Friday, 9:00am–5:00pm<br />24/7 emergency maintenance line</span></div></li>
             </ul>
             <div style="margin-top:24px;">
