@@ -16,6 +16,27 @@
   var clamp = function (v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
 
   /* ============================================================
+     0) ACTIVE NAV — works for real pages (pathname) AND the
+        single-file build's hash routes (#owners, #services, …)
+     ============================================================ */
+  (function activeNav() {
+    var links = document.querySelectorAll(".nav-links a");
+    if (!links.length) return;
+    function setActive() {
+      var hash = location.hash;
+      var page = location.pathname.split("/").pop() || "index.html";
+      links.forEach(function (a) {
+        var href = a.getAttribute("href") || "", on;
+        if (href.charAt(0) === "#") on = hash ? href === hash : href === "#home";
+        else on = href.split("#")[0] === page;
+        a.classList.toggle("active", on);
+      });
+    }
+    setActive();
+    window.addEventListener("hashchange", setActive);
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {
