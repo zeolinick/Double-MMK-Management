@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" role="img" aria-label="Double MMK Management emblem">
+  <defs>
+    <linearGradient id="mmkRed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E84750"/><stop offset="0.5" stop-color="#C8202A"/><stop offset="1" stop-color="#6E1015"/>
+    </linearGradient>
+    <linearGradient id="mmkSilver" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.48" stop-color="#cdcdd3"/><stop offset="0.56" stop-color="#7e7e85"/><stop offset="1" stop-color="#e8e8ea"/>
+    </linearGradient>
+  </defs>
+  <path d="M64 198 Q64 96 196 90" stroke="url(#mmkRed)" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M336 198 Q336 96 204 90" stroke="url(#mmkRed)" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <polygon points="37,300 37,242 95,196 153,242 153,300" fill="#8E1620"/>
+  <polygon points="247,300 247,242 305,196 363,242 363,300" fill="#8E1620"/>
+  <polygon points="130,300 130,230 200,174 270,230 270,300" fill="url(#mmkRed)"/>
+  <rect x="186" y="252" width="28" height="48" fill="#0F0F11"/>
+  <line x1="200" y1="252" x2="200" y2="300" stroke="#8E1620" stroke-width="2"/>
+  <line x1="186" y1="270" x2="214" y2="270" stroke="#8E1620" stroke-width="2"/>
+  <circle cx="200" cy="70" r="50" fill="#0F0F11" stroke="url(#mmkRed)" stroke-width="8"/>
+  <text x="200" y="72" font-family="Archivo, Arial, sans-serif" font-weight="800" font-size="54" fill="url(#mmkSilver)" text-anchor="middle" dominant-baseline="central">D</text>
+</svg>

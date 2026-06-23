@@ -21,12 +21,16 @@ Cloudflare Pages, or any static host.
 
 ## Brand
 
-- **Style:** warm & approachable, Detroit-inspired
-- **Colors** (defined as CSS variables in `assets/css/style.css`):
-  - Navy `#16324f` (primary) · Amber `#e0922f` (accent) · Terracotta `#c0563b`
-  - Cream `#fbf7f1` background · Sand `#f2ebe1` alt surface
-- **Fonts:** Poppins (headings) + Inter (body), loaded from Google Fonts
-- **Logo:** placeholder mark at `assets/img/logo.svg` — swap with the real logo
+Implements the official **Double MMK brand kit** ("Detroit property, managed right.").
+
+- **Style:** bold, dependable, Detroit — lead with Onyx + Paper, reserve red for emphasis
+- **Colors** (CSS variables in `assets/css/style.css`):
+  - Signal Red `#c8202a` (primary/emphasis) · Oxblood `#6e1015` · Onyx `#0f0f11`
+  - Carbon `#1c1c20` · Steel `#8c8c92` · Platinum `#c9c9cf` · Paper `#f6f5f3`
+- **Fonts:** Archivo (display/headlines, 600–900) + Hanken Grotesk (body), via Google Fonts
+- **Logo:** vector brand assets — emblem `assets/img/logo-emblem.svg`, "D" monogram
+  favicon `assets/img/favicon.svg`, social/OG image `assets/img/og-image.svg`. The
+  header/footer pair the emblem with the silver "DOUBLE MMK" / red "MANAGEMENT LLC" wordmark.
 
 ## How to view locally
 
@@ -41,7 +45,7 @@ python3 -m http.server 8000
 
 Search the project for these placeholders and replace them:
 
-1. **Contact details** — phone `(313) 555-0100`, email `info@doublemmk.com`,
+1. **Contact details** — phone `(313) 555-0142`, email `hello@doublemmk.com`,
    and the Detroit office address (in every page footer + `contact.html`).
 2. **Landlord Studio portal links** — in `tenants.html`, the "Pay Rent" and
    "Tenant Portal Login" buttons use `href="#"`. Replace with your Landlord
