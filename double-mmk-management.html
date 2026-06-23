@@ -238,7 +238,10 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center; }
 .stats .stat strong { display: block; font-family: var(--font-head); font-size: 2.8rem; font-weight: 900; color: var(--red-bright); letter-spacing: -.02em; }
 .stats .stat span { color: #9a9aa0; font-size: .9rem; text-transform: uppercase; letter-spacing: .07em; }
-@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 36px; } }
+.stats .stat { align-self: start; }
+@media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 36px 24px; } }
+/* Slanted clip reads as crooked on tall mobile blocks — flatten it there */
+@media (max-width: 720px) { .section--angled, .photo-band, .page-head { clip-path: none; } }
 
 /* ---- Steps --------------------------------------------------------------- */
 .steps { counter-reset: step; display: grid; gap: 32px; grid-template-columns: repeat(3, 1fr); }
@@ -973,7 +976,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <section class="section--tight section--navy section--angled">
       <div class="container">
         <div class="stats">
-          <div class="stat reveal"><strong>500+</strong><span>Units under management</span></div>
+          <div class="stat reveal"><strong>500+</strong><span>Units managed</span></div>
           <div class="stat reveal"><strong>98%</strong><span>Average occupancy</span></div>
           <div class="stat reveal"><strong>21</strong><span>Days avg. to lease</span></div>
           <div class="stat reveal"><strong>4.9★</strong><span>Owner satisfaction</span></div>
