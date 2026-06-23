@@ -630,8 +630,8 @@ p, .lead { text-wrap: pretty; }
 .section--navy { position: relative; overflow: hidden; }
 .section--navy::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .6;
   background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px); background-size: 22px 22px; }
-.section--navy::after { content: ""; position: absolute; right: -140px; top: -140px; width: 380px; height: 380px;
-  border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.26), transparent 62%); pointer-events: none; }
+.section--navy::after { content: ""; position: absolute; left: 50%; top: -210px; width: 640px; height: 440px;
+  transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.20), transparent 62%); pointer-events: none; }
 .section--navy > .container { position: relative; z-index: 1; }
 
 /* Angled dividers on dark sections for smoother flow */
