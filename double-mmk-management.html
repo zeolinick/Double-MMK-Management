@@ -728,6 +728,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 
 .filter-bar > * { min-width: 0; }
 
+/* Flatten slanted section clips on mobile — the vw-based angle reads as a
+   crooked parallelogram on tall blocks. Placed last so it wins source order. */
+@media (max-width: 720px) {
+  .section--angled, .photo-band, .page-head, .site-footer { clip-path: none !important; }
+}
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
