@@ -715,6 +715,16 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .info-list a, .info-list span,
 .prose a { overflow-wrap: anywhere; }            /* long emails/URLs wrap instead of overflowing */
 
+/* ==========================================================================
+   Fix: grid tracks overflowing (min-width:auto) -> off-center / misaligned
+   ========================================================================== */
+.hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.hero-grid > *, .split > *, .grid > *, .footer-grid > *, .compare > *, .paths > *, .portal-grid > * { min-width: 0; }
+.search-wrap, .hero-card { max-width: 100%; }
+
+.filter-bar > * { min-width: 0; }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1462,7 +1472,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     
 
     <!-- Detailed services -->
-    <section class="section sub-section" id="leasing">
+    <section class="section sub-section" id="svc-leasing">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTIuNiAxNy40QTIgMiAwIDAgMCAyIDE4LjhWMjFhMSAxIDAgMCAwIDEgMWgzYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWgxYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWguMmEyIDIgMCAwIDAgMS40LS42bC44LS44YTYuNSA2LjUgMCAxIDAtNC00eicvPjxjaXJjbGUgY3g9JzE2LjUnIGN5PSc3LjUnIHI9Jy42JyBmaWxsPSclMjNlOGU4ZWEnLz48L2c+PC9zdmc+" alt="Leasing &amp; marketing" loading="lazy" /></div>
@@ -1481,7 +1491,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
-    <section class="section section--sand sub-section" id="screening">
+    <section class="section section--sand sub-section" id="svc-screening">
       <div class="container">
         <div class="split reverse reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTE2IDIxdi0yYTQgNCAwIDAgMC00LTRINmE0IDQgMCAwIDAtNCA0djInLz48Y2lyY2xlIGN4PSc5JyBjeT0nNycgcj0nNCcvPjxwYXRoIGQ9J00yMiAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Jy8+PHBhdGggZD0nTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NScvPjwvZz48L3N2Zz4=" alt="Tenant screening" loading="lazy" /></div>
@@ -1500,7 +1510,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
-    <section class="section sub-section" id="maintenance">
+    <section class="section sub-section" id="svc-maintenance">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTE0LjcgNi4zYTEgMSAwIDAgMCAwIDEuNGwxLjYgMS42YTEgMSAwIDAgMCAxLjQgMGwzLjc3LTMuNzdhNiA2IDAgMCAxLTcuOTQgNy45NGwtNi45MSA2LjkxYTIuMTIgMi4xMiAwIDAgMS0zLTNsNi45MS02LjkxYTYgNiAwIDAgMSA3Ljk0LTcuOTRsLTMuNzYgMy43NnonLz48L2c+PC9zdmc+" alt="Maintenance & repairs" loading="lazy" /></div>
@@ -1519,7 +1529,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
-    <section class="section section--sand sub-section" id="accounting">
+    <section class="section section--sand sub-section" id="svc-accounting">
       <div class="container">
         <div class="split reverse reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PGxpbmUgeDE9JzYnIHkxPScyMCcgeDI9JzYnIHkyPScxMicvPjxsaW5lIHgxPScxMicgeTE9JzIwJyB4Mj0nMTInIHkyPSc0Jy8+PGxpbmUgeDE9JzE4JyB5MT0nMjAnIHgyPScxOCcgeTI9JzE0Jy8+PC9nPjwvc3ZnPg==" alt="Rent collection &amp; accounting" loading="lazy" /></div>
@@ -1538,7 +1548,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
-    <section class="section sub-section" id="compliance">
+    <section class="section sub-section" id="svc-compliance">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTEyIDIyczgtNCA4LTEwVjVsLTgtMy04IDN2N2MwIDYgOCAxMCA4IDEweicvPjxwb2x5bGluZSBwb2ludHM9JzkgMTIgMTEgMTQgMTUgOS41Jy8+PC9nPjwvc3ZnPg==" alt="Inspections & compliance" loading="lazy" /></div>

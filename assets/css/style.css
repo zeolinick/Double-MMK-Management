@@ -689,3 +689,13 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .footer-links a, .footer-links li,
 .info-list a, .info-list span,
 .prose a { overflow-wrap: anywhere; }            /* long emails/URLs wrap instead of overflowing */
+
+/* ==========================================================================
+   Fix: grid tracks overflowing (min-width:auto) -> off-center / misaligned
+   ========================================================================== */
+.hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.hero-grid > *, .split > *, .grid > *, .footer-grid > *, .compare > *, .paths > *, .portal-grid > * { min-width: 0; }
+.search-wrap, .hero-card { max-width: 100%; }
+
+.filter-bar > * { min-width: 0; }
