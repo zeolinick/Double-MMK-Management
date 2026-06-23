@@ -891,3 +891,30 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .calc-note { font-size: .82rem; color: #9a9aa0; margin: 0 0 20px; line-height: 1.55; }
 .calc-result .btn { align-self: flex-start; }
 @media (max-width: 760px) { .calc { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   MOBILE ACTION BAR — quiet, appears after scrolling (mobile only)
+   ========================================================================== */
+.mobile-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: none;
+  grid-template-columns: 1fr 1.4fr; gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(15,15,17,.97); border-top: 1px solid rgba(255,255,255,.1);
+  transform: translateY(115%); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.mobile-bar.show { transform: translateY(0); }
+.mobile-bar a { display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px; border-radius: 11px; font-family: var(--font-head); font-weight: 700; font-size: .92rem; }
+.mobile-bar .mb-call { background: rgba(255,255,255,.1); color: #fff; }
+.mobile-bar .mb-cta { background: var(--red); color: #fff; }
+.mobile-bar svg { width: 18px; height: 18px; }
+@media (max-width: 760px) {
+  .mobile-bar { display: grid; }
+  body { padding-bottom: 70px; }
+  .to-top { bottom: 84px; }
+}
+
+/* ---- Footer: Areas We Serve (internal SEO links) ------------------------ */
+.footer-areas { border-top: 1px solid var(--line-dark); padding-top: 22px; margin-top: 4px; }
+.footer-areas h4 { color: #fff; margin-bottom: 12px; }
+.footer-area-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.footer-area-links a { color: #b4b4bb; font-size: .88rem; }
+.footer-area-links a:hover { color: #fff; }

@@ -921,6 +921,33 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .calc-result .btn { align-self: flex-start; }
 @media (max-width: 760px) { .calc { grid-template-columns: 1fr; } }
 
+/* ==========================================================================
+   MOBILE ACTION BAR — quiet, appears after scrolling (mobile only)
+   ========================================================================== */
+.mobile-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 80; display: none;
+  grid-template-columns: 1fr 1.4fr; gap: 10px;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: rgba(15,15,17,.97); border-top: 1px solid rgba(255,255,255,.1);
+  transform: translateY(115%); transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+.mobile-bar.show { transform: translateY(0); }
+.mobile-bar a { display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 13px; border-radius: 11px; font-family: var(--font-head); font-weight: 700; font-size: .92rem; }
+.mobile-bar .mb-call { background: rgba(255,255,255,.1); color: #fff; }
+.mobile-bar .mb-cta { background: var(--red); color: #fff; }
+.mobile-bar svg { width: 18px; height: 18px; }
+@media (max-width: 760px) {
+  .mobile-bar { display: grid; }
+  body { padding-bottom: 70px; }
+  .to-top { bottom: 84px; }
+}
+
+/* ---- Footer: Areas We Serve (internal SEO links) ------------------------ */
+.footer-areas { border-top: 1px solid var(--line-dark); padding-top: 22px; margin-top: 4px; }
+.footer-areas h4 { color: #fff; margin-bottom: 12px; }
+.footer-area-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.footer-area-links a { color: #b4b4bb; font-size: .88rem; }
+.footer-area-links a:hover { color: #fff; }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -2513,6 +2540,26 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     form.addEventListener("input", calc);
     form.addEventListener("change", calc);
     calc();
+  })();
+
+  /* ============================================================
+     0d) MOBILE ACTION BAR — quiet two-button bar, mobile only,
+         appears after scrolling. Clear direction, not pushy.
+     ============================================================ */
+  (function mobileBar() {
+    if (window.innerWidth >= 760) return;
+    var spa = !!document.querySelector(".page");           // single-file build uses .page routes
+    var cta = spa ? "#owners" : "owners.html#quote";
+    var bar = document.createElement("div");
+    bar.className = "mobile-bar";
+    bar.innerHTML =
+      '<a class="mb-call" href="tel:+13136036064">' +
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>' +
+      '<a class="mb-cta" href="' + cta + '">Free Rental Analysis</a>';
+    document.body.appendChild(bar);
+    function toggle() { bar.classList.toggle("show", (window.scrollY || 0) > 560); }
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
   })();
 
   /* ============================================================
