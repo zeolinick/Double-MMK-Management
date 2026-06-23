@@ -818,3 +818,16 @@ body.intro-lock { overflow: hidden; }
 .intro-mark em { font-style: normal; color: var(--red); -webkit-text-fill-color: var(--red); }
 .intro-sub { display: block; margin-top: 12px; font-family: var(--font-head); font-weight: 600;
   text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--steel); }
+
+/* --- Touch-native polish: tactile press feedback (no-hover devices) ------- */
+@media (hover: none) {
+  .js .card, .js .path-card, .js .portal-card, .js .listing,
+  .js .hood, .js .quote, .js .btn { transition: transform .14s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease, background var(--t), color var(--t), border-color var(--t); }
+  .js .card:active, .js .path-card:active, .js .portal-card:active,
+  .js .listing:active, .js .quote:active { transform: scale(.975); }
+  .js .hood:active { transform: scale(.94); }
+  .js .btn:active { transform: scale(.96); }
+  .js .listing:active .listing-photo img { transform: scale(1.04); }
+  /* gentler parallax + a touch quicker reveals so phones feel snappy */
+  .js .reveal { transition-duration: .6s; }
+}
