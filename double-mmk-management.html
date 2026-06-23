@@ -558,8 +558,9 @@ textarea:focus-visible, .btn:focus-visible {
 /* ---- Owner / Resident paths ---------------------------------------------- */
 .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
 @media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
-.path-card { position: relative; overflow: hidden; border-radius: var(--radius); padding: 40px; border: 1px solid var(--line); background: var(--white); box-shadow: var(--shadow-sm); transition: transform var(--t), box-shadow var(--t); }
+.path-card { position: relative; overflow: hidden; display: flex; flex-direction: column; border-radius: var(--radius); padding: 40px; border: 1px solid var(--line); background: var(--white); box-shadow: var(--shadow-sm); transition: transform var(--t), box-shadow var(--t); }
 .path-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.path-card .btn { margin-top: auto; align-self: flex-start; }
 .path-card .icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(200,32,42,.09); color: var(--red); display: grid; place-items: center; margin-bottom: 18px; }
 .path-card .icon svg { width: 26px; height: 26px; }
 .path-card h3 { font-size: 1.5rem; margin-bottom: .4rem; }
