@@ -101,7 +101,7 @@
     parallaxEls.push({
       el: el,
       isBand: el.classList.contains("photo-band"),
-      speed: parseFloat(el.getAttribute("data-parallax")) || 0.18
+      speed: parseFloat(el.getAttribute("data-parallax")) || 0.28
     });
   });
 
@@ -131,7 +131,7 @@
         var p = parallaxEls[i], r = p.el.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) continue;
         var center = r.top + r.height / 2 - vh / 2;
-        var shift = clamp(-center * p.speed, -60, 60);
+        var shift = clamp(-center * p.speed, -90, 90);
         if (p.isBand) {
           p.el.style.backgroundPosition = "center calc(50% + " + shift.toFixed(1) + "px)";
         } else {
