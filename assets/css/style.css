@@ -520,7 +520,7 @@ textarea:focus-visible, .btn:focus-visible {
 .search-wrap label { font-size: .72rem; font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: block; margin-bottom: 6px; }
 .search-wrap input, .search-wrap select { width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); font: inherit; color: var(--body); }
 .search-wrap .btn { height: 49px; }
-@media (max-width: 760px) { .search-wrap { grid-template-columns: 1fr; margin-top: -30px; } }
+@media (max-width: 760px) { .search-band { padding: 44px 0 48px; } .search-wrap { grid-template-columns: 1fr; margin-top: 0; } }
 
 /* ---- Owner / Resident paths ---------------------------------------------- */
 .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
