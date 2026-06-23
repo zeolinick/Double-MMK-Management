@@ -805,19 +805,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
-/* --- Page-load intro curtain --------------------------------------------- */
-body.intro-lock { overflow: hidden; }
-.intro { position: fixed; inset: 0; z-index: 9999; background: var(--onyx);
-  display: grid; place-items: center; transition: transform .8s cubic-bezier(.76,0,.24,1); }
-.intro--out { transform: translateY(-100%); }
-.intro-inner { text-align: center; opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-.intro--show .intro-inner { opacity: 1; transform: none; }
-.intro-mark { display: block; font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
-  letter-spacing: .02em; font-size: clamp(2rem, 7vw, 3.4rem);
-  background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.intro-mark em { font-style: normal; color: var(--red); -webkit-text-fill-color: var(--red); }
-.intro-sub { display: block; margin-top: 12px; font-family: var(--font-head); font-weight: 600;
-  text-transform: uppercase; letter-spacing: .22em; font-size: .72rem; color: var(--steel); }
+/* (page-load intro curtain removed) */
 
 /* --- Touch-native polish: tactile press feedback (no-hover devices) ------- */
 @media (hover: none) {
@@ -842,16 +830,9 @@ body.intro-lock { overflow: hidden; }
 /* ==========================================================================
    IMMERSIVE v2 — more pronounced, cinematic
    ========================================================================== */
-/* Thicker, brighter scroll progress */
-.scroll-progress { height: 4px; box-shadow: 0 0 12px rgba(200,32,42,.5); }
+/* Scroll progress (subtle) */
+.scroll-progress { height: 3px; }
 
-/* Headline line-by-line mask reveal (homepage hero) */
-.js .hero-copy > .hero-title { opacity: 1; animation: none; }      /* let the lines drive it */
-.hero-title .line { display: block; overflow: hidden; padding-bottom: .04em; }
-.js .hero-title .line > span { display: block; transform: translateY(115%); }
-.js .hero-title .line:nth-child(1) > span { animation: lineUp 1s cubic-bezier(.2,.8,.2,1) .35s forwards; }
-.js .hero-title .line:nth-child(2) > span { animation: lineUp 1s cubic-bezier(.2,.8,.2,1) .52s forwards; }
-@keyframes lineUp { to { transform: translateY(0); } }
-@media (prefers-reduced-motion: reduce) {
-  .js .hero-title .line > span { transform: none; animation: none; }
-}
+/* Hero headline: clean two-line layout; fades up with the rest of the hero */
+.hero-title .line { display: block; }
+.hero-title .line > span { display: block; }

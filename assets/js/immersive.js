@@ -96,14 +96,18 @@
   /* ============================================================
      6) PARALLAX — photo bands + tagged elements
      ============================================================ */
+  /* desktop only — background-position parallax is a repaint cost that
+     makes mobile scrolling feel janky, so we skip it on touch/coarse */
   var parallaxEls = [];
-  document.querySelectorAll(".photo-band, [data-parallax]").forEach(function (el) {
-    parallaxEls.push({
-      el: el,
-      isBand: el.classList.contains("photo-band"),
-      speed: parseFloat(el.getAttribute("data-parallax")) || 0.28
+  if (finePointer && !reduce) {
+    document.querySelectorAll(".photo-band, [data-parallax]").forEach(function (el) {
+      parallaxEls.push({
+        el: el,
+        isBand: el.classList.contains("photo-band"),
+        speed: parseFloat(el.getAttribute("data-parallax")) || 0.12
+      });
     });
-  });
+  }
 
   /* ============================================================
      6b) SCROLL-INTO-FOCUS cards (touch devices only — the mobile
@@ -131,7 +135,7 @@
         var p = parallaxEls[i], r = p.el.getBoundingClientRect();
         if (r.bottom < -200 || r.top > vh + 200) continue;
         var center = r.top + r.height / 2 - vh / 2;
-        var shift = clamp(-center * p.speed, -90, 90);
+        var shift = clamp(-center * p.speed, -44, 44);
         if (p.isBand) {
           p.el.style.backgroundPosition = "center calc(50% + " + shift.toFixed(1) + "px)";
         } else {
@@ -165,62 +169,5 @@
   window.addEventListener("scroll", requestScroll, { passive: true });
   window.addEventListener("resize", requestScroll, { passive: true });
   onScrollEffects();
-
-  /* ============================================================
-     8) PAGE-LOAD INTRO (homepage only, once per session)
-     ============================================================ */
-  (function intro() {
-    if (reduce) return;
-    var isHome = !!document.querySelector(".hero") || !!document.getElementById("home");
-    if (!isHome) return;
-    try { if (sessionStorage.getItem("dmmk_intro")) return; sessionStorage.setItem("dmmk_intro", "1"); } catch (e) {}
-
-    var c = document.createElement("div");
-    c.className = "intro";
-    c.setAttribute("aria-hidden", "true");
-    c.innerHTML =
-      '<div class="intro-inner">' +
-      '<span class="intro-mark">Double <em>MMK</em></span>' +
-      '<span class="intro-sub">Detroit property, managed right.</span>' +
-      '</div>';
-    document.body.appendChild(c);
-    document.body.classList.add("intro-lock");
-    requestAnimationFrame(function () { c.classList.add("intro--show"); });
-    setTimeout(function () { c.classList.add("intro--out"); document.body.classList.remove("intro-lock"); }, 1500);
-    setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, 2400);
-  })();
-
-  /* ============================================================
-     9) SMOOTH MOMENTUM SCROLL (desktop fine-pointer only)
-         scrollTo-based so sticky headers + anchor links keep working.
-         Set ENABLE_MOMENTUM = false to turn off.
-     ============================================================ */
-  var ENABLE_MOMENTUM = true;
-  if (ENABLE_MOMENTUM && finePointer && !reduce && !("ontouchstart" in window)) {
-    var target = window.scrollY, current = window.scrollY, running = false;
-    var maxY = function () { return document.documentElement.scrollHeight - window.innerHeight; };
-
-    function frame() {
-      current = lerp(current, target, 0.14);
-      if (Math.abs(target - current) < 0.4) { current = target; running = false; }
-      window.scrollTo(0, current);
-      if (running) requestAnimationFrame(frame);
-    }
-    function kick() { if (!running) { running = true; requestAnimationFrame(frame); } }
-
-    window.addEventListener("wheel", function (e) {
-      if (e.ctrlKey) return;                 // pinch-zoom
-      if (e.deltaMode !== 0) return;         // line/page mode — let native handle
-      target = clamp(target + e.deltaY, 0, maxY());
-      e.preventDefault();
-      kick();
-    }, { passive: false });
-
-    // keep target synced when scroll comes from elsewhere (keyboard, anchors, drag)
-    window.addEventListener("scroll", function () {
-      if (!running) { target = current = window.scrollY; }
-    }, { passive: true });
-    window.addEventListener("resize", function () { target = current = window.scrollY; });
-  }
 
 })();
