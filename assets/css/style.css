@@ -877,3 +877,18 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 /* Tasteful reassurance under forms (clear, not pushy) */
 .form-trust { margin-top: 12px; font-size: .8rem; color: var(--muted); text-align: center; line-height: 1.5; }
 .form-trust strong { color: var(--body); font-weight: 600; }
+
+/* ==========================================================================
+   RENT ESTIMATE CALCULATOR (Owners) — helpful, not pushy
+   ========================================================================== */
+.calc { display: grid; grid-template-columns: 1.1fr .9fr; gap: 0; max-width: 980px; margin: 0 auto;
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.calc-form { padding: 32px; }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.calc-form .field { margin: 0; }
+.calc-result { background: var(--onyx); color: #fff; padding: 36px 32px; display: flex; flex-direction: column; justify-content: center; }
+.calc-label { font-family: var(--font-head); text-transform: uppercase; letter-spacing: .16em; font-size: .72rem; color: var(--steel); }
+.calc-range { font-family: var(--font-head); font-weight: 900; font-size: clamp(2rem, 4.4vw, 2.9rem); color: var(--red-bright); margin: 8px 0 12px; letter-spacing: -.02em; line-height: 1; }
+.calc-note { font-size: .82rem; color: #9a9aa0; margin: 0 0 20px; line-height: 1.55; }
+.calc-result .btn { align-self: flex-start; }
+@media (max-width: 760px) { .calc { grid-template-columns: 1fr; } }

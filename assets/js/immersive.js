@@ -55,6 +55,30 @@
   })();
 
   /* ============================================================
+     0c) RENT ESTIMATE CALCULATOR (Owners page) — instant ballpark
+     ============================================================ */
+  (function rentCalc() {
+    var form = document.getElementById("rent-calc");
+    if (!form) return;
+    var out = document.getElementById("rc-out");
+    var hood = document.getElementById("rc-hood"), beds = document.getElementById("rc-beds"),
+        baths = document.getElementById("rc-baths"), sqft = document.getElementById("rc-sqft");
+    function money(n) { return "$" + Math.round(n).toLocaleString(); }
+    function calc() {
+      var f = parseFloat(hood.value) || 0.85,
+          b = parseInt(beds.value, 10) || 1,
+          ba = parseFloat(baths.value) || 1,
+          sf = Math.max(300, Math.min(6000, parseInt(sqft.value, 10) || 1000));
+      var est = (sf * 0.78 + b * 170 + ba * 90) * f;
+      var lo = Math.round(est * 0.92 / 10) * 10, hi = Math.round(est * 1.09 / 10) * 10;
+      out.textContent = money(lo) + " – " + money(hi);
+    }
+    form.addEventListener("input", calc);
+    form.addEventListener("change", calc);
+    calc();
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {

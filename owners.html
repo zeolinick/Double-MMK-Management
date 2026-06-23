@@ -120,12 +120,67 @@
 
     <nav class="subnav" aria-label="On this page">
       <div class="container">
+        <a href="#estimate">Estimate</a>
         <a href="#benefits">Benefits</a>
         <a href="#pricing">Pricing</a>
         <a href="#quote">Free Analysis</a>
         <a href="#faq">FAQ</a>
       </div>
     </nav>
+
+    <!-- Rent estimate calculator -->
+    <section class="section section--sand sub-section" id="estimate">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Free Tool</span>
+          <h2>What could your property rent for?</h2>
+          <p class="lead">Get a quick ballpark in seconds. When you're ready for an exact figure and a plan, request your free analysis — no obligation.</p>
+        </div>
+        <div class="calc reveal">
+          <form class="calc-form" id="rent-calc">
+            <div class="calc-grid">
+              <div class="field">
+                <label for="rc-hood">Neighborhood</label>
+                <select id="rc-hood">
+                  <option value="1.05">Corktown</option>
+                  <option value="1.05">Midtown</option>
+                  <option value="1.00">Indian Village</option>
+                  <option value="1.00">Woodbridge</option>
+                  <option value="0.95">Boston-Edison</option>
+                  <option value="0.92">Sherwood Forest</option>
+                  <option value="0.90">Rosedale Park</option>
+                  <option value="0.85" selected>East English Village</option>
+                  <option value="0.85">Palmer Park</option>
+                  <option value="0.85">Hubbard Farms</option>
+                  <option value="0.82">Bagley</option>
+                  <option value="0.80">Grandmont</option>
+                  <option value="0.78">Southwest Detroit</option>
+                  <option value="0.85">Other Detroit area</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rc-beds">Bedrooms</label>
+                <select id="rc-beds"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select>
+              </div>
+              <div class="field">
+                <label for="rc-baths">Bathrooms</label>
+                <select id="rc-baths"><option value="1">1</option><option value="1.5" selected>1.5</option><option value="2">2</option><option value="2.5">2.5</option><option value="3">3+</option></select>
+              </div>
+              <div class="field">
+                <label for="rc-sqft">Square feet</label>
+                <input id="rc-sqft" type="number" inputmode="numeric" value="1400" min="300" max="6000" step="50" />
+              </div>
+            </div>
+          </form>
+          <div class="calc-result" aria-live="polite">
+            <span class="calc-label">Estimated monthly rent</span>
+            <div class="calc-range" id="rc-out">$—</div>
+            <p class="calc-note">A ballpark from Detroit market averages. Actual rent depends on condition, finishes, and timing.</p>
+            <a href="#quote" class="btn btn--primary">Get a Precise Free Analysis</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Benefits -->
     <section class="section sub-section" id="benefits">
