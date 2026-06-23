@@ -512,3 +512,32 @@ textarea:focus-visible, .btn:focus-visible {
 .photo { background-position: center; background-size: cover; background-repeat: no-repeat; display: block; }
 .split-photo { width: 100%; aspect-ratio: 4/3; border-radius: var(--radius); box-shadow: var(--shadow); }
 .map-photo { width: 100%; aspect-ratio: 3/1; border-radius: var(--radius); box-shadow: var(--shadow); }
+
+/* ---- Hero rental search band --------------------------------------------- */
+.search-band { background: var(--paper); padding: 0 0 64px; }
+.search-wrap { position: relative; z-index: 5; margin-top: -44px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-lg); padding: 20px; display: grid; grid-template-columns: 1.6fr 1fr 1fr auto; gap: 14px; align-items: end; }
+.search-wrap .field { margin: 0; }
+.search-wrap label { font-size: .72rem; font-family: var(--font-head); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); display: block; margin-bottom: 6px; }
+.search-wrap input, .search-wrap select { width: 100%; padding: 13px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: var(--paper); font: inherit; color: var(--body); }
+.search-wrap .btn { height: 49px; }
+@media (max-width: 760px) { .search-wrap { grid-template-columns: 1fr; margin-top: -30px; } }
+
+/* ---- Owner / Resident paths ---------------------------------------------- */
+.paths { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+@media (max-width: 760px) { .paths { grid-template-columns: 1fr; } }
+.path-card { position: relative; overflow: hidden; border-radius: var(--radius); padding: 40px; border: 1px solid var(--line); background: var(--white); box-shadow: var(--shadow-sm); transition: transform var(--t), box-shadow var(--t); }
+.path-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.path-card .icon { width: 56px; height: 56px; border-radius: 14px; background: rgba(200,32,42,.09); color: var(--red); display: grid; place-items: center; margin-bottom: 18px; }
+.path-card .icon svg { width: 26px; height: 26px; }
+.path-card h3 { font-size: 1.5rem; margin-bottom: .4rem; }
+.path-card p { color: var(--muted); }
+.path-card .btn { margin-top: 10px; }
+
+/* ---- Full-width Detroit photo band --------------------------------------- */
+.photo-band { position: relative; display: grid; place-items: center; text-align: center; color: #fff; background-size: cover; background-position: center; }
+.photo-band::before { content: ""; position: absolute; inset: 0; background: linear-gradient(rgba(15,15,17,.5), rgba(15,15,17,.74)); }
+.photo-band .container { position: relative; z-index: 1; padding: 96px 28px; }
+.photo-band h2 { color: #fff; }
+.photo-band p { color: #e6e6ea; max-width: 640px; margin: 0 auto 24px; }
+.photo-band .eyebrow { color: var(--red-bright); }
+.hood { cursor: pointer; text-decoration: none; }

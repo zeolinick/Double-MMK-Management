@@ -148,6 +148,34 @@
     filterForm.addEventListener("reset", function () { setTimeout(applyFilters, 0); });
   }
 
+  /* ---- Hero rental search -> listings ---- */
+  var searchGo = document.querySelector("[data-search-go]");
+  if (searchGo) {
+    searchGo.addEventListener("click", function (e) {
+      var form = searchGo.closest("[data-search]");
+      if (!form) return;
+      e.preventDefault();
+      var p = new URLSearchParams();
+      ["city", "beds", "price"].forEach(function (k) {
+        var el = form.querySelector("[name=" + k + "]");
+        if (el && el.value) p.set(k, el.value);
+      });
+      var qs = p.toString();
+      window.location.href = "listings.html" + (qs ? "?" + qs : "") + "#properties";
+    });
+  }
+
+  /* ---- Listings: prefill filter from URL params ---- */
+  var lfEl = document.getElementById("listing-filter");
+  if (lfEl && window.location.search) {
+    var q = new URLSearchParams(window.location.search);
+    ["city", "beds", "price", "type"].forEach(function (k) {
+      var el = lfEl.querySelector("[name=" + k + "]");
+      if (el && q.get(k) !== null) el.value = q.get(k);
+    });
+    lfEl.dispatchEvent(new Event("input"));
+  }
+
   /* ---- Footer year ---- */
   var yr = document.getElementById("year");
   if (yr) yr.textContent = new Date().getFullYear();
