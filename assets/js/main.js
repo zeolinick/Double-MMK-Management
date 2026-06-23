@@ -71,6 +71,23 @@
   toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
   window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.scrollY > 600); }, { passive: true });
 
+  /* ---- Sub-nav scrollspy ---- */
+  var subnav = document.querySelector(".subnav");
+  if (subnav && "IntersectionObserver" in window) {
+    var slinks = Array.prototype.slice.call(subnav.querySelectorAll("a"));
+    var smap = {};
+    slinks.forEach(function (a) { var id = (a.getAttribute("href") || "").slice(1); if (document.getElementById(id)) smap[id] = a; });
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          slinks.forEach(function (l) { l.classList.remove("active"); });
+          if (smap[e.target.id]) smap[e.target.id].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-45% 0px -50% 0px", threshold: 0 });
+    Object.keys(smap).forEach(function (id) { spy.observe(document.getElementById(id)); });
+  }
+
   /* ---- Condense header on scroll ---- */
   var header = document.querySelector(".site-header");
   if (header) {

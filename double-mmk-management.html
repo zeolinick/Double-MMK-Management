@@ -640,6 +640,36 @@ p, .lead { text-wrap: pretty; }
 /* Staggered reveals (multi-page, JS sets --d) */
 .reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
 
+/* ==========================================================================
+   Polish round 2 — dark ribbon texture, angled dividers, sticky sub-nav
+   ========================================================================== */
+
+/* Keep header height steady (so sub-nav aligns); condense via shadow only */
+.site-header.scrolled .nav { height: 84px; }
+.site-header.scrolled .brand-emblem { height: 48px; }
+
+/* Refined dark ribbon: subtle dot grid + red glow */
+.section--navy { position: relative; overflow: hidden; }
+.section--navy::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .6;
+  background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px); background-size: 22px 22px; }
+.section--navy::after { content: ""; position: absolute; right: -140px; top: -140px; width: 380px; height: 380px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.26), transparent 62%); pointer-events: none; }
+.section--navy > .container { position: relative; z-index: 1; }
+
+/* Angled dividers on dark sections for smoother flow */
+.page-head { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
+.photo-band { clip-path: polygon(0 2.4vw, 100% 0, 100% 100%, 0 calc(100% - 2.4vw)); }
+.site-footer { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 100%); }
+
+/* Sticky in-page sub-nav (long pages) */
+.subnav { position: sticky; top: 84px; z-index: 40; background: rgba(255,255,255,.9); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+.subnav .container { display: flex; gap: 4px; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+.subnav .container::-webkit-scrollbar { display: none; }
+.subnav a { font-family: var(--font-head); font-weight: 600; font-size: .85rem; color: var(--muted); padding: 16px 14px; white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--t), border-color var(--t); }
+.subnav a:hover { color: var(--onyx); }
+.subnav a.active { color: var(--red); border-bottom-color: var(--red); }
+.sub-section { scroll-margin-top: 150px; }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1236,8 +1266,10 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
+    
+
     <!-- Benefits -->
-    <section class="section">
+    <section class="section sub-section" id="benefits">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">Owner Benefits</span>
@@ -1256,7 +1288,7 @@ p, .lead { text-wrap: pretty; }
     </section>
 
     <!-- Pricing -->
-    <section class="section section--sand">
+    <section class="section section--sand sub-section" id="pricing">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">Simple Pricing</span>
@@ -1300,7 +1332,7 @@ p, .lead { text-wrap: pretty; }
     </section>
 
     <!-- Quote form -->
-    <section class="section" id="quote">
+    <section class="section sub-section" id="quote">
       <div class="container">
         <div class="split">
           <div class="reveal">
@@ -1354,7 +1386,7 @@ p, .lead { text-wrap: pretty; }
     </section>
 
     <!-- FAQ -->
-    <section class="section section--sand">
+    <section class="section section--sand sub-section" id="faq">
       <div class="container">
         <div class="section-head center reveal">
           <span class="eyebrow">Owner FAQ</span>
@@ -1382,8 +1414,10 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
+    
+
     <!-- Detailed services -->
-    <section class="section">
+    <section class="section sub-section" id="leasing">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTIuNiAxNy40QTIgMiAwIDAgMCAyIDE4LjhWMjFhMSAxIDAgMCAwIDEgMWgzYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWgxYTEgMSAwIDAgMCAxLTF2LTFhMSAxIDAgMCAxIDEtMWguMmEyIDIgMCAwIDAgMS40LS42bC44LS44YTYuNSA2LjUgMCAxIDAtNC00eicvPjxjaXJjbGUgY3g9JzE2LjUnIGN5PSc3LjUnIHI9Jy42JyBmaWxsPSclMjNlOGU4ZWEnLz48L2c+PC9zdmc+" alt="Leasing &amp; marketing" loading="lazy" /></div>
@@ -1402,7 +1436,7 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
-    <section class="section section--sand">
+    <section class="section section--sand sub-section" id="screening">
       <div class="container">
         <div class="split reverse reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTE2IDIxdi0yYTQgNCAwIDAgMC00LTRINmE0IDQgMCAwIDAtNCA0djInLz48Y2lyY2xlIGN4PSc5JyBjeT0nNycgcj0nNCcvPjxwYXRoIGQ9J00yMiAyMXYtMmE0IDQgMCAwIDAtMy0zLjg3Jy8+PHBhdGggZD0nTTE2IDMuMTNhNCA0IDAgMCAxIDAgNy43NScvPjwvZz48L3N2Zz4=" alt="Tenant screening" loading="lazy" /></div>
@@ -1421,7 +1455,7 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
-    <section class="section">
+    <section class="section sub-section" id="maintenance">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTE0LjcgNi4zYTEgMSAwIDAgMCAwIDEuNGwxLjYgMS42YTEgMSAwIDAgMCAxLjQgMGwzLjc3LTMuNzdhNiA2IDAgMCAxLTcuOTQgNy45NGwtNi45MSA2LjkxYTIuMTIgMi4xMiAwIDAgMS0zLTNsNi45MS02LjkxYTYgNiAwIDAgMSA3Ljk0LTcuOTRsLTMuNzYgMy43NnonLz48L2c+PC9zdmc+" alt="Maintenance & repairs" loading="lazy" /></div>
@@ -1440,7 +1474,7 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
-    <section class="section section--sand">
+    <section class="section section--sand sub-section" id="accounting">
       <div class="container">
         <div class="split reverse reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PGxpbmUgeDE9JzYnIHkxPScyMCcgeDI9JzYnIHkyPScxMicvPjxsaW5lIHgxPScxMicgeTE9JzIwJyB4Mj0nMTInIHkyPSc0Jy8+PGxpbmUgeDE9JzE4JyB5MT0nMjAnIHgyPScxOCcgeTI9JzE0Jy8+PC9nPjwvc3ZnPg==" alt="Rent collection &amp; accounting" loading="lazy" /></div>
@@ -1459,7 +1493,7 @@ p, .lead { text-wrap: pretty; }
       </div>
     </section>
 
-    <section class="section">
+    <section class="section sub-section" id="compliance">
       <div class="container">
         <div class="split reveal">
           <div class="split-media"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA0MDAgMzAwJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSd4TWlkWU1pZCBzbGljZScgcm9sZT0naW1nJz48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9J29nJyB4MT0nMCcgeTE9JzAnIHgyPScxJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjMWMxYzIwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjMGYwZjExJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3Qgd2lkdGg9JzQwMCcgaGVpZ2h0PSczMDAnIGZpbGw9J3VybCgjb2cpJy8+PGNpcmNsZSBjeD0nMzIwJyBjeT0nNDAnIHI9JzE1MCcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jy8+PGcgZmlsbD0nI2M4MjAyYScgb3BhY2l0eT0nLjE0Jz48cG9seWdvbiBwb2ludHM9JzIwLDMwMCAyMCwyNjIgNzAsMjI0IDEyMCwyNjIgMTIwLDMwMCcvPjxwb2x5Z29uIHBvaW50cz0nMTUwLDMwMCAxNTAsMjUwIDIxMCwyMDYgMjcwLDI1MCAyNzAsMzAwJy8+PHBvbHlnb24gcG9pbnRzPSczMDAsMzAwIDMwMCwyNjIgMzUwLDIyNCA0MDAsMjYyIDQwMCwzMDAnLz48L2c+PGNpcmNsZSBjeD0nMjAwJyBjeT0nMTM4JyByPSc2MicgZmlsbD0nIzBmMGYxMScgc3Ryb2tlPSd1cmwoI2JkZyknIHN0cm9rZS13aWR0aD0nNicvPjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0nYmRnJyB4MT0nMCcgeTE9JzAnIHgyPScwJyB5Mj0nMSc+PHN0b3Agb2Zmc2V0PScwJyBzdG9wLWNvbG9yPScjZTg0NzUwJy8+PHN0b3Agb2Zmc2V0PScxJyBzdG9wLWNvbG9yPScjYzgyMDJhJy8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PGcgdHJhbnNmb3JtPSd0cmFuc2xhdGUoMjAwLDEzOCkgc2NhbGUoMi4xKSB0cmFuc2xhdGUoLTEyLC0xMiknIGZpbGw9J25vbmUnIHN0cm9rZT0nI2U4ZThlYScgc3Ryb2tlLXdpZHRoPScxLjcnIHN0cm9rZS1saW5lY2FwPSdyb3VuZCcgc3Ryb2tlLWxpbmVqb2luPSdyb3VuZCc+PHBhdGggZD0nTTEyIDIyczgtNCA4LTEwVjVsLTgtMy04IDN2N2MwIDYgOCAxMCA4IDEweicvPjxwb2x5bGluZSBwb2ludHM9JzkgMTIgMTEgMTQgMTUgOS41Jy8+PC9nPjwvc3ZnPg==" alt="Inspections & compliance" loading="lazy" /></div>

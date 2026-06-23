@@ -614,3 +614,33 @@ p, .lead { text-wrap: pretty; }
 
 /* Staggered reveals (multi-page, JS sets --d) */
 .reveal { transition: opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1); }
+
+/* ==========================================================================
+   Polish round 2 — dark ribbon texture, angled dividers, sticky sub-nav
+   ========================================================================== */
+
+/* Keep header height steady (so sub-nav aligns); condense via shadow only */
+.site-header.scrolled .nav { height: 84px; }
+.site-header.scrolled .brand-emblem { height: 48px; }
+
+/* Refined dark ribbon: subtle dot grid + red glow */
+.section--navy { position: relative; overflow: hidden; }
+.section--navy::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .6;
+  background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1.4px); background-size: 22px 22px; }
+.section--navy::after { content: ""; position: absolute; right: -140px; top: -140px; width: 380px; height: 380px;
+  border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.26), transparent 62%); pointer-events: none; }
+.section--navy > .container { position: relative; z-index: 1; }
+
+/* Angled dividers on dark sections for smoother flow */
+.page-head { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
+.photo-band { clip-path: polygon(0 2.4vw, 100% 0, 100% 100%, 0 calc(100% - 2.4vw)); }
+.site-footer { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 100%); }
+
+/* Sticky in-page sub-nav (long pages) */
+.subnav { position: sticky; top: 84px; z-index: 40; background: rgba(255,255,255,.9); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+.subnav .container { display: flex; gap: 4px; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
+.subnav .container::-webkit-scrollbar { display: none; }
+.subnav a { font-family: var(--font-head); font-weight: 600; font-size: .85rem; color: var(--muted); padding: 16px 14px; white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--t), border-color var(--t); }
+.subnav a:hover { color: var(--onyx); }
+.subnav a.active { color: var(--red); border-bottom-color: var(--red); }
+.sub-section { scroll-margin-top: 150px; }
