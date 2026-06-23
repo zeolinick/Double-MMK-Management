@@ -106,6 +106,14 @@
   });
 
   /* ============================================================
+     6b) SCROLL-INTO-FOCUS cards (touch devices only — the mobile
+         counterpart to desktop tilt). Subtle: ~2% lift near center.
+         Driven via a CSS var so tap-press feedback still composes.
+     ============================================================ */
+  var focusOn = !finePointer && !reduce;
+  var focusEls = focusOn ? [].slice.call(document.querySelectorAll(".card, .path-card")) : [];
+
+  /* ============================================================
      7) AGGREGATE SCROLL-DRIVEN EFFECTS (single rAF loop)
      ============================================================ */
   var vh = window.innerHeight;
@@ -139,6 +147,16 @@
         for (var k = 0; k < n; k++) {
           if (prog >= (k + 0.4) / n) steps[k].classList.add("step--active");
         }
+      }
+      // scroll-into-focus cards (touch)
+      for (var f = 0; f < focusEls.length; f++) {
+        var fe = focusEls[f], fr = fe.getBoundingClientRect();
+        if (fr.bottom < 0 || fr.top > vh) { if (fe._foc) { fe.style.setProperty("--f", "1"); fe._foc = false; } continue; }
+        if (!fe.classList.contains("in")) continue;
+        if (!fe.classList.contains("focus-card")) fe.classList.add("focus-card");
+        var d = Math.abs((fr.top + fr.height / 2) - vh / 2) / vh;
+        fe.style.setProperty("--f", (1 + 0.022 * clamp(1 - d * 2.2, 0, 1)).toFixed(3));
+        fe._foc = true;
       }
     }
     ticking = false;

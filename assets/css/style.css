@@ -831,3 +831,10 @@ body.intro-lock { overflow: hidden; }
   /* gentler parallax + a touch quicker reveals so phones feel snappy */
   .js .reveal { transition-duration: .6s; }
 }
+
+/* --- Scroll-into-focus cards (touch) — composed via --f so :active presses still work --- */
+@media (hover: none) {
+  .js .reveal.focus-card { transform: scale(var(--f, 1));
+    transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; }
+  .js .reveal.focus-card:active { transform: scale(calc(var(--f, 1) * .975)); }
+}
