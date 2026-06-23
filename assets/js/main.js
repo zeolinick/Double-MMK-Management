@@ -52,10 +52,24 @@
         }
       });
     }, { threshold: 0.12 });
-    reveals.forEach(function (el) { io.observe(el); });
+    reveals.forEach(function (el) {
+      var parent = el.parentElement;
+      var idx = parent ? Array.prototype.indexOf.call(parent.children, el) : 0;
+      el.style.transitionDelay = (Math.min(idx, 7) * 70) + "ms";
+      io.observe(el);
+    });
   } else {
     reveals.forEach(function (el) { el.classList.add("in"); });
   }
+
+  /* ---- Back to top ---- */
+  var toTop = document.createElement("button");
+  toTop.className = "to-top";
+  toTop.setAttribute("aria-label", "Back to top");
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
+  document.body.appendChild(toTop);
+  toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
+  window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.scrollY > 600); }, { passive: true });
 
   /* ---- Condense header on scroll ---- */
   var header = document.querySelector(".site-header");
