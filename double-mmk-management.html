@@ -456,6 +456,43 @@ textarea:focus-visible, .btn:focus-visible {
   outline: 3px solid rgba(200,32,42,.55); outline-offset: 2px; border-radius: 6px;
 }
 
+/* ---- Hero rating badge --------------------------------------------------- */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line-dark); color: #d8d8dd;
+  padding: 8px 16px; border-radius: 999px; font-family: var(--font-head); font-weight: 600;
+  font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+}
+.hero-badge .stars { color: var(--red-bright); letter-spacing: 2px; font-size: .85rem; }
+
+/* ---- Angled dark ribbon -------------------------------------------------- */
+.section--angled { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
+
+/* ---- Comparison ---------------------------------------------------------- */
+.compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+@media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
+.compare-col { padding: 38px; }
+.compare-col--us { background: var(--onyx); color: #c2c2c8; }
+.compare-col--them { background: var(--paper); }
+.compare-col h3 { margin: 2px 0 0; }
+.compare-col--us h3 { color: #fff; }
+.compare-col .tag { font-family: var(--font-head); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .18em; display: block; margin-bottom: 4px; }
+.compare-col--us .tag { color: var(--red-bright); }
+.compare-col--them .tag { color: var(--steel); }
+.compare-list { list-style: none; margin: 22px 0 0; padding: 0; }
+.compare-list li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; font-size: .98rem; border-top: 1px solid var(--line-dark); }
+.compare-col--them .compare-list li { border-top-color: var(--line); color: var(--muted); }
+.compare-list li:first-child { border-top: 0; }
+.compare-list svg { width: 20px; height: 20px; flex: none; margin-top: 1px; }
+.compare-list--yes svg { color: var(--red-bright); }
+.compare-list--no svg { color: var(--steel); }
+
+/* ---- Neighborhoods ------------------------------------------------------- */
+.hoods { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 880px; margin: 0 auto; }
+.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
+.hood:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+.hood svg { width: 15px; height: 15px; color: var(--red); flex: none; }
+
 /* ---- Detroit skyline motif ----------------------------------------------- */
 .hero { background-repeat: no-repeat; background-position: center bottom; background-size: 1100px auto; }
 .site-footer { position: relative; }
@@ -547,7 +584,7 @@ textarea:focus-visible, .btn:focus-visible {
       <div class="container">
         <div class="hero-grid">
           <div class="reveal">
-            <span class="eyebrow">Detroit Property Management</span>
+            <span class="hero-badge"><span class="stars">★★★★★</span> Trusted by Detroit landlords</span>
             <h1>Detroit property,<br /><span class="accent">managed right.</span></h1>
             <p>Double MMK Management LLC keeps your properties occupied, maintained, and profitable — with hands-on service and straight answers. Three houses, one standard.</p>
             <div class="hero-actions">
@@ -667,7 +704,7 @@ textarea:focus-visible, .btn:focus-visible {
     </section>
 
     <!-- ====================== STATS ====================== -->
-    <section class="section--tight section--navy">
+    <section class="section--tight section--navy section--angled">
       <div class="container">
         <div class="stats">
           <div class="stat reveal"><strong>500+</strong><span>Units under management</span></div>
@@ -780,6 +817,69 @@ textarea:focus-visible, .btn:focus-visible {
             <div class="stars">★★★★★</div>
             <p>"Finally a management company that actually picks up the phone. Their team knows Detroit and it shows in the results."</p>
             <div class="who"><div class="avatar">TK</div><div><strong>Tony K.</strong><span>Investor, 12 units</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== NEIGHBORHOODS ====================== -->
+    <section class="section section--sand">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">Where We Work</span>
+          <h2>Neighborhoods we serve</h2>
+          <p class="lead">Boots-on-the-ground management across Detroit's neighborhoods — and growing.</p>
+        </div>
+        <div class="hoods reveal">
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Corktown</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Midtown</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Rosedale Park</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> East English Village</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Bagley</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Hubbard Farms</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Woodbridge</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Boston-Edison</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Indian Village</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Southwest Detroit</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Grandmont</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Sherwood Forest</span>
+          <span class="hood"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Palmer Park</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== COMPARISON ====================== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow">The Double MMK Difference</span>
+          <h2>Management the way it should be</h2>
+          <p class="lead">No call centers, no hidden fees, no runaround — just hands-on local management.</p>
+        </div>
+        <div class="compare reveal">
+          <div class="compare-col compare-col--us">
+            <span class="tag">The Double MMK Way</span>
+            <h3>Hands-on &amp; local</h3>
+            <ul class="compare-list compare-list--yes">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> A real person answers the phone</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Flat, transparent pricing — no surprise fees</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 24/7 maintenance with vetted Detroit contractors</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Tenants screened for credit, income &amp; history</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Clear monthly owner statements</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> We know every neighborhood we manage</li>
+            </ul>
+          </div>
+          <div class="compare-col compare-col--them">
+            <span class="tag">Typical Management</span>
+            <h3>Hands-off &amp; remote</h3>
+            <ul class="compare-list compare-list--no">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hold music, tickets &amp; slow replies</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Markups and surprise line items</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Slow repairs and absent vendors</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Rushed or skipped tenant screening</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Confusing or late reporting</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> One-size-fits-all, out-of-town operators</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -1356,7 +1456,7 @@ textarea:focus-visible, .btn:focus-visible {
     </section>
 
     <!-- Stats -->
-    <section class="section--tight section--navy">
+    <section class="section--tight section--navy section--angled">
       <div class="container">
         <div class="stats">
           <div class="stat reveal"><strong>500+</strong><span>Units under management</span></div>

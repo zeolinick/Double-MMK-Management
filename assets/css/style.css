@@ -431,6 +431,43 @@ textarea:focus-visible, .btn:focus-visible {
   outline: 3px solid rgba(200,32,42,.55); outline-offset: 2px; border-radius: 6px;
 }
 
+/* ---- Hero rating badge --------------------------------------------------- */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
+  background: rgba(255,255,255,.06); border: 1px solid var(--line-dark); color: #d8d8dd;
+  padding: 8px 16px; border-radius: 999px; font-family: var(--font-head); font-weight: 600;
+  font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
+}
+.hero-badge .stars { color: var(--red-bright); letter-spacing: 2px; font-size: .85rem; }
+
+/* ---- Angled dark ribbon -------------------------------------------------- */
+.section--angled { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
+
+/* ---- Comparison ---------------------------------------------------------- */
+.compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+@media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
+.compare-col { padding: 38px; }
+.compare-col--us { background: var(--onyx); color: #c2c2c8; }
+.compare-col--them { background: var(--paper); }
+.compare-col h3 { margin: 2px 0 0; }
+.compare-col--us h3 { color: #fff; }
+.compare-col .tag { font-family: var(--font-head); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .18em; display: block; margin-bottom: 4px; }
+.compare-col--us .tag { color: var(--red-bright); }
+.compare-col--them .tag { color: var(--steel); }
+.compare-list { list-style: none; margin: 22px 0 0; padding: 0; }
+.compare-list li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; font-size: .98rem; border-top: 1px solid var(--line-dark); }
+.compare-col--them .compare-list li { border-top-color: var(--line); color: var(--muted); }
+.compare-list li:first-child { border-top: 0; }
+.compare-list svg { width: 20px; height: 20px; flex: none; margin-top: 1px; }
+.compare-list--yes svg { color: var(--red-bright); }
+.compare-list--no svg { color: var(--steel); }
+
+/* ---- Neighborhoods ------------------------------------------------------- */
+.hoods { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 880px; margin: 0 auto; }
+.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
+.hood:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+.hood svg { width: 15px; height: 15px; color: var(--red); flex: none; }
+
 /* ---- Detroit skyline motif ----------------------------------------------- */
 .hero { background-repeat: no-repeat; background-position: center bottom; background-size: 1100px auto; }
 .site-footer { position: relative; }
