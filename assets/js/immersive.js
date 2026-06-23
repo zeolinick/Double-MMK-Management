@@ -37,6 +37,24 @@
   })();
 
   /* ============================================================
+     0b) HERO VIDEO — desktop only, lazy (don't burn mobile data),
+         respects reduced motion. Fades in once it can play.
+     ============================================================ */
+  (function heroVideo() {
+    var v = document.querySelector(".hero-video");
+    if (!v) return;
+    var src = v.getAttribute("data-hero-src");
+    if (!src || reduce || !finePointer || window.innerWidth < 1000) return;
+    var hero = v.closest(".hero");
+    if (hero) hero.classList.add("has-video");
+    v.setAttribute("preload", "auto");
+    v.src = src;
+    v.addEventListener("canplay", function () { v.classList.add("is-ready"); });
+    var p = v.play && v.play();
+    if (p && p.catch) p.catch(function () {});
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {

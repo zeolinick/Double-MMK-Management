@@ -846,3 +846,18 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 @media (max-width: 760px) {
   .subnav { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
 }
+
+/* ==========================================================================
+   HERO VIDEO BACKGROUND (desktop only; JS sets the source)
+   ========================================================================== */
+.hero-video, .hero-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero-video { object-fit: cover; z-index: 0; opacity: 0; transition: opacity 1s ease; }
+.hero-video.is-ready { opacity: 1; }
+.hero-overlay { z-index: 1; opacity: 0; transition: opacity 1s ease;
+  background:
+    linear-gradient(90deg, rgba(15,15,17,.93) 0%, rgba(15,15,17,.74) 46%, rgba(15,15,17,.5) 100%),
+    linear-gradient(180deg, rgba(15,15,17,.55) 0%, rgba(15,15,17,.12) 38%, rgba(15,15,17,.92) 100%); }
+.hero.has-video .hero-overlay { opacity: 1; }
+/* when video is active, drop the ambient glow so it isn't busy */
+.hero.has-video::after { display: none; }
+.hero .container { position: relative; z-index: 2; }
