@@ -36,4 +36,56 @@
     <loc>https://www.doublemmk.com/legal.html</loc>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.doublemmk.com/bagley-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/boston-edison-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/corktown-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/east-english-village-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/grandmont-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/hubbard-farms-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/indian-village-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/midtown-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/palmer-park-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/rosedale-park-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/sherwood-forest-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/southwest-detroit-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://www.doublemmk.com/woodbridge-property-management.html</loc>
+    <priority>0.5</priority>
+  </url>
 </urlset>

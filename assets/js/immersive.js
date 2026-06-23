@@ -30,6 +30,7 @@
         if (href.charAt(0) === "#") on = hash ? href === hash : href === "#home";
         else on = href.split("#")[0] === page;
         a.classList.toggle("active", on);
+        if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
       });
     }
     setActive();

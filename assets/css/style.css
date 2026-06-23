@@ -541,7 +541,6 @@ textarea:focus-visible, .btn:focus-visible {
 .path-card .icon svg { width: 26px; height: 26px; }
 .path-card h3 { font-size: 1.5rem; margin-bottom: .4rem; }
 .path-card p { color: var(--muted); }
-.path-card .btn { margin-top: 10px; }
 
 /* ---- Full-width Detroit photo band --------------------------------------- */
 .photo-band { position: relative; display: grid; place-items: center; text-align: center; color: #fff; background-size: cover; background-position: center; }
