@@ -507,3 +507,8 @@ textarea:focus-visible, .btn:focus-visible {
 .owner-photo { width: 100%; max-width: 430px; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
 .map-img { width: 100%; aspect-ratio: 3/1; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); display: block; }
 .listing-photo img { display: block; }
+
+/* ---- Photo slots (stock photo over illustration fallback) ---------------- */
+.photo { background-position: center; background-size: cover; background-repeat: no-repeat; display: block; }
+.split-photo { width: 100%; aspect-ratio: 4/3; border-radius: var(--radius); box-shadow: var(--shadow); }
+.map-photo { width: 100%; aspect-ratio: 3/1; border-radius: var(--radius); box-shadow: var(--shadow); }
