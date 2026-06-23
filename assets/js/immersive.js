@@ -115,7 +115,17 @@
          Driven via a CSS var so tap-press feedback still composes.
      ============================================================ */
   var focusOn = !finePointer && !reduce;
-  var focusEls = focusOn ? [].slice.call(document.querySelectorAll(".card, .path-card")) : [];
+  var focusVisible = [];
+  if (focusOn && "IntersectionObserver" in window) {
+    var fobs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = focusVisible.indexOf(e.target);
+        if (e.isIntersecting && i === -1) focusVisible.push(e.target);
+        else if (!e.isIntersecting && i !== -1) { focusVisible.splice(i, 1); e.target.style.setProperty("--f", "1"); }
+      });
+    }, { rootMargin: "10% 0px 10% 0px" });
+    document.querySelectorAll(".card, .path-card").forEach(function (el) { fobs.observe(el); });
+  }
 
   /* ============================================================
      7) AGGREGATE SCROLL-DRIVEN EFFECTS (single rAF loop)
@@ -152,15 +162,14 @@
           if (prog >= (k + 0.4) / n) steps[k].classList.add("step--active");
         }
       }
-      // scroll-into-focus cards (touch)
-      for (var f = 0; f < focusEls.length; f++) {
-        var fe = focusEls[f], fr = fe.getBoundingClientRect();
-        if (fr.bottom < 0 || fr.top > vh) { if (fe._foc) { fe.style.setProperty("--f", "1"); fe._foc = false; } continue; }
+      // scroll-into-focus cards (touch) — only the few cards in view
+      for (var f = 0; f < focusVisible.length; f++) {
+        var fe = focusVisible[f];
         if (!fe.classList.contains("in")) continue;
         if (!fe.classList.contains("focus-card")) fe.classList.add("focus-card");
+        var fr = fe.getBoundingClientRect();
         var d = Math.abs((fr.top + fr.height / 2) - vh / 2) / vh;
         fe.style.setProperty("--f", (1 + 0.022 * clamp(1 - d * 2.2, 0, 1)).toFixed(3));
-        fe._foc = true;
       }
     }
     ticking = false;
