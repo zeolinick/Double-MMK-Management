@@ -670,6 +670,43 @@ p, .lead { text-wrap: pretty; }
 .subnav a.active { color: var(--red); border-bottom-color: var(--red); }
 .sub-section { scroll-margin-top: 150px; }
 
+/* ==========================================================================
+   Polish round 3 — mega-footer, refined forms, page-load
+   ========================================================================== */
+
+/* Mega-footer */
+.footer-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-bottom: 38px; margin-bottom: 40px; border-bottom: 1px solid var(--line-dark); }
+.footer-cta h3 { color: #fff; font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 4px; }
+.footer-cta p { color: #9a9aa0; margin: 0; }
+.footer-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.footer-grid { grid-template-columns: 1.7fr 1fr 1.1fr 1fr 1.2fr; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 32px; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* Refined form controls */
+.field select, .filter-bar select, .search-wrap select, .hero-card select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236c6c74' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+}
+.field input, .field select, .field textarea { background: var(--white); }
+.field input::placeholder, .field textarea::placeholder,
+.search-wrap input::placeholder, .hero-card input::placeholder { color: #9a9aa0; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: #d3cdc4; }
+.field input:focus, .field select:focus, .field textarea:focus,
+.search-wrap input:focus, .search-wrap select:focus,
+.hero-card input:focus, .hero-card select:focus,
+.filter-bar input:focus, .filter-bar select:focus {
+  border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,32,42,.14); background: var(--white); outline: none;
+}
+
+/* Page-load animation: thin top progress sliver + header fade */
+@keyframes loadbar { 0% { transform: scaleX(0); opacity: 1; } 82% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform-origin: left; transform: scaleX(0); z-index: 200; pointer-events: none; animation: loadbar 1.1s ease forwards; }
+@keyframes hdrIn { from { opacity: 0; } to { opacity: 1; } }
+.site-header { animation: hdrIn .55s ease both; }
+@media (prefers-reduced-motion: reduce) { body::before { display: none; } .site-header { animation: none; } }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1947,29 +1984,35 @@ p, .lead { text-wrap: pretty; }
 
   <footer class="site-footer">
     <div class="container">
+      <div class="footer-cta">
+        <div>
+          <h3>Ready for management done right?</h3>
+          <p>Get a free, no-obligation rental analysis for your Detroit property.</p>
+        </div>
+        <div class="footer-cta-actions">
+          <a href="#owners" class="btn btn--primary">Get a Free Analysis</a>
+          <a href="#contact" class="btn btn--outline-light">Contact Us</a>
+        </div>
+      </div>
+
       <div class="footer-grid">
         <div class="footer-about">
           <a href="#home" class="brand">
             <img class="brand-emblem" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzIwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkRvdWJsZSBNTUsgTWFuYWdlbWVudCBlbWJsZW0iPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJtbWtSZWQiIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRTg0NzUwIi8+PHN0b3Agb2Zmc2V0PSIwLjUiIHN0b3AtY29sb3I9IiNDODIwMkEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM2RTEwMTUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im1ta1NpbHZlciIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPgogICAgICA8c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmZmZmZmYiLz48c3RvcCBvZmZzZXQ9IjAuNDgiIHN0b3AtY29sb3I9IiNjZGNkZDMiLz48c3RvcCBvZmZzZXQ9IjAuNTYiIHN0b3AtY29sb3I9IiM3ZTdlODUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNlOGU4ZWEiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgogIDxwYXRoIGQ9Ik02NCAxOTggUTY0IDk2IDE5NiA5MCIgc3Ryb2tlPSJ1cmwoI21ta1JlZCkiIHN0cm9rZS13aWR0aD0iNyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTMzNiAxOTggUTMzNiA5NiAyMDQgOTAiIHN0cm9rZT0idXJsKCNtbWtSZWQpIiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwb2x5Z29uIHBvaW50cz0iMzcsMzAwIDM3LDI0MiA5NSwxOTYgMTUzLDI0MiAxNTMsMzAwIiBmaWxsPSIjOEUxNjIwIi8+CiAgPHBvbHlnb24gcG9pbnRzPSIyNDcsMzAwIDI0NywyNDIgMzA1LDE5NiAzNjMsMjQyIDM2MywzMDAiIGZpbGw9IiM4RTE2MjAiLz4KICA8cG9seWdvbiBwb2ludHM9IjEzMCwzMDAgMTMwLDIzMCAyMDAsMTc0IDI3MCwyMzAgMjcwLDMwMCIgZmlsbD0idXJsKCNtbWtSZWQpIi8+CiAgPHJlY3QgeD0iMTg2IiB5PSIyNTIiIHdpZHRoPSIyOCIgaGVpZ2h0PSI0OCIgZmlsbD0iIzBGMEYxMSIvPgogIDxsaW5lIHgxPSIyMDAiIHkxPSIyNTIiIHgyPSIyMDAiIHkyPSIzMDAiIHN0cm9rZT0iIzhFMTYyMCIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGxpbmUgeDE9IjE4NiIgeTE9IjI3MCIgeDI9IjIxNCIgeTI9IjI3MCIgc3Ryb2tlPSIjOEUxNjIwIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8Y2lyY2xlIGN4PSIyMDAiIGN5PSI3MCIgcj0iNTAiIGZpbGw9IiMwRjBGMTEiIHN0cm9rZT0idXJsKCNtbWtSZWQpIiBzdHJva2Utd2lkdGg9IjgiLz4KICA8dGV4dCB4PSIyMDAiIHk9IjcyIiBmb250LWZhbWlseT0iQXJjaGl2bywgQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtd2VpZ2h0PSI4MDAiIGZvbnQtc2l6ZT0iNTQiIGZpbGw9InVybCgjbW1rU2lsdmVyKSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiPkQ8L3RleHQ+Cjwvc3ZnPgo=" alt="" style="height:44px;" />
-            <span class="brand-words">
-              <span class="brand-name">Double MMK</span>
-              <span class="brand-sub">Management LLC</span>
-            </span>
+            <span class="brand-words"><span class="brand-name">Double MMK</span><span class="brand-sub">Management LLC</span></span>
           </a>
           <p style="margin-top:16px;">Detroit property, managed right. Full-service management for local landlords and investors.</p>
-          <div class="social">
-            <a href="javascript:void(0)" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a>
-            <a href="javascript:void(0)" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-            <a href="javascript:void(0)" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21h-4z"/></svg></a>
-          </div>
+          <div class="social"><a href="javascript:void(0)" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg></a><a href="javascript:void(0)" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="javascript:void(0)" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.4-2.07 2.85V21h-4z"/></svg></a></div>
         </div>
-        <div><h4>Company</h4><ul class="footer-links"><li><a href="#about">About Us</a></li><li><a href="#resources">Resources</a></li><li><a href="#services">Services</a></li><li><a href="#owners">For Owners</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div><h4>Company</h4><ul class="footer-links"><li><a href="#about">About Us</a></li><li><a href="#owners">For Owners</a></li><li><a href="#resources">Resources</a></li><li><a href="#contact">Contact</a></li></ul></div>
+        <div><h4>Services</h4><ul class="footer-links"><li><a href="#services">Leasing &amp; Marketing</a></li><li><a href="#services">Tenant Screening</a></li><li><a href="#services">Maintenance</a></li><li><a href="#services">Rent &amp; Accounting</a></li><li><a href="#services">Compliance</a></li></ul></div>
         <div><h4>Residents</h4><ul class="footer-links"><li><a href="#properties">Find a Rental</a></li><li><a href="#tenants">Tenant Portal</a></li><li><a href="#tenants">Maintenance Request</a></li><li><a href="#tenants">Pay Rent</a></li></ul></div>
         <div><h4>Contact</h4><ul class="footer-links"><li><a href="tel:+13136036064">(313) 603-6064</a></li><li><a href="mailto:Doublemmkmanagement@gmail.com">Doublemmkmanagement@gmail.com</a></li><li>Detroit, Michigan</li><li>Mon–Fri, 9am–5pm</li></ul></div>
       </div>
+
       <div class="footer-bottom">
         <span>&copy; <span id="year">2026</span> Double MMK Management LLC. All rights reserved.</span>
-        <span><a href="#legal">Equal Housing Opportunity</a> &nbsp;·&nbsp; <a href="#legal">Privacy</a> &nbsp;·&nbsp; <a href="#legal">Terms</a></span>
+        <span><a href="#legal">Equal Housing Opportunity</a> &nbsp;·&nbsp; <a href="#legal">Privacy</a> &nbsp;·&nbsp; <a href="#legal">Terms</a> &nbsp;·&nbsp; <a href="#legal">Accessibility</a></span>
       </div>
     </div>
   </footer>

@@ -644,3 +644,40 @@ p, .lead { text-wrap: pretty; }
 .subnav a:hover { color: var(--onyx); }
 .subnav a.active { color: var(--red); border-bottom-color: var(--red); }
 .sub-section { scroll-margin-top: 150px; }
+
+/* ==========================================================================
+   Polish round 3 — mega-footer, refined forms, page-load
+   ========================================================================== */
+
+/* Mega-footer */
+.footer-cta { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-bottom: 38px; margin-bottom: 40px; border-bottom: 1px solid var(--line-dark); }
+.footer-cta h3 { color: #fff; font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin: 0 0 4px; }
+.footer-cta p { color: #9a9aa0; margin: 0; }
+.footer-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.footer-grid { grid-template-columns: 1.7fr 1fr 1.1fr 1fr 1.2fr; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 32px; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* Refined form controls */
+.field select, .filter-bar select, .search-wrap select, .hero-card select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236c6c74' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
+}
+.field input, .field select, .field textarea { background: var(--white); }
+.field input::placeholder, .field textarea::placeholder,
+.search-wrap input::placeholder, .hero-card input::placeholder { color: #9a9aa0; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: #d3cdc4; }
+.field input:focus, .field select:focus, .field textarea:focus,
+.search-wrap input:focus, .search-wrap select:focus,
+.hero-card input:focus, .hero-card select:focus,
+.filter-bar input:focus, .filter-bar select:focus {
+  border-color: var(--red); box-shadow: 0 0 0 3px rgba(200,32,42,.14); background: var(--white); outline: none;
+}
+
+/* Page-load animation: thin top progress sliver + header fade */
+@keyframes loadbar { 0% { transform: scaleX(0); opacity: 1; } 82% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform-origin: left; transform: scaleX(0); z-index: 200; pointer-events: none; animation: loadbar 1.1s ease forwards; }
+@keyframes hdrIn { from { opacity: 0; } to { opacity: 1; } }
+.site-header { animation: hdrIn .55s ease both; }
+@media (prefers-reduced-motion: reduce) { body::before { display: none; } .site-header { animation: none; } }
