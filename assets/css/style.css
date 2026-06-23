@@ -681,3 +681,11 @@ body::before { content: ""; position: fixed; top: 0; left: 0; right: 0; height: 
 @keyframes hdrIn { from { opacity: 0; } to { opacity: 1; } }
 .site-header { animation: hdrIn .55s ease both; }
 @media (prefers-reduced-motion: reduce) { body::before { display: none; } .site-header { animation: none; } }
+
+/* ==========================================================================
+   Fix: prevent horizontal overflow that shifts centered content off-center
+   ========================================================================== */
+html, body { overflow-x: clip; }                 /* clip (not hidden) keeps sticky working */
+.footer-links a, .footer-links li,
+.info-list a, .info-list span,
+.prose a { overflow-wrap: anywhere; }            /* long emails/URLs wrap instead of overflowing */
