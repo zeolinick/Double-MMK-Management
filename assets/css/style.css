@@ -103,28 +103,27 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 /* ---- Brand lockup (header/footer) --------------------------------------- */
 .brand { display: inline-flex; align-items: center; gap: .85rem; flex-shrink: 0; }
 .brand:hover { color: inherit; }
-.brand-emblem { height: 50px; width: auto; }
+.brand-emblem { height: 56px; width: auto; }
 .brand-words { display: flex; flex-direction: column; justify-content: center; line-height: 1; }
 .brand-name {
   font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
-  font-size: 1.36rem; letter-spacing: .01em; line-height: 1; white-space: nowrap;
+  font-size: 1.48rem; letter-spacing: .01em; line-height: 1; white-space: nowrap;
   background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .brand-sub {
   font-family: var(--font-head); font-weight: 600; text-transform: uppercase;
-  font-size: .58rem; letter-spacing: .345em; color: var(--red); margin-top: 6px; white-space: nowrap;
+  font-size: .62rem; letter-spacing: .35em; color: var(--red); margin-top: 6px; white-space: nowrap;
 }
 
 /* ---- Header / Nav (Onyx) ------------------------------------------------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(15,15,17,.82);
-  -webkit-backdrop-filter: saturate(140%) blur(12px); backdrop-filter: saturate(140%) blur(12px);
-  border-bottom: 1px solid var(--line-dark);
+  background: var(--onyx);
+  border-bottom: 1px solid rgba(255,255,255,.08);
 }
-.nav { display: flex; align-items: center; justify-content: space-between; height: 88px; gap: 40px; }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 90px; gap: 44px; }
 .nav-menu { display: flex; align-items: center; gap: 30px; }
-.nav-links { display: flex; align-items: center; gap: 30px; list-style: none; margin: 0; padding: 0; }
+.nav-links { display: flex; align-items: center; gap: 34px; list-style: none; margin: 0; padding: 0; }
 .nav-links a { font-family: var(--font-head); font-weight: 600; color: #c8c8d0; font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; position: relative; transition: color var(--t); }
 .nav-links a::after {
   content: ""; position: absolute; left: 0; right: 100%; bottom: -7px; height: 2.5px; background: var(--red); border-radius: 2px; transition: right .26s cubic-bezier(.2,.7,.2,1);
@@ -140,7 +139,7 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 @media (max-width: 1000px) {
   .nav-toggle { display: flex; }
   .nav-menu {
-    position: fixed; inset: 88px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
+    position: fixed; inset: 90px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
     background: var(--onyx); border-bottom: 1px solid var(--line-dark);
     padding: 14px 28px 26px; box-shadow: var(--shadow); transform: translateY(-130%);
     transition: transform .3s ease; z-index: 49;
@@ -424,9 +423,10 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 /* ---- Scroll-condensed header --------------------------------------------- */
 .site-header .nav { transition: height var(--t); }
 .brand-emblem { transition: height var(--t); }
-.site-header.scrolled { background: rgba(15,15,17,.95); box-shadow: 0 10px 34px rgba(0,0,0,.45); }
-.site-header.scrolled .nav { height: 68px; }
-.site-header.scrolled .brand-emblem { height: 40px; }
+.site-header.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,.5); border-bottom-color: rgba(255,255,255,.06); }
+.site-header.scrolled .nav { height: 72px; }
+.site-header.scrolled .brand-emblem { height: 46px; }
+.site-header.scrolled ~ main .subnav { top: 72px; }
 
 /* ---- Trust strip --------------------------------------------------------- */
 .trust-strip { background: var(--white); border-bottom: 1px solid var(--line); }
@@ -629,9 +629,7 @@ p, .lead { text-wrap: pretty; }
    Polish round 2 — dark ribbon texture, angled dividers, sticky sub-nav
    ========================================================================== */
 
-/* Keep header height steady (so sub-nav aligns); condense via shadow only */
-.site-header.scrolled .nav { height: 88px; }
-.site-header.scrolled .brand-emblem { height: 50px; }
+/* (header now condenses on scroll; sub-nav top is synced via sibling selector) */
 
 /* Refined dark ribbon: subtle dot grid + red glow */
 .section--navy { position: relative; overflow: hidden; }
@@ -644,7 +642,7 @@ p, .lead { text-wrap: pretty; }
 /* Clean straight edges on dark sections (slanted clips removed) */
 
 /* Sticky in-page sub-nav (long pages) */
-.subnav { position: sticky; top: 88px; z-index: 40; background: rgba(255,255,255,.9); -webkit-backdrop-filter: saturate(160%) blur(10px); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+.subnav { position: sticky; top: 90px; z-index: 40; background: rgba(255,255,255,.9); -webkit-backdrop-filter: saturate(160%) blur(10px); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
 .subnav .container { display: flex; gap: 4px; overflow-x: auto; -ms-overflow-style: none; scrollbar-width: none; }
 .subnav .container::-webkit-scrollbar { display: none; }
 .subnav a { font-family: var(--font-head); font-weight: 600; font-size: .85rem; color: var(--muted); padding: 16px 14px; white-space: nowrap; border-bottom: 2px solid transparent; transition: color var(--t), border-color var(--t); }
@@ -843,7 +841,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 
 /* --- Mobile perf: drop backdrop-blur (expensive to recomposite on scroll) --- */
 @media (max-width: 1000px) {
-  .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(15,15,17,.97); }
+  .site-header { background: var(--onyx); }
 }
 @media (max-width: 760px) {
   .subnav { -webkit-backdrop-filter: none; backdrop-filter: none; background: #fff; }
