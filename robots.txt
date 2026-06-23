@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# Update the domain below once the site is live on its final address.
 Sitemap: https://www.doublemmk.com/sitemap.xml

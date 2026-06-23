@@ -861,3 +861,19 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 /* when video is active, drop the ambient glow so it isn't busy */
 .hero.has-video::after { display: none; }
 .hero .container { position: relative; z-index: 2; }
+
+/* ==========================================================================
+   ACCESSIBILITY — skip link + visible keyboard focus
+   ========================================================================== */
+.skip-link { position: fixed; left: 14px; top: -70px; z-index: 999;
+  background: var(--red); color: #fff; padding: 11px 18px; border-radius: 10px;
+  font-family: var(--font-head); font-weight: 700; font-size: .9rem; box-shadow: var(--shadow);
+  transition: top .2s ease; }
+.skip-link:focus { top: 14px; color: #fff; outline: 2px solid #fff; outline-offset: 2px; }
+*:focus-visible { outline: 3px solid var(--red-bright); outline-offset: 2px; border-radius: 4px; }
+.btn--primary:focus-visible, .btn--navy:focus-visible { outline-color: #fff; }
+.nav-links a:focus-visible, .btn--outline-light:focus-visible { outline-color: #fff; }
+
+/* Tasteful reassurance under forms (clear, not pushy) */
+.form-trust { margin-top: 12px; font-size: .8rem; color: var(--muted); text-align: center; line-height: 1.5; }
+.form-trust strong { color: var(--body); font-weight: 600; }
