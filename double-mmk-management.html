@@ -473,8 +473,7 @@ textarea:focus-visible, .btn:focus-visible {
 }
 .hero-badge .stars { color: var(--red-bright); letter-spacing: 2px; font-size: .85rem; }
 
-/* ---- Angled dark ribbon -------------------------------------------------- */
-.section--angled { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
+/* ---- Dark ribbon (kept as a clean rectangle — no slant) ----------------- */
 
 /* ---- Comparison ---------------------------------------------------------- */
 .compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
@@ -665,10 +664,7 @@ p, .lead { text-wrap: pretty; }
   transform: translateX(-50%); border-radius: 50%; background: radial-gradient(circle, rgba(200,32,42,.20), transparent 62%); pointer-events: none; }
 .section--navy > .container { position: relative; z-index: 1; }
 
-/* Angled dividers on dark sections for smoother flow */
-.page-head { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.2vw)); }
-.photo-band { clip-path: polygon(0 2.4vw, 100% 0, 100% 100%, 0 calc(100% - 2.4vw)); }
-.site-footer { clip-path: polygon(0 2.2vw, 100% 0, 100% 100%, 0 100%); }
+/* Clean straight edges on dark sections (slanted clips removed) */
 
 /* Sticky in-page sub-nav (long pages) */
 .subnav { position: sticky; top: 88px; z-index: 40; background: rgba(255,255,255,.9); -webkit-backdrop-filter: saturate(160%) blur(10px); backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
