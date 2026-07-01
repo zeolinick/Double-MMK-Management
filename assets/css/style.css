@@ -82,7 +82,7 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
   font-family: var(--font-head); font-weight: 700; font-size: .95rem; line-height: 1;
-  letter-spacing: .01em; padding: .95rem 1.6rem; border-radius: 999px;
+  letter-spacing: .01em; padding: .95rem 1.6rem; border-radius: 11px;
   border: 1.5px solid transparent; cursor: pointer;
   transition: transform var(--t), background var(--t), color var(--t), box-shadow var(--t), border-color var(--t);
   white-space: nowrap;
@@ -281,7 +281,7 @@ body.menu-open { overflow: hidden; }
 .listing-photo img { width: 100%; height: 100%; object-fit: cover; }
 .listing-badge {
   position: absolute; top: 14px; left: 14px; background: var(--red); color: #fff;
-  font-family: var(--font-head); font-weight: 700; font-size: .72rem; padding: 6px 12px; border-radius: 999px;
+  font-family: var(--font-head); font-weight: 700; font-size: .72rem; padding: 6px 12px; border-radius: 8px;
   text-transform: uppercase; letter-spacing: .06em;
 }
 .listing-badge--rented { background: var(--onyx); }
@@ -486,7 +486,7 @@ textarea:focus-visible, .btn:focus-visible {
 .hero-badge {
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
   background: rgba(255,255,255,.06); border: 1px solid var(--line-dark); color: #d8d8dd;
-  padding: 8px 16px; border-radius: 999px; font-family: var(--font-head); font-weight: 600;
+  padding: 8px 16px; border-radius: 10px; font-family: var(--font-head); font-weight: 600;
   font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
 }
 .hero-badge svg.stars { width: 64px; height: 11px; margin: 0; fill: var(--red-bright); flex: none; }
@@ -515,7 +515,7 @@ textarea:focus-visible, .btn:focus-visible {
 
 /* ---- Neighborhoods ------------------------------------------------------- */
 .hoods { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 880px; margin: 0 auto; }
-.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
+.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 10px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
 .hood:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
 .hood svg { width: 15px; height: 15px; color: var(--red); flex: none; }
 

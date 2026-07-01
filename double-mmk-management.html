@@ -110,7 +110,7 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
   font-family: var(--font-head); font-weight: 700; font-size: .95rem; line-height: 1;
-  letter-spacing: .01em; padding: .95rem 1.6rem; border-radius: 999px;
+  letter-spacing: .01em; padding: .95rem 1.6rem; border-radius: 11px;
   border: 1.5px solid transparent; cursor: pointer;
   transition: transform var(--t), background var(--t), color var(--t), box-shadow var(--t), border-color var(--t);
   white-space: nowrap;
@@ -309,7 +309,7 @@ body.menu-open { overflow: hidden; }
 .listing-photo img { width: 100%; height: 100%; object-fit: cover; }
 .listing-badge {
   position: absolute; top: 14px; left: 14px; background: var(--red); color: #fff;
-  font-family: var(--font-head); font-weight: 700; font-size: .72rem; padding: 6px 12px; border-radius: 999px;
+  font-family: var(--font-head); font-weight: 700; font-size: .72rem; padding: 6px 12px; border-radius: 8px;
   text-transform: uppercase; letter-spacing: .06em;
 }
 .listing-badge--rented { background: var(--onyx); }
@@ -389,13 +389,17 @@ body.menu-open { overflow: hidden; }
 .portal-card .icon { margin: 0 auto 18px; }
 
 /* ---- Testimonials -------------------------------------------------------- */
-.quote { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow-sm); }
-.quote p { font-size: 1.05rem; color: var(--body); }
-.quote .who { display: flex; align-items: center; gap: 13px; margin-top: 18px; }
-.quote .avatar { width: 46px; height: 46px; border-radius: 50%; background: rgba(200,32,42,.1); display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; color: var(--red); }
-.quote .who strong { display: block; font-family: var(--font-head); color: var(--onyx); font-size: .95rem; }
-.quote .who span { font-size: .85rem; color: var(--muted); }
-.stars { color: var(--red); letter-spacing: 3px; margin-bottom: 10px; font-size: 1.05rem; }
+/* Editorial testimonials: one big pull-quote + quiet supporting quotes */
+.pull-quote { margin: 0 0 54px; max-width: 940px; border: 0; padding: 0; }
+.pull-quote p { font-family: var(--font-head); font-weight: 800; font-size: clamp(1.55rem, 3.1vw, 2.5rem);
+  line-height: 1.18; letter-spacing: -.015em; color: var(--onyx); margin: 0 0 18px; }
+.pull-quote footer, .quote-sm footer { font-size: .92rem; color: var(--muted); }
+.pull-quote footer strong, .quote-sm footer strong { font-family: var(--font-head); color: var(--onyx); font-weight: 700; margin-right: 10px; }
+.quote-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+@media (max-width: 760px) { .quote-row { grid-template-columns: 1fr; gap: 30px; } }
+.quote-sm { border-top: 1px solid var(--line); padding-top: 22px; }
+.quote-sm p { font-size: 1.02rem; color: var(--body); margin: 0 0 12px; }
+svg.stars { display: block; width: 92px; height: 15px; fill: var(--red); margin-bottom: 12px; }
 
 /* ---- FAQ ----------------------------------------------------------------- */
 .faq { max-width: 780px; margin: 0 auto; }
@@ -495,9 +499,9 @@ body.menu-open { overflow: hidden; }
 
 /* ---- Trust strip --------------------------------------------------------- */
 .trust-strip { background: var(--white); border-bottom: 1px solid var(--line); }
-.trust-strip ul { list-style: none; margin: 0; padding: 24px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 46px; }
-.trust-strip li { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-head); font-weight: 600; font-size: .82rem; text-transform: uppercase; letter-spacing: .08em; color: var(--onyx); }
-.trust-strip svg { width: 20px; height: 20px; color: var(--red); flex: none; }
+.cred-line { margin: 0; padding: 20px 0; text-align: center; font-family: var(--font-head); font-weight: 600;
+  font-size: .78rem; text-transform: uppercase; letter-spacing: .14em; color: var(--muted); }
+.cred-line span { color: var(--red); margin: 0 10px; }
 @media (max-width: 600px) { .trust-strip ul { gap: 14px 22px; padding: 20px 0; } .trust-strip li { font-size: .72rem; } }
 
 /* ---- Focus-visible (keyboard accessibility) ------------------------------ */
@@ -510,35 +514,36 @@ textarea:focus-visible, .btn:focus-visible {
 .hero-badge {
   display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;
   background: rgba(255,255,255,.06); border: 1px solid var(--line-dark); color: #d8d8dd;
-  padding: 8px 16px; border-radius: 999px; font-family: var(--font-head); font-weight: 600;
+  padding: 8px 16px; border-radius: 10px; font-family: var(--font-head); font-weight: 600;
   font-size: .76rem; letter-spacing: .08em; text-transform: uppercase;
 }
-.hero-badge .stars { color: var(--red-bright); letter-spacing: 2px; font-size: .85rem; }
+.hero-badge svg.stars { width: 64px; height: 11px; margin: 0; fill: var(--red-bright); flex: none; }
 
 /* ---- Dark ribbon (kept as a clean rectangle — no slant) ----------------- */
 
 /* ---- Comparison ---------------------------------------------------------- */
-.compare { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.compare { display: grid; grid-template-columns: 1fr 1fr; }
 @media (max-width: 680px) { .compare { grid-template-columns: 1fr; } }
-.compare-col { padding: 38px; }
+.compare-col { padding: 38px 44px; }
 .compare-col--us { background: var(--onyx); color: #c2c2c8; }
-.compare-col--them { background: var(--paper); }
+.compare-col--them { background: transparent; border: 1px solid var(--line); border-left: 0; }
 .compare-col h3 { margin: 2px 0 0; }
 .compare-col--us h3 { color: #fff; }
 .compare-col .tag { font-family: var(--font-head); font-weight: 600; font-size: .72rem; text-transform: uppercase; letter-spacing: .18em; display: block; margin-bottom: 4px; }
 .compare-col--us .tag { color: var(--red-bright); }
 .compare-col--them .tag { color: var(--steel); }
 .compare-list { list-style: none; margin: 22px 0 0; padding: 0; }
-.compare-list li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0; font-size: .98rem; border-top: 1px solid var(--line-dark); }
+.compare-list li { position: relative; padding: 13px 0 13px 28px; font-size: .98rem; border-top: 1px solid var(--line-dark); }
+.compare-list--yes li::before { content: ""; position: absolute; left: 0; top: 1.28em; width: 13px; height: 5px;
+  background: linear-gradient(to bottom, var(--red-bright) 0 1.5px, transparent 1.5px 3.5px, var(--red-bright) 3.5px 5px); }
+.compare-list--no li::before { content: ""; position: absolute; left: 0; top: 1.42em; width: 13px; height: 1.5px; background: var(--steel); opacity: .8; }
 .compare-col--them .compare-list li { border-top-color: var(--line); color: var(--muted); }
 .compare-list li:first-child { border-top: 0; }
-.compare-list svg { width: 20px; height: 20px; flex: none; margin-top: 1px; }
-.compare-list--yes svg { color: var(--red-bright); }
-.compare-list--no svg { color: var(--steel); }
+/* (glyph icons replaced by typographic double-rule / dash markers) */
 
 /* ---- Neighborhoods ------------------------------------------------------- */
 .hoods { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; max-width: 880px; margin: 0 auto; }
-.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
+.hood { display: inline-flex; align-items: center; gap: 8px; padding: 11px 18px; border: 1px solid var(--line); border-radius: 10px; font-family: var(--font-head); font-weight: 600; font-size: .9rem; color: var(--onyx); background: var(--white); transition: border-color var(--t), color var(--t), transform var(--t); }
 .hood:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
 .hood svg { width: 15px; height: 15px; color: var(--red); flex: none; }
 
@@ -822,12 +827,6 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .js .reveal--left.in, .js .reveal--right.in, .js .reveal--scale.in { transform: none; }
 .js .reveal--blur.in { filter: blur(0); }
 
-/* --- 3D tilt cards -------------------------------------------------------- */
-.js .tilt { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
-.js .tilt:hover { box-shadow: var(--shadow-lg); }
-
-/* --- Magnetic buttons ----------------------------------------------------- */
-.js .magnetic { transition: transform .35s cubic-bezier(.2,.8,.2,1), background var(--t), box-shadow var(--t); }
 
 /* --- Hero cinematic entrance --------------------------------------------- */
 @keyframes heroUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
@@ -860,26 +859,15 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .js .steps-progress .step::before { transition: background .45s ease, color .45s ease, transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s ease; }
 .js .steps-progress .step--active::before { background: var(--red); color: #fff; transform: scale(1.08); box-shadow: 0 10px 24px rgba(200,32,42,.32); }
 
-/* --- Neighborhood marquee (decorative) ----------------------------------- */
-.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); margin-bottom: 34px; }
-.marquee-track { display: inline-flex; gap: 0; white-space: nowrap; will-change: transform; animation: marquee 38s linear infinite; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-track span { font-family: var(--font-head); font-weight: 800; text-transform: uppercase;
-  letter-spacing: .02em; font-size: clamp(1.4rem, 3vw, 2.2rem); color: transparent;
-  -webkit-text-stroke: 1px var(--steel); padding: 0 28px; display: inline-flex; align-items: center; }
-.marquee-track span::after { content: "•"; color: var(--red); -webkit-text-stroke: 0; margin-left: 56px; }
-@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 
 /* (page-load intro curtain removed) */
 
 /* --- Touch-native polish: tactile press feedback (no-hover devices) ------- */
 @media (hover: none) {
   .js .card, .js .path-card, .js .portal-card, .js .listing,
-  .js .hood, .js .quote, .js .btn { transition: transform .14s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease, background var(--t), color var(--t), border-color var(--t); }
+  .js .hood, .js .btn { transition: transform .14s cubic-bezier(.2,.7,.2,1), box-shadow .2s ease, background var(--t), color var(--t), border-color var(--t); }
   .js .card:active, .js .path-card:active, .js .portal-card:active,
-  .js .listing:active, .js .quote:active { transform: scale(.975); }
+  .js .listing:active { transform: scale(.975); }
   .js .hood:active { transform: scale(.94); }
   .js .mobile-bar a { transition: transform .14s cubic-bezier(.2,.7,.2,1); }
   .js .mobile-bar a:active { transform: scale(.96); }
@@ -1026,28 +1014,28 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 @media (max-width: 560px) { .steps--5 { grid-template-columns: 1fr; } }
 
 /* Hanging quotes on testimonials */
-.quote p { hanging-punctuation: first; }
-@supports not (hanging-punctuation: first) { .quote p { text-indent: -.45ch; } }
+.pull-quote p, .quote-sm p, .founder h2 { hanging-punctuation: first; }
+@supports not (hanging-punctuation: first) { .pull-quote p, .quote-sm p { text-indent: -.45ch; } }
 
 /* ---- Print: pages were printing half-blank (reveal opacity) -------------- */
 @media print {
   .js .reveal, .js .reveal * { opacity: 1 !important; transform: none !important; filter: none !important; }
   .nav-menu, .nav-toggle, .nav-cta, .to-top, .mobile-bar, .scroll-progress,
-  .marquee, .cta-band, .footer-cta, .social, .skip-link, body::before, .hero::after { display: none !important; }
+  .cta-band, .footer-cta, .social, .skip-link, body::before, .hero::after { display: none !important; }
   .site-header, .page-head, .hero, .section--navy, .photo-band, .site-footer { background: #fff !important; color: #000 !important; }
   .site-header { position: static; }
   h1, h2, h3 { color: #000 !important; }
   .hero h1, .hero p, .page-head h1, .page-head p, .section--navy h2, .section--navy p,
   .photo-band h2, .photo-band p, .site-footer, .site-footer a { color: #000 !important; }
   .faq-a { max-height: none !important; overflow: visible !important; }
-  .card, .quote, .faq-item, .step, .listing { break-inside: avoid; }
+  .card, .pull-quote, .quote-sm, .faq-item, .step, .listing { break-inside: avoid; }
   .prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; color: #555; }
 }
 
 /* Hero badge: keep the pill on one line on small phones */
 @media (max-width: 600px) {
   .hero-badge { font-size: .64rem; letter-spacing: .05em; gap: 8px; padding: 7px 12px; }
-  .hero-badge .stars { font-size: .75rem; letter-spacing: 1px; }
+  .hero-badge svg.stars { width: 56px; height: 9px; }
 }
 
 /* ---- Calculator: transparent owner math -------------------------------- */
@@ -1075,6 +1063,48 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   background: linear-gradient(to bottom, currentColor 0 1.5px, transparent 1.5px 3.5px, currentColor 3.5px 5px); }
 
 
+
+/* ==========================================================================
+   MANIFESTO — the one pure-typography beat
+   ========================================================================== */
+.manifesto { padding: 116px 0; }
+.manifesto .eyebrow { color: var(--red-bright); }
+.manifesto-line { font-size: clamp(3rem, 8.5vw, 6.8rem); line-height: .95; letter-spacing: -.03em;
+  text-transform: uppercase; font-weight: 900; margin: 10px 0 26px; }
+.manifesto p { color: #9a9aa0; font-size: 1.1rem; max-width: 560px; margin: 0; }
+.manifesto p a { color: var(--red-bright); white-space: nowrap; }
+.manifesto p a:hover { color: #fff; }
+
+.compare-col--them .compare-list--yes li::before {
+  background: linear-gradient(to bottom, var(--red) 0 1.5px, transparent 1.5px 3.5px, var(--red) 3.5px 5px); }
+
+/* ---- Numbered editorial index (homepage services) ------------------------ */
+.section-head.left { margin: 0 0 52px; max-width: 760px; }
+.svc-index { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px 40px; }
+@media (max-width: 900px) { .svc-index { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .svc-index { grid-template-columns: 1fr; gap: 30px; } }
+.svc-i { border-top: 1px solid var(--line); padding-top: 20px; }
+.svc-num { display: block; font-family: var(--font-head); font-weight: 900; font-size: 2.2rem;
+  line-height: 1; color: var(--platinum); margin-bottom: 12px; letter-spacing: -.02em; }
+.svc-i h3 { font-size: 1.14rem; margin-bottom: .4rem; }
+.svc-i p { color: var(--muted); font-size: .98rem; margin: 0; }
+
+/* card numerals (benefits / values / promise grids) */
+.card-num { display: block; font-family: var(--font-head); font-weight: 900; font-size: 2rem;
+  line-height: 1; color: var(--platinum); margin-bottom: 14px; letter-spacing: -.02em; }
+
+/* ==========================================================================
+   UNIFIED PHOTO GRADE — one tonal treatment for all mixed-source imagery
+   ========================================================================== */
+.split-media img, .owner-photo, .founder-photo img {
+  filter: saturate(.82) contrast(1.06) brightness(.97); }
+.listing-photo img { filter: saturate(.88); }
+
+/* ---- Footer brand mark ---------------------------------------------------- */
+.footer-mark { font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.6rem, 8.5vw, 6.4rem); line-height: .9; letter-spacing: -.02em;
+  background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent;
+  opacity: .16; margin: 44px 0 6px; white-space: nowrap; overflow: hidden; }
 
 </style>
   <style>
@@ -1168,7 +1198,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="hero-badge"><span class="stars">★★★★★</span> Trusted by Detroit landlords</span>
+            <span class="hero-badge"><svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg> Trusted by Detroit landlords</span>
             <h1 class="hero-title"><span class="line"><span>Detroit property,</span></span><span class="line"><span class="accent">managed right.</span></span></h1>
             <p>Owning a rental shouldn’t feel like a second job. We keep your Detroit property occupied, maintained, and profitable — and when you call, a real person picks up. No call centers, no runaround.</p>
             <div class="hero-actions">
@@ -1234,12 +1264,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <!-- ====================== TRUST STRIP ====================== -->
     <section class="trust-strip">
       <div class="container">
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg> Equal Housing Opportunity</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 9.5"/></svg> Licensed &amp; Insured</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Locally Owned &amp; Operated</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg> Powered by Landlord Studio</li>
-        </ul>
+        <p class="cred-line">Equal Housing Opportunity <span>·</span> Licensed &amp; Insured <span>·</span> Locally Owned &amp; Operated <span>·</span> Powered by Landlord Studio</p>
       </div>
     </section>
 
@@ -1264,14 +1289,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       <div class="container">
         <div class="paths">
           <div class="path-card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
             <span class="eyebrow">Property Owners</span>
             <h3>Grow your investment</h3>
             <p>Hands-on management that keeps your Detroit property occupied, maintained, and profitable — with one clear report a month.</p>
             <a href="#quote" class="btn btn--primary">Get a Free Rental Analysis</a>
           </div>
           <div class="path-card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg></div>
             <span class="eyebrow">Residents</span>
             <h3>Find a home &amp; pay rent</h3>
             <p>Browse available rentals, pay rent online, and submit maintenance requests in minutes through the resident portal.</p>
@@ -1281,42 +1304,42 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
-    <!-- ====================== TRUST / SERVICES ====================== -->
+    <!-- ====================== SERVICES INDEX ====================== -->
     <section class="section">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head left reveal">
           <span class="eyebrow">What We Do</span>
           <h2>Full-service management for Detroit owners</h2>
           <p class="lead">From the first tenant inquiry to your monthly owner statement, we handle every detail so your investment runs smoothly.</p>
         </div>
-        <div class="grid grid-3">
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 17.4A2 2 0 0 0 2 18.8V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.2a2 2 0 0 0 1.4-.6l.8-.8a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".6" fill="currentColor"/></svg></div>
+        <div class="svc-index">
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">01</span>
             <h3>Leasing &amp; Marketing</h3>
             <p>Professional listings, syndicated across top rental sites, with thorough tenant screening to fill vacancies fast with quality residents.</p>
           </div>
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-            <h3>Maintenance &amp; Repairs</h3>
-            <p>A vetted network of local Detroit contractors and a 24/7 emergency line keep your property — and tenants — well cared for.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
-            <h3>Rent Collection</h3>
-            <p>Automated online rent payments through Landlord Studio mean on-time deposits and clear, transparent owner reporting.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="6" y1="20" x2="6" y2="12"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="18" y1="20" x2="18" y2="14"/></svg></div>
-            <h3>Owner Reporting</h3>
-            <p>Real-time financials, monthly statements, and year-end documents — always at your fingertips, always easy to read.</p>
-          </div>
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></div>
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">02</span>
             <h3>Tenant Screening</h3>
             <p>Credit, background, eviction history, and income verification to place reliable, long-term residents in your home.</p>
           </div>
-          <div class="card reveal">
-            <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M6 21h12"/><path d="M3 7h18"/><path d="M7 7l-3 6h6z"/><path d="M17 7l-3 6h6z"/></svg></div>
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">03</span>
+            <h3>Rent Collection</h3>
+            <p>Automated online rent payments through Landlord Studio mean on-time deposits and clear, transparent owner reporting.</p>
+          </div>
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">04</span>
+            <h3>Maintenance &amp; Repairs</h3>
+            <p>A vetted network of local Detroit contractors and a 24/7 emergency line keep your property — and tenants — well cared for.</p>
+          </div>
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">05</span>
+            <h3>Owner Reporting</h3>
+            <p>Real-time financials, monthly statements, and year-end documents — always at your fingertips, always easy to read.</p>
+          </div>
+          <div class="svc-i reveal">
+            <span class="svc-num" aria-hidden="true">06</span>
             <h3>Compliance &amp; Inspections</h3>
             <p>We keep your property aligned with City of Detroit rental ordinances, certifications, and routine inspections.</p>
           </div>
@@ -1473,27 +1496,35 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <!-- ====================== TESTIMONIALS ====================== -->
     <section class="section">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head left reveal">
           <span class="eyebrow">Owner Stories</span>
           <h2>Trusted by Detroit property owners</h2>
         </div>
-        <div class="grid grid-3">
-          <div class="quote reveal">
-            <div class="stars">★★★★★</div>
+        <blockquote class="pull-quote reveal">
+          <p>“Finally a management company that actually picks up the phone. Their team knows Detroit and it shows in the results.”</p>
+          <footer><strong>Tony K.</strong><span>Investor, 12 units</span></footer>
+        </blockquote>
+        <div class="quote-row">
+          <div class="quote-sm reveal">
+            <svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg>
             <p>“I live out of state and Double MMK gives me total peace of mind. My units stay rented and I always know exactly what’s happening.”</p>
-            <div class="who"><div class="avatar">DM</div><div><strong>Darnell M.</strong><span>Owner, 6 units</span></div></div>
+            <footer><strong>Darnell M.</strong><span>Owner, 6 units</span></footer>
           </div>
-          <div class="quote reveal">
-            <div class="stars">★★★★★</div>
+          <div class="quote-sm reveal">
+            <svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg>
             <p>“They turned around a problem property in weeks. Quality tenants, on-time rent, and honest communication every step of the way.”</p>
-            <div class="who"><div class="avatar">SR</div><div><strong>Sandra R.</strong><span>Owner, single-family</span></div></div>
-          </div>
-          <div class="quote reveal">
-            <div class="stars">★★★★★</div>
-            <p>“Finally a management company that actually picks up the phone. Their team knows Detroit and it shows in the results.”</p>
-            <div class="who"><div class="avatar">TK</div><div><strong>Tony K.</strong><span>Investor, 12 units</span></div></div>
+            <footer><strong>Sandra R.</strong><span>Owner, single-family</span></footer>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ====================== MANIFESTO ====================== -->
+    <section class="manifesto section--navy">
+      <div class="container">
+        <span class="eyebrow">Our Promise</span>
+        <h2 class="manifesto-line"><span class="silver">Every door.</span><br /><span class="silver">One standard.</span></h2>
+        <p>A single family home in Bagley or a fourplex in Palmer Park — the promise doesn’t change. <a href="#about">Read our story →</a></p>
       </div>
     </section>
 
@@ -1504,12 +1535,6 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <span class="eyebrow">Where We Work</span>
           <h2>Neighborhoods we serve</h2>
           <p class="lead">Thirteen neighborhoods we walk, drive, and manage — and growing.</p>
-        </div>
-        <div class="marquee reveal" aria-hidden="true">
-          <div class="marquee-track">
-            <span>Woodward</span><span>Michigan Ave</span><span>Gratiot</span><span>Grand River</span><span>Jefferson</span><span>Vernor</span><span>Livernois</span><span>Mack</span><span>McNichols</span><span>Fort St</span><span>Trumbull</span><span>Cadieux</span>
-            <span>Woodward</span><span>Michigan Ave</span><span>Gratiot</span><span>Grand River</span><span>Jefferson</span><span>Vernor</span><span>Livernois</span><span>Mack</span><span>McNichols</span><span>Fort St</span><span>Trumbull</span><span>Cadieux</span>
-          </div>
         </div>
         <div class="hoods reveal">
           <a class="hood" href="#properties"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Corktown</a>
@@ -1532,7 +1557,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     <!-- ====================== COMPARISON ====================== -->
     <section class="section">
       <div class="container">
-        <div class="section-head center reveal">
+        <div class="section-head left reveal">
           <span class="eyebrow">The Double MMK Difference</span>
           <h2>Management the way it should be</h2>
           <p class="lead">No call centers, no hidden fees, no runaround — just hands-on local management.</p>
@@ -1542,24 +1567,24 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
             <span class="tag">The Double MMK Way</span>
             <h3>Hands-on &amp; local</h3>
             <ul class="compare-list compare-list--yes">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> A real person answers the phone</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Flat, transparent pricing — no surprise fees</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> 24/7 maintenance with vetted Detroit contractors</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Tenants screened for credit, income &amp; history</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Clear monthly owner statements</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> We know every neighborhood we manage</li>
+              <li>A real person answers the phone</li>
+              <li>Flat, transparent pricing — no surprise fees</li>
+              <li>24/7 maintenance with vetted Detroit contractors</li>
+              <li>Tenants screened for credit, income &amp; history</li>
+              <li>Clear monthly owner statements</li>
+              <li>We know every neighborhood we manage</li>
             </ul>
           </div>
           <div class="compare-col compare-col--them">
             <span class="tag">Typical Management</span>
             <h3>Hands-off &amp; remote</h3>
             <ul class="compare-list compare-list--no">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Hold music, tickets &amp; slow replies</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Markups and surprise line items</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Slow repairs and absent vendors</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Rushed or skipped tenant screening</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Confusing or late reporting</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> One-size-fits-all, out-of-town operators</li>
+              <li>Hold music, tickets &amp; slow replies</li>
+              <li>Markups and surprise line items</li>
+              <li>Slow repairs and absent vendors</li>
+              <li>Rushed or skipped tenant screening</li>
+              <li>Confusing or late reporting</li>
+              <li>One-size-fits-all, out-of-town operators</li>
             </ul>
           </div>
         </div>
@@ -1834,12 +1859,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <p class="lead">Everything you need to protect your asset and grow your income — under one roof.</p>
         </div>
         <div class="grid grid-3">
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div><h3>Rent Set Right</h3><p>We price from what’s actually leasing on your block — not a national algorithm. No months lost to a fantasy number, no money left on the table.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Protect Your Asset</h3><p>Routine inspections, preventative maintenance, and trusted contractors preserve your property’s value.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><h3>Save Your Time</h3><p>We handle calls, repairs, rent, and paperwork. You get your evenings and weekends back.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Quality Tenants</h3><p>Rigorous screening places responsible, long-term residents who treat your home with respect.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6.5H10a3.5 3.5 0 0 0 0 7h4a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>Reliable Rent</h3><p>Online payments via Landlord Studio and proactive collections mean dependable monthly deposits.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><h3>Total Transparency</h3><p>Clear statements, real-time reporting, and no hidden fees — you always know where you stand.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">01</span><h3>Rent Set Right</h3><p>We price from what’s actually leasing on your block — not a national algorithm. No months lost to a fantasy number, no money left on the table.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">02</span><h3>Protect Your Asset</h3><p>Routine inspections, preventative maintenance, and trusted contractors preserve your property’s value.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">03</span><h3>Save Your Time</h3><p>We handle calls, repairs, rent, and paperwork. You get your evenings and weekends back.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">04</span><h3>Quality Tenants</h3><p>Rigorous screening places responsible, long-term residents who treat your home with respect.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">05</span><h3>Reliable Rent</h3><p>Online payments via Landlord Studio and proactive collections mean dependable monthly deposits.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">06</span><h3>Total Transparency</h3><p>Clear statements, real-time reporting, and no hidden fees — you always know where you stand.</p></div>
         </div>
       </div>
     </section>
@@ -1908,19 +1933,19 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
             <span class="tag">Every Fee, In Writing</span>
             <h3>The only fees you’ll ever see</h3>
             <ul class="compare-list compare-list--yes">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Lease-up — 50% of first month’s rent</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Full management — 8% of collected rent</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Lease renewal — $0</li>
+              <li>Lease-up — 50% of first month’s rent</li>
+              <li>Full management — 8% of collected rent</li>
+              <li>Lease renewal — $0</li>
             </ul>
           </div>
           <div class="compare-col compare-col--them">
             <span class="tag">What You’ll Never Pay</span>
             <h3>The fees we don’t charge</h3>
             <ul class="compare-list compare-list--yes">
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> $0 setup or onboarding fee</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> $0 statement, portal, or technology fees</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> $0 markup on maintenance — invoices passed through at cost</li>
-              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> $0 while your unit sits vacant — we’re paid on collected rent only</li>
+              <li>$0 setup or onboarding fee</li>
+              <li>$0 statement, portal, or technology fees</li>
+              <li>$0 markup on maintenance — invoices passed through at cost</li>
+              <li>$0 while your unit sits vacant — we’re paid on collected rent only</li>
             </ul>
           </div>
         </div>
@@ -1943,10 +1968,10 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <div class="step reveal"><h3>Tenants are told</h3><p>Residents get a welcome letter and new payment instructions. Rent doesn’t skip a cycle.</p></div>
           <div class="step reveal"><h3>Baseline &amp; report</h3><p>We inspect and document your property’s condition, then your first monthly statement arrives.</p></div>
         </div>
-        <div class="quote reveal" style="max-width:640px; margin:40px auto 0;">
-          <div class="stars">★★★★★</div>
+        <div class="quote-sm reveal" style="max-width:640px; margin:40px auto 0;">
+          <svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg>
           <p>“They turned around a problem property in weeks. Quality tenants, on-time rent, and honest communication every step of the way.”</p>
-          <div class="who"><div class="avatar">SR</div><div><strong>Sandra R.</strong><span>Owner, single-family</span></div></div>
+          <footer><strong>Sandra R.</strong><span>Owner, single-family</span></footer>
         </div>
       </div>
     </section>
@@ -2374,12 +2399,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <p class="lead">The principles behind every decision we make.</p>
         </div>
         <div class="grid grid-3">
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 9.5"/></svg></div><h3>Integrity</h3><p>Honest pricing, straight answers, and no hidden fees — ever. We do what we say we'll do.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg></div><h3>Local Expertise</h3><p>We know Detroit's neighborhoods, market, and ordinances inside and out, because this is home.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg></div><h3>Communication</h3><p>Owners and residents always reach a real, responsive person who actually listens.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 4 14 11 14 10 22 20 10 13 10 13 2"/></svg></div><h3>Responsiveness</h3><p>Fast action on maintenance, leasing, and questions keeps everyone happy and protected.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div><h3>Accountability</h3><p>Transparent reporting and clear records mean you always know exactly how things stand.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5.4 5.4 0 0 0-7.7 0L12 6.7l-1.1-1.1a5.4 5.4 0 1 0-7.7 7.7L12 22l8.8-8.7a5.4 5.4 0 0 0 0-7.7z"/></svg></div><h3>Community</h3><p>Better-managed homes build stronger neighborhoods. We're invested in Detroit's future.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">01</span><h3>Integrity</h3><p>Honest pricing, straight answers, and no hidden fees — ever. We do what we say we'll do.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">02</span><h3>Local Expertise</h3><p>We know Detroit's neighborhoods, market, and ordinances inside and out, because this is home.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">03</span><h3>Communication</h3><p>Owners and residents always reach a real, responsive person who actually listens.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">04</span><h3>Responsiveness</h3><p>Fast action on maintenance, leasing, and questions keeps everyone happy and protected.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">05</span><h3>Accountability</h3><p>Transparent reporting and clear records mean you always know exactly how things stand.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">06</span><h3>Community</h3><p>Better-managed homes build stronger neighborhoods. We're invested in Detroit's future.</p></div>
         </div>
       </div>
     </section>
@@ -2441,9 +2466,9 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <h2>What you can count on</h2>
         </div>
         <div class="grid grid-3">
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg></div><h3>Same-day response</h3><p>Owners and residents hear back from a real person the same business day — not a ticket number.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 6.5H10a3.5 3.5 0 0 0 0 7h4a3.5 3.5 0 0 1 0 7H6"/></svg></div><h3>No hidden fees</h3><p>Flat, transparent pricing. You’ll always know exactly what you pay and why.</p></div>
-          <div class="card reveal"><div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 5.6a5.4 5.4 0 0 0-7.7 0L12 6.7l-1.1-1.1a5.4 5.4 0 1 0-7.7 7.7L12 22l8.8-8.7a5.4 5.4 0 0 0 0-7.7z"/></svg></div><h3>Managed like our own</h3><p>If we wouldn’t accept it at our own property, we don’t accept it at yours.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">01</span><h3>Same-day response</h3><p>Owners and residents hear back from a real person the same business day — not a ticket number.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">02</span><h3>No hidden fees</h3><p>Flat, transparent pricing. You’ll always know exactly what you pay and why.</p></div>
+          <div class="card reveal"><span class="card-num" aria-hidden="true">03</span><h3>Managed like our own</h3><p>If we wouldn’t accept it at our own property, we don’t accept it at yours.</p></div>
         </div>
       </div>
     </section>
@@ -2609,6 +2634,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <div><h4>Contact</h4><ul class="footer-links"><li><a href="tel:+13136036064">(313) 603-6064</a></li><li><a href="mailto:Doublemmkmanagement@gmail.com">Doublemmkmanagement@gmail.com</a></li><li>Detroit, Michigan</li><li>Mon–Fri, 9am–5pm</li></ul></div>
       </div>
 
+      <div class="footer-mark" aria-hidden="true">Double MMK</div>
       <div class="footer-bottom">
         <span>&copy; <span id="year">2026</span> Double MMK Management LLC. All rights reserved.</span>
         <span><a href="#fair-housing">Equal Housing Opportunity</a> &nbsp;·&nbsp; <a href="#privacy">Privacy</a> &nbsp;·&nbsp; <a href="#terms">Terms</a> &nbsp;·&nbsp; <a href="#accessibility">Accessibility</a></span>
@@ -2932,47 +2958,6 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   bar.className = "scroll-progress";
   bar.setAttribute("aria-hidden", "true");
   document.body.appendChild(bar);
-
-  /* ============================================================
-     3) 3D TILT on cards (subtle, refined)
-     ============================================================ */
-  if (finePointer && !reduce) {
-    var tiltEls = document.querySelectorAll(".card, .path-card, .portal-card, .quote");
-    tiltEls.forEach(function (el) {
-      el.classList.add("tilt");
-      var raf = null, tx = 0, ty = 0;
-      el.addEventListener("mousemove", function (ev) {
-        var r = el.getBoundingClientRect();
-        var px = (ev.clientX - r.left) / r.width - 0.5;
-        var py = (ev.clientY - r.top) / r.height - 0.5;
-        tx = clamp(-py * 6, -6, 6);
-        ty = clamp(px * 6, -6, 6);
-        if (!raf) raf = requestAnimationFrame(function apply() {
-          el.style.transform = "perspective(900px) rotateX(" + tx + "deg) rotateY(" + ty + "deg) translateY(-4px)";
-          raf = null;
-        });
-      });
-      el.addEventListener("mouseleave", function () {
-        el.style.transform = "";
-      });
-    });
-  }
-
-  /* ============================================================
-     4) MAGNETIC buttons (primary CTAs)
-     ============================================================ */
-  if (finePointer && !reduce) {
-    document.querySelectorAll(".btn--primary").forEach(function (btn) {
-      btn.classList.add("magnetic");
-      btn.addEventListener("mousemove", function (ev) {
-        var r = btn.getBoundingClientRect();
-        var mx = ev.clientX - (r.left + r.width / 2);
-        var my = ev.clientY - (r.top + r.height / 2);
-        btn.style.transform = "translate(" + (mx * 0.18) + "px," + (my * 0.28) + "px)";
-      });
-      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
-    });
-  }
 
   /* ============================================================
      5) STEP-BY-STEP progress (How it works / process)
