@@ -1008,3 +1008,10 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .listing-ask svg { width: 15px; height: 15px; transition: transform var(--t); }
 .listing-ask:hover { color: var(--oxblood); }
 .listing-ask:hover svg { transform: translateX(3px); }
+
+/* ---- Designed inline validation ----------------------------------------- */
+.field--error input, .field--error select, .field--error textarea {
+  border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(200,32,42,.12); }
+.field-error { margin: 7px 0 0; font-size: .82rem; color: var(--red); line-height: 1.45; }
+.field-error::before { content: ""; display: inline-block; width: 10px; height: 5px; margin-right: 7px; vertical-align: 2px;
+  background: linear-gradient(to bottom, currentColor 0 1.5px, transparent 1.5px 3.5px, currentColor 3.5px 5px); }

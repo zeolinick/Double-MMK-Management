@@ -149,6 +149,73 @@
   })();
 
   /* ============================================================
+     0g) PREMIUM FORM UX — designed inline validation + phone
+         formatting. Capture-phase gate runs before the submit
+         senders in both builds; no-JS keeps native validation.
+     ============================================================ */
+  (function formUX() {
+    var forms = document.querySelectorAll("form[data-demo]");
+    if (!forms.length) return;
+    forms.forEach(function (f) { f.setAttribute("novalidate", ""); });
+
+    function msgFor(el) {
+      if (el.validity.valueMissing) {
+        if (el.type === "email") return "Please add your email so we can reply.";
+        if (el.type === "tel") return "Please add a phone number.";
+        if (el.tagName === "TEXTAREA") return "Please add a short message.";
+        return "Please fill this in.";
+      }
+      if (el.type === "email") return "That email doesn\u2019t look right \u2014 e.g. you@email.com";
+      return "Please check this field.";
+    }
+    function setError(el, msg) {
+      var field = el.closest(".field"); if (!field) return;
+      field.classList.add("field--error");
+      var note = field.querySelector(".field-error");
+      if (!note) { note = document.createElement("p"); note.className = "field-error"; field.appendChild(note); }
+      note.textContent = msg;
+      el.setAttribute("aria-invalid", "true");
+    }
+    function clearError(el) {
+      var field = el.closest(".field"); if (!field) return;
+      field.classList.remove("field--error");
+      var note = field.querySelector(".field-error");
+      if (note) note.remove();
+      el.removeAttribute("aria-invalid");
+    }
+    document.addEventListener("submit", function (e) {
+      var form = e.target;
+      if (!form.matches || !form.matches("form[data-demo]")) return;
+      var bad = [];
+      form.querySelectorAll("input:not([type=checkbox]), select, textarea").forEach(function (el) {
+        if (!el.checkValidity()) { setError(el, msgFor(el)); bad.push(el); }
+        else clearError(el);
+      });
+      if (bad.length) {
+        e.preventDefault();
+        e.stopPropagation();           // capture phase: senders never fire
+        bad[0].focus({ preventScroll: false });
+      }
+    }, true);
+    document.addEventListener("input", function (e) {
+      var el = e.target;
+      if (el.closest && el.closest("form[data-demo]") && el.getAttribute("aria-invalid") && el.checkValidity()) clearError(el);
+    });
+
+    /* phone: format (313) 555-0123 as you type (end-of-field typing only,
+       so mid-string edits never fight the cursor) */
+    document.querySelectorAll("form[data-demo] input[type=tel]").forEach(function (tel) {
+      tel.addEventListener("input", function () {
+        if (tel.selectionStart !== tel.value.length) return;
+        var d = tel.value.replace(/\D/g, "").slice(0, 10);
+        if (d.length > 6) tel.value = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+        else if (d.length > 3) tel.value = "(" + d.slice(0, 3) + ") " + d.slice(3);
+        else if (d.length > 0 && tel.value.indexOf("(") !== 0 && d.length === tel.value.length) tel.value = d;
+      });
+    });
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {
