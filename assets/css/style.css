@@ -137,23 +137,53 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
 .nav-toggle span { display: block; width: 26px; height: 2.5px; background: #e6e6ea; border-radius: 2px; transition: var(--t); }
 
+.nav-menu-foot { display: none; }
+body.menu-open { overflow: hidden; }
 @media (max-width: 1200px) {
   .nav-toggle { display: flex; }
+  /* hamburger -> X */
+  .nav-toggle span { transition: transform .25s cubic-bezier(.2,.7,.2,1), opacity .2s ease; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  /* full-screen branded sheet */
   .nav-menu {
-    position: fixed; inset: 90px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
-    background: var(--onyx); border-bottom: 1px solid var(--line-dark);
-    padding: 14px 28px 26px; box-shadow: var(--shadow); transform: translateY(-130%);
-    transition: transform .3s ease; z-index: 49;
+    position: fixed; inset: 90px 0 0 0; flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--onyx);
+    background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    padding: 18px 28px calc(28px + env(safe-area-inset-bottom, 0px));
+    z-index: 49; overflow-y: auto;
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s;
   }
-  .nav-menu.open { transform: translateY(0); }
+  .nav-menu.open { opacity: 1; visibility: visible; transform: none;
+    transition: opacity .28s ease, transform .28s ease; }
   .nav-links { flex-direction: column; align-items: stretch; gap: 0; }
-  .nav-links li { border-bottom: 1px solid var(--line-dark); }
-  .nav-links a { display: block; padding: 16px 4px; font-size: .95rem; border-left: 3px solid transparent; }
+  .nav-links li { border-bottom: 1px solid rgba(255,255,255,.08);
+    opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.7,.2,1); }
+  .nav-menu.open .nav-links li { opacity: 1; transform: none; }
+  .nav-menu.open .nav-links li:nth-child(1) { transition-delay: .05s; }
+  .nav-menu.open .nav-links li:nth-child(2) { transition-delay: .09s; }
+  .nav-menu.open .nav-links li:nth-child(3) { transition-delay: .13s; }
+  .nav-menu.open .nav-links li:nth-child(4) { transition-delay: .17s; }
+  .nav-menu.open .nav-links li:nth-child(5) { transition-delay: .21s; }
+  .nav-menu.open .nav-links li:nth-child(6) { transition-delay: .25s; }
+  .nav-menu.open .nav-links li:nth-child(7) { transition-delay: .29s; }
+  .nav-links a { display: block; padding: 16px 2px; font-size: 1.32rem; font-weight: 700;
+    letter-spacing: .035em; color: #e6e6ea; border-left: 0; }
   .nav-links a::after { display: none; }
-  .nav-links a.active { color: #fff; background: rgba(200,32,42,.13); border-left-color: var(--red); padding-left: 14px; }
-  .nav-cta { flex-direction: column; align-items: stretch; margin-top: 18px; gap: 10px; padding-left: 0; }
+  .nav-links a.active { color: var(--red-bright); background: none; padding-left: 2px;
+    border-left: 0; }
+  .nav-cta { flex-direction: column; align-items: stretch; margin-top: 24px; gap: 10px; padding-left: 0; }
   .nav-cta::before { display: none; }
-  .nav-cta .btn { width: 100%; }
+  .nav-cta .btn { width: 100%; padding: .95rem; font-size: .95rem; }
+  /* contact strip pinned to the sheet's bottom */
+  .nav-menu-foot { display: block; margin-top: auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08); }
+  .nav-menu-foot a { display: inline-block; font-family: var(--font-head); font-weight: 800;
+    font-size: 1.2rem; color: #fff; margin-bottom: 4px; }
+  .nav-menu-foot a:hover { color: var(--red-bright); }
+  .nav-menu-foot span { display: block; font-size: .82rem; color: var(--steel); }
 }
 
 /* ---- Hero (Onyx) --------------------------------------------------------- */
