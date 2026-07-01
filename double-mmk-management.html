@@ -165,23 +165,53 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; flex-direction: column; gap: 5px; }
 .nav-toggle span { display: block; width: 26px; height: 2.5px; background: #e6e6ea; border-radius: 2px; transition: var(--t); }
 
+.nav-menu-foot { display: none; }
+body.menu-open { overflow: hidden; }
 @media (max-width: 1200px) {
   .nav-toggle { display: flex; }
+  /* hamburger -> X */
+  .nav-toggle span { transition: transform .25s cubic-bezier(.2,.7,.2,1), opacity .2s ease; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+  /* full-screen branded sheet */
   .nav-menu {
-    position: fixed; inset: 90px 0 auto 0; flex-direction: column; align-items: stretch; gap: 0;
-    background: var(--onyx); border-bottom: 1px solid var(--line-dark);
-    padding: 14px 28px 26px; box-shadow: var(--shadow); transform: translateY(-130%);
-    transition: transform .3s ease; z-index: 49;
+    position: fixed; inset: 90px 0 0 0; flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--onyx);
+    background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    padding: 18px 28px calc(28px + env(safe-area-inset-bottom, 0px));
+    z-index: 49; overflow-y: auto;
+    opacity: 0; visibility: hidden; transform: translateY(-10px);
+    transition: opacity .28s ease, transform .28s ease, visibility 0s linear .28s;
   }
-  .nav-menu.open { transform: translateY(0); }
+  .nav-menu.open { opacity: 1; visibility: visible; transform: none;
+    transition: opacity .28s ease, transform .28s ease; }
   .nav-links { flex-direction: column; align-items: stretch; gap: 0; }
-  .nav-links li { border-bottom: 1px solid var(--line-dark); }
-  .nav-links a { display: block; padding: 16px 4px; font-size: .95rem; border-left: 3px solid transparent; }
+  .nav-links li { border-bottom: 1px solid rgba(255,255,255,.08);
+    opacity: 0; transform: translateY(10px); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.7,.2,1); }
+  .nav-menu.open .nav-links li { opacity: 1; transform: none; }
+  .nav-menu.open .nav-links li:nth-child(1) { transition-delay: .05s; }
+  .nav-menu.open .nav-links li:nth-child(2) { transition-delay: .09s; }
+  .nav-menu.open .nav-links li:nth-child(3) { transition-delay: .13s; }
+  .nav-menu.open .nav-links li:nth-child(4) { transition-delay: .17s; }
+  .nav-menu.open .nav-links li:nth-child(5) { transition-delay: .21s; }
+  .nav-menu.open .nav-links li:nth-child(6) { transition-delay: .25s; }
+  .nav-menu.open .nav-links li:nth-child(7) { transition-delay: .29s; }
+  .nav-links a { display: block; padding: 16px 2px; font-size: 1.32rem; font-weight: 700;
+    letter-spacing: .035em; color: #e6e6ea; border-left: 0; }
   .nav-links a::after { display: none; }
-  .nav-links a.active { color: #fff; background: rgba(200,32,42,.13); border-left-color: var(--red); padding-left: 14px; }
-  .nav-cta { flex-direction: column; align-items: stretch; margin-top: 18px; gap: 10px; padding-left: 0; }
+  .nav-links a.active { color: var(--red-bright); background: none; padding-left: 2px;
+    border-left: 0; }
+  .nav-cta { flex-direction: column; align-items: stretch; margin-top: 24px; gap: 10px; padding-left: 0; }
   .nav-cta::before { display: none; }
-  .nav-cta .btn { width: 100%; }
+  .nav-cta .btn { width: 100%; padding: .95rem; font-size: .95rem; }
+  /* contact strip pinned to the sheet's bottom */
+  .nav-menu-foot { display: block; margin-top: auto; padding-top: 22px; border-top: 1px solid rgba(255,255,255,.08); }
+  .nav-menu-foot a { display: inline-block; font-family: var(--font-head); font-weight: 800;
+    font-size: 1.2rem; color: #fff; margin-bottom: 4px; }
+  .nav-menu-foot a:hover { color: var(--red-bright); }
+  .nav-menu-foot span { display: block; font-size: .82rem; color: var(--steel); }
 }
 
 /* ---- Hero (Onyx) --------------------------------------------------------- */
@@ -1020,6 +1050,59 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   .hero-badge .stars { font-size: .75rem; letter-spacing: 1px; }
 }
 
+/* ---- Calculator: transparent owner math -------------------------------- */
+.calc-breakdown { margin: 4px 0 14px; padding: 14px 0 0; border-top: 1px solid rgba(255,255,255,.14); }
+.calc-breakdown > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 7px; }
+.calc-breakdown dt { font-size: .85rem; color: #9a9aa0; }
+.calc-breakdown dd { margin: 0; font-family: var(--font-head); font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+.calc-breakdown dd span { font-weight: 500; color: #9a9aa0; font-size: .82rem; }
+.calc-note a { color: var(--red-bright); }
+.calc-note a:hover { color: #fff; }
+
+/* ---- Listing cards: "Ask about this home" action ------------------------ */
+.listing-actions { border-top: 1px solid var(--line-soft); margin-top: 14px; padding-top: 12px; }
+.listing-ask { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-head);
+  font-weight: 700; font-size: .88rem; color: var(--red); }
+.listing-ask svg { width: 15px; height: 15px; transition: transform var(--t); }
+.listing-ask:hover { color: var(--oxblood); }
+.listing-ask:hover svg { transform: translateX(3px); }
+
+/* ---- Designed inline validation ----------------------------------------- */
+.field--error input, .field--error select, .field--error textarea {
+  border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(200,32,42,.12); }
+.field-error { margin: 7px 0 0; font-size: .82rem; color: var(--red); line-height: 1.45; }
+.field-error::before { content: ""; display: inline-block; width: 10px; height: 5px; margin-right: 7px; vertical-align: 2px;
+  background: linear-gradient(to bottom, currentColor 0 1.5px, transparent 1.5px 3.5px, currentColor 3.5px 5px); }
+
+/* ==========================================================================
+   DETROIT NEIGHBORHOODS MAP — hand-drawn SVG, desktop; pills stay on mobile
+   ========================================================================== */
+.hood-map { display: none; background: var(--onyx);
+  background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.4px);
+  background-size: 22px 22px; border-radius: var(--radius); padding: 26px 26px 18px;
+  box-shadow: var(--shadow); margin-bottom: 34px; }
+@media (min-width: 761px) {
+  .hood-map { display: block; }
+  .hood-map + .hoods { display: none; }
+}
+.hood-map svg { display: block; width: 100%; height: auto; }
+.hm-city { fill: var(--carbon); stroke: rgba(201,201,207,.55); stroke-width: 1.5; stroke-linejoin: round; }
+.hm-enclave { fill: none; stroke: rgba(201,201,207,.22); stroke-width: 1; }
+.hm-isle { fill: var(--carbon); stroke: rgba(201,201,207,.35); stroke-width: 1; }
+.hm-water, .hm-road { font-family: var(--font-head); font-weight: 600; font-size: 11px;
+  letter-spacing: .3em; fill: rgba(201,201,207,.32); }
+.hm-downtown rect { fill: none; stroke: rgba(201,201,207,.5); stroke-width: 1.5; }
+.hm-downtown text { font-family: var(--font-body); font-size: 11.5px; fill: rgba(201,201,207,.55); }
+.hm-dot { fill: var(--red-bright); stroke: rgba(200,32,42,.30); stroke-width: 7;
+  transform-box: fill-box; transform-origin: center; transition: transform .25s cubic-bezier(.2,.7,.2,1), fill .2s ease; }
+.hm-label { font-family: var(--font-head); font-weight: 600; font-size: 13.5px; fill: #b9b9c0;
+  letter-spacing: .02em; transition: fill .2s ease;
+  paint-order: stroke; stroke: rgba(15,15,17,.85); stroke-width: 3px; }
+.hood-map a:hover .hm-dot, .hood-map a:focus-visible .hm-dot { transform: scale(1.45); fill: #fff; }
+.hood-map a:hover .hm-label, .hood-map a:focus-visible .hm-label { fill: #fff; }
+@media (prefers-reduced-motion: reduce) { .hm-dot { transition: fill .2s ease; }
+  .hood-map a:hover .hm-dot { transform: none; } }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1032,7 +1115,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
        so no-JS still shows everything. No forced override needed here. */
     [id] { scroll-margin-top: 100px; }
     /* CSS-only mobile menu */
-    @media (max-width: 1200px) { #menu:target { transform: translateY(0); } }
+    @media (max-width: 1200px) { #menu:target { opacity: 1; visibility: visible; transform: none; } #menu:target .nav-links li { opacity: 1; transform: none; } }
     /* native <details> FAQ */
     summary.faq-q { list-style: none; cursor: pointer; }
     summary.faq-q::-webkit-details-marker { display: none; }
@@ -1094,6 +1177,10 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <div class="nav-cta">
           <a href="#tenants" class="btn btn--outline-light btn--sm">Tenant Login</a>
           <a href="#quote" class="btn btn--primary btn--sm">Free Rental Analysis</a>
+        </div>
+        <div class="nav-menu-foot">
+          <a href="tel:+13136036064">(313) 603-6064</a>
+          <span>Mon–Fri, 9am–5pm · 24/7 emergency maintenance line</span>
         </div>
       </nav>
     </div>
@@ -1372,6 +1459,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-meta">
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 3 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1.5 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,400 sqft</span>
               </div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
           <article class="listing reveal">
@@ -1385,6 +1473,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-meta">
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 2 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,050 sqft</span>
               </div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
           <article class="listing reveal">
@@ -1398,6 +1487,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-meta">
                 <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 3 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 2 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,650 sqft</span>
               </div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
         </div>
@@ -1447,6 +1537,69 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
             <span>Woodward</span><span>Michigan Ave</span><span>Gratiot</span><span>Grand River</span><span>Jefferson</span><span>Vernor</span><span>Livernois</span><span>Mack</span><span>McNichols</span><span>Fort St</span><span>Trumbull</span><span>Cadieux</span>
             <span>Woodward</span><span>Michigan Ave</span><span>Gratiot</span><span>Grand River</span><span>Jefferson</span><span>Vernor</span><span>Livernois</span><span>Mack</span><span>McNichols</span><span>Fort St</span><span>Trumbull</span><span>Cadieux</span>
           </div>
+        </div>
+        <div class="hood-map reveal" aria-label="Map of the Detroit neighborhoods we serve">
+          <svg viewBox="0 0 760 560" role="img" aria-label="Stylized map of Detroit with the neighborhoods Double MMK manages">
+            <polygon class="hm-city" points="42.5,44.9 630.5,32.4 657.4,131.2 715.3,268.1 630.5,312.0 523.2,326.5 419.4,368.6 385.4,425.3 329.9,461.4 279.8,439.7 258.3,372.3 133.1,333.7 133.1,230.1 42.5,230.1"/>
+            <rect class="hm-enclave" x="442.9" y="150.6" width="34" height="24" transform="rotate(-8 458.9 161.6)"><title>Hamtramck</title></rect>
+            <rect class="hm-enclave" x="368.1" y="129.7" width="36" height="22"><title>Highland Park</title></rect>
+            <ellipse class="hm-isle" cx="585.8" cy="292.7" rx="20" ry="7" transform="rotate(-24 585.8 292.7)"><title>Belle Isle</title></ellipse>
+            <text class="hm-water" x="562" y="368" transform="rotate(16 562 368)">DETROIT RIVER</text>
+            <text class="hm-road" x="330" y="24">8 MILE RD</text>
+            <g class="hm-downtown"><rect x="471.6" y="311.4" width="8" height="8"/><text x="487.6" y="319.4">Downtown</text></g>
+      <a href="#properties" aria-label="Corktown property management">
+        <circle class="hm-dot" cx="432.8" cy="315.4" r="6"/>
+        <text class="hm-label" x="420.8" y="319.4" text-anchor="end">Corktown</text>
+      </a>
+      <a href="#properties" aria-label="Midtown property management">
+        <circle class="hm-dot" cx="443.0" cy="264.5" r="6"/>
+        <text class="hm-label" x="455.0" y="268.5" text-anchor="start">Midtown</text>
+      </a>
+      <a href="#properties" aria-label="Woodbridge property management">
+        <circle class="hm-dot" cx="419.4" cy="261.1" r="6"/>
+        <text class="hm-label" x="407.4" y="255.10000000000002" text-anchor="end">Woodbridge</text>
+      </a>
+      <a href="#properties" aria-label="Hubbard Farms property management">
+        <circle class="hm-dot" cx="401.5" cy="351.3" r="6"/>
+        <text class="hm-label" x="389.5" y="355.3" text-anchor="end">Hubbard Farms</text>
+      </a>
+      <a href="#properties" aria-label="Southwest Detroit property management">
+        <circle class="hm-dot" cx="346.0" cy="377.8" r="6"/>
+        <text class="hm-label" x="346.0" y="401.8" text-anchor="middle">Southwest Detroit</text>
+      </a>
+      <a href="#properties" aria-label="Boston-Edison property management">
+        <circle class="hm-dot" cx="400.0" cy="167.1" r="6"/>
+        <text class="hm-label" x="388.0" y="171.1" text-anchor="end">Boston-Edison</text>
+      </a>
+      <a href="#properties" aria-label="Indian Village property management">
+        <circle class="hm-dot" cx="585.3" cy="250.5" r="6"/>
+        <text class="hm-label" x="597.3" y="254.5" text-anchor="start">Indian Village</text>
+      </a>
+      <a href="#properties" aria-label="East English Village property management">
+        <circle class="hm-dot" cx="658.3" cy="143.8" r="6"/>
+        <text class="hm-label" x="646.3" y="147.8" text-anchor="end">East English Village</text>
+      </a>
+      <a href="#properties" aria-label="Bagley property management">
+        <circle class="hm-dot" cx="228.6" cy="108.8" r="6"/>
+        <text class="hm-label" x="228.6" y="132.8" text-anchor="middle">Bagley</text>
+      </a>
+      <a href="#properties" aria-label="Grandmont property management">
+        <circle class="hm-dot" cx="180.1" cy="144.5" r="6"/>
+        <text class="hm-label" x="180.1" y="168.5" text-anchor="middle">Grandmont</text>
+      </a>
+      <a href="#properties" aria-label="Rosedale Park property management">
+        <circle class="hm-dot" cx="164.4" cy="97.0" r="6"/>
+        <text class="hm-label" x="154.4" y="83.0" text-anchor="start">Rosedale Park</text>
+      </a>
+      <a href="#properties" aria-label="Sherwood Forest property management">
+        <circle class="hm-dot" cx="325.4" cy="76.3" r="6"/>
+        <text class="hm-label" x="337.4" y="80.3" text-anchor="start">Sherwood Forest</text>
+      </a>
+      <a href="#properties" aria-label="Palmer Park property management">
+        <circle class="hm-dot" cx="374.3" cy="113.2" r="6"/>
+        <text class="hm-label" x="386.3" y="121.2" text-anchor="start">Palmer Park</text>
+      </a>
+          </svg>
         </div>
         <div class="hoods reveal">
           <a class="hood" href="#properties"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Corktown</a>
@@ -1578,6 +1731,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$1,250<span> / mo</span></div>
               <div class="listing-addr">East English Village, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 3 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1.5 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,400 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1587,6 +1741,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$950<span> / mo</span></div>
               <div class="listing-addr">Bagley, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 2 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,050 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1596,6 +1751,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$1,600<span> / mo</span></div>
               <div class="listing-addr">Corktown, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 3 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 2 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,650 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1605,6 +1761,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$1,100<span> / mo</span></div>
               <div class="listing-addr">Hubbard Farms, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 2 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 1,200 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1614,6 +1771,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$800<span> / mo</span></div>
               <div class="listing-addr">Midtown, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 1 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 1 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 700 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1623,6 +1781,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
               <div class="listing-price">$2,100<span> / mo</span></div>
               <div class="listing-addr">Rosedale Park, Detroit</div>
               <div class="listing-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4v16"/><path d="M2 9h18a2 2 0 0 1 2 2v9"/><path d="M2 16h20"/><path d="M6 9v5"/></svg> 4 bed</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.7s6 5.7 6 10.3a6 6 0 0 1-12 0c0-4.6 6-10.3 6-10.3z"/></svg> 2.5 bath</span><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg> 2,000 sqft</span></div>
+              <div class="listing-actions"><a class="listing-ask" href="#inquire" data-ask>Ask about this home <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div>
             </div>
           </article>
 
@@ -1631,7 +1790,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
         <!-- Empty state -->
         <div id="listing-empty" class="hide center" style="padding:48px 0;">
           <h3>No properties match your filters</h3>
-          <p class="text-muted">Try adjusting your search, or <a href="#contact">contact us</a> and we'll help you find a home.</p>
+          <p class="text-muted">Try adjusting your search — or <a href="#inquire">tell us what you’re looking for</a> and we’ll keep an eye out as homes open up.</p>
         </div>
 
         <!-- Note for owner -->
@@ -1641,12 +1800,45 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       </div>
     </section>
 
+    <!-- Home inquiry -->
+    <section class="section section--sand sub-section" id="inquire">
+      <div class="container">
+        <div class="split">
+          <div class="reveal">
+            <span class="eyebrow">Ask About a Home</span>
+            <h2>Interested, or looking for something specific?</h2>
+            <p class="text-muted">Ask about any home above, or describe what you’re looking for — beds, neighborhood, budget. New homes open up all the time, and we’ll reach out when something fits.</p>
+            <ul class="checklist">
+              <li>A real person replies within one business day</li>
+              <li>No application fee to ask a question</li>
+              <li>Prefer to talk? Call <a href="tel:+13136036064"><strong>(313) 603-6064</strong></a></li>
+            </ul>
+          </div>
+          <div class="reveal">
+            <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
+              <div class="form-success" role="status"><strong>Thanks — inquiry received.</strong> We’ll get back to you within one business day. Need an answer sooner? Call <a href="tel:+13136036064">(313) 603-6064</a>.</div>
+              <div class="field-row">
+                <div class="field"><label for="inq-name">Name <span class="req">*</span></label><input id="inq-name" name="name" type="text" required autocomplete="name" /></div>
+                <div class="field"><label for="inq-phone">Phone</label><input id="inq-phone" name="phone" type="tel" autocomplete="tel" /></div>
+              </div>
+              <div class="field"><label for="inq-email">Email <span class="req">*</span></label><input id="inq-email" name="email" type="email" required autocomplete="email" /></div>
+              <div class="field"><label for="inq-home">Home you’re asking about</label><input id="inq-home" name="home" type="text" placeholder="e.g. Corktown, Detroit — or ‘anything with 3 beds’" /></div>
+              <div class="field"><label for="inq-msg">Anything else?</label><textarea id="inq-msg" name="message" placeholder="Move-in timing, pets, parking..."></textarea></div>
+              <button type="submit" class="btn btn--primary btn--block">Send Inquiry</button>
+              <p class="form-trust">No obligation — we reply within <strong>one business day</strong>. Your info is never shared.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section section--tight">
       <div class="container">
         <div class="cta-band reveal">
-          <h2>Don't see the right fit?</h2>
-          <p>New homes become available all the time. Tell us what you're looking for and we'll keep an eye out.</p>
-          <a href="#contact" class="btn btn--primary">Contact Our Team</a>
+          <h2>Don’t see the right fit?</h2>
+          <p>New homes become available all the time. Tell us what you’re looking for and we’ll keep an eye out.</p>
+          <a href="#inquire" class="btn btn--primary">Tell Us What You Need</a>
         </div>
       </div>
     </section>
@@ -1712,7 +1904,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <div class="calc-result" aria-live="polite">
             <span class="calc-label">Estimated monthly rent</span>
             <div class="calc-range" id="rc-out">$—</div>
-            <p class="calc-note">A ballpark from Detroit market averages. Actual rent depends on condition, finishes, and timing.</p>
+            <dl class="calc-breakdown">
+              <div><dt>Management fee (8%)</dt><dd id="rc-fee">$—</dd></div>
+              <div><dt>Your estimated net</dt><dd id="rc-net">$—<span id="rc-net-yr"></span></dd></div>
+            </dl>
+            <p class="calc-note">A ballpark from Detroit market averages, at the midpoint of the range. Actual rent depends on condition, finishes, and timing. <a href="#pricing">See every fee →</a></p>
             <a href="#quote" class="btn btn--primary">Get a Precise Free Analysis</a>
           </div>
         </div>
@@ -2569,8 +2765,8 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
      the #menu:target CSS remains the no-JS fallback */
   var nt=document.querySelector(".nav-toggle"), nm=document.getElementById("menu");
   if(nt&&nm){
-    nt.addEventListener("click", function(e){ e.preventDefault(); var open=nm.classList.toggle("open"); nt.setAttribute("aria-expanded", open?"true":"false"); });
-    nm.addEventListener("click", function(e){ if(e.target.tagName==="A"){ nm.classList.remove("open"); nt.setAttribute("aria-expanded","false"); } });
+    nt.addEventListener("click", function(e){ e.preventDefault(); var open=nm.classList.toggle("open"); nt.setAttribute("aria-expanded", open?"true":"false"); document.body.classList.toggle("menu-open", open); });
+    nm.addEventListener("click", function(e){ if(e.target.tagName==="A"){ nm.classList.remove("open"); nt.setAttribute("aria-expanded","false"); document.body.classList.remove("menu-open"); } });
   }
   /* skip link: focus main without setting the hash (which would reset the SPA page) */
   var sk=document.querySelector(".skip-link");
@@ -2645,6 +2841,7 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     var out = document.getElementById("rc-out");
     var hood = document.getElementById("rc-hood"), beds = document.getElementById("rc-beds"),
         baths = document.getElementById("rc-baths"), sqft = document.getElementById("rc-sqft");
+    var feeEl = document.getElementById("rc-fee"), netEl = document.getElementById("rc-net"), netYrEl = document.getElementById("rc-net-yr");
     function money(n) { return "$" + Math.round(n).toLocaleString(); }
     function calc() {
       var f = parseFloat(hood.value) || 0.85,
@@ -2654,6 +2851,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
       var est = (sf * 0.78 + b * 170 + ba * 90) * f;
       var lo = Math.round(est * 0.92 / 10) * 10, hi = Math.round(est * 1.09 / 10) * 10;
       out.textContent = money(lo) + " – " + money(hi);
+      // transparent owner math from the midpoint: fee out, net in
+      var mid = (lo + hi) / 2, fee = mid * 0.08, net = mid - fee;
+      if (feeEl) feeEl.textContent = money(fee) + " /mo";
+      if (netEl) netEl.firstChild.textContent = money(net) + " /mo";
+      if (netYrEl) netYrEl.textContent = " · " + money(net * 12) + " /yr";
     }
     form.addEventListener("input", calc);
     form.addEventListener("change", calc);
@@ -2698,6 +2900,95 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
     };
     sel.addEventListener("change", function () {
       hint.innerHTML = map[sel.value] || "";
+    });
+  })();
+
+  /* ============================================================
+     0f) LISTING INQUIRY — "Ask about this home" prefill.
+         Same-document (listings page / SPA) via click; cross-page
+         via the ?ask= URL param.
+     ============================================================ */
+  (function askPrefill() {
+    var home = document.getElementById("inq-home");
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("[data-ask]");
+      if (!a || !home) return;
+      var card = a.closest(".listing");
+      var addr = card && card.querySelector(".listing-addr");
+      if (addr) home.value = addr.textContent.trim();
+    });
+    if (home && window.location.search) {
+      try {
+        var ask = new URLSearchParams(window.location.search).get("ask");
+        if (ask) home.value = ask;
+      } catch (err) {}
+    }
+  })();
+
+  /* ============================================================
+     0g) PREMIUM FORM UX — designed inline validation + phone
+         formatting. Capture-phase gate runs before the submit
+         senders in both builds; no-JS keeps native validation.
+     ============================================================ */
+  (function formUX() {
+    var forms = document.querySelectorAll("form[data-demo]");
+    if (!forms.length) return;
+    forms.forEach(function (f) { f.setAttribute("novalidate", ""); });
+
+    function msgFor(el) {
+      if (el.validity.valueMissing) {
+        if (el.type === "email") return "Please add your email so we can reply.";
+        if (el.type === "tel") return "Please add a phone number.";
+        if (el.tagName === "TEXTAREA") return "Please add a short message.";
+        return "Please fill this in.";
+      }
+      if (el.type === "email") return "That email doesn\u2019t look right \u2014 e.g. you@email.com";
+      return "Please check this field.";
+    }
+    function setError(el, msg) {
+      var field = el.closest(".field"); if (!field) return;
+      field.classList.add("field--error");
+      var note = field.querySelector(".field-error");
+      if (!note) { note = document.createElement("p"); note.className = "field-error"; field.appendChild(note); }
+      note.textContent = msg;
+      el.setAttribute("aria-invalid", "true");
+    }
+    function clearError(el) {
+      var field = el.closest(".field"); if (!field) return;
+      field.classList.remove("field--error");
+      var note = field.querySelector(".field-error");
+      if (note) note.remove();
+      el.removeAttribute("aria-invalid");
+    }
+    document.addEventListener("submit", function (e) {
+      var form = e.target;
+      if (!form.matches || !form.matches("form[data-demo]")) return;
+      var bad = [];
+      form.querySelectorAll("input:not([type=checkbox]), select, textarea").forEach(function (el) {
+        if (!el.checkValidity()) { setError(el, msgFor(el)); bad.push(el); }
+        else clearError(el);
+      });
+      if (bad.length) {
+        e.preventDefault();
+        e.stopPropagation();           // capture phase: senders never fire
+        bad[0].focus({ preventScroll: false });
+      }
+    }, true);
+    document.addEventListener("input", function (e) {
+      var el = e.target;
+      if (el.closest && el.closest("form[data-demo]") && el.getAttribute("aria-invalid") && el.checkValidity()) clearError(el);
+    });
+
+    /* phone: format (313) 555-0123 as you type (end-of-field typing only,
+       so mid-string edits never fight the cursor) */
+    document.querySelectorAll("form[data-demo] input[type=tel]").forEach(function (tel) {
+      tel.addEventListener("input", function () {
+        if (tel.selectionStart !== tel.value.length) return;
+        var d = tel.value.replace(/\D/g, "").slice(0, 10);
+        if (d.length > 6) tel.value = "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+        else if (d.length > 3) tel.value = "(" + d.slice(0, 3) + ") " + d.slice(3);
+        else if (d.length > 0 && tel.value.indexOf("(") !== 0 && d.length === tel.value.length) tel.value = d;
+      });
     });
   })();
 
