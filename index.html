@@ -112,21 +112,22 @@
 
           <!-- Quick owner lead form -->
           <div class="hero-card">
-            <h3>Free Rental Analysis</h3>
+            <h2 class="hero-card-title">Free Rental Analysis</h2>
             <p>See what your property could earn in today's Detroit market.</p>
             <form data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Thanks! We'll be in touch within one business day with your free analysis.</div>
               <div class="field">
                 <label for="h-name">Your name</label>
-                <input id="h-name" name="name" type="text" placeholder="Jane Owner" required />
+                <input id="h-name" name="name" type="text" placeholder="Jane Owner" required autocomplete="name" />
               </div>
               <div class="field">
                 <label for="h-address">Property address</label>
-                <input id="h-address" name="address" type="text" placeholder="123 Woodward Ave, Detroit, MI" required />
+                <input id="h-address" name="address" type="text" placeholder="123 Woodward Ave, Detroit, MI" required autocomplete="street-address" />
               </div>
               <div class="field">
                 <label for="h-email">Email</label>
-                <input id="h-email" name="email" type="email" placeholder="you@email.com" required />
+                <input id="h-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email" />
               </div>
               <button type="submit" class="btn btn--primary btn--block">Get My Free Analysis</button>
               <p class="form-trust">No obligation — we reply within <strong>one business day</strong>. Your info is never shared.</p>

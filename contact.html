@@ -113,12 +113,13 @@
           <!-- Form -->
           <div class="reveal">
             <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Thanks for reaching out! Your message has been sent — we'll get back to you within one business day.</div>
               <div class="field-row">
-                <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" type="text" required /></div>
-                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" /></div>
+                <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" type="text" required autocomplete="name" /></div>
+                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" /></div>
               </div>
-              <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required /></div>
+              <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required autocomplete="email" /></div>
               <div class="field">
                 <label for="c-reason">I'm reaching out as a...</label>
                 <select id="c-reason" name="reason">

@@ -12,15 +12,7 @@
      ============================================================ */
   var WEB3FORMS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
 
-  /* ---- Highlight the current page in the nav ---- */
-  (function () {
-    var page = location.pathname.split("/").pop() || "index.html";
-    if (page === "") page = "index.html";
-    document.querySelectorAll(".nav-links a").forEach(function (a) {
-      var href = (a.getAttribute("href") || "").split("#")[0];
-      if (href === page) a.classList.add("active");
-    });
-  })();
+  /* ---- Active nav: owned by immersive.js (hash-aware + aria-current) ---- */
 
   /* ---- Mobile nav toggle ---- */
   var toggle = document.querySelector(".nav-toggle");

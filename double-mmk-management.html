@@ -206,7 +206,7 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .hero-trust div span { font-size: .85rem; color: #8c8c92; text-transform: uppercase; letter-spacing: .08em; }
 
 .hero-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-lg); }
-.hero-card h3 { color: var(--onyx); margin-bottom: .25rem; }
+.hero-card h3, .hero-card .hero-card-title { color: var(--onyx); font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .25rem; }
 .hero-card > p { color: var(--muted); font-size: .96rem; margin-bottom: 20px; }
 .hero-card label { display: block; font-size: .8rem; color: var(--onyx); margin-bottom: 6px; font-family: var(--font-head); font-weight: 600; }
 .hero-card input, .hero-card select {
@@ -949,6 +949,9 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .footer-area-links a { color: #b4b4bb; font-size: .88rem; }
 .footer-area-links a:hover { color: #fff; }
 
+/* Spam honeypot — visually gone, still in the form for bots to trip */
+.hp-field { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; }
+
 </style>
   <style>
     /* --- single-file: no-JS navigation via :target --- */
@@ -1052,21 +1055,22 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 
           <!-- Quick owner lead form -->
           <div class="hero-card">
-            <h3>Free Rental Analysis</h3>
+            <h2 class="hero-card-title">Free Rental Analysis</h2>
             <p>See what your property could earn in today's Detroit market.</p>
             <form data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Thanks! We'll be in touch within one business day with your free analysis.</div>
               <div class="field">
                 <label for="h-name">Your name</label>
-                <input id="h-name" name="name" type="text" placeholder="Jane Owner" required />
+                <input id="h-name" name="name" type="text" placeholder="Jane Owner" required autocomplete="name" />
               </div>
               <div class="field">
                 <label for="h-address">Property address</label>
-                <input id="h-address" name="address" type="text" placeholder="123 Woodward Ave, Detroit, MI" required />
+                <input id="h-address" name="address" type="text" placeholder="123 Woodward Ave, Detroit, MI" required autocomplete="street-address" />
               </div>
               <div class="field">
                 <label for="h-email">Email</label>
-                <input id="h-email" name="email" type="email" placeholder="you@email.com" required />
+                <input id="h-email" name="email" type="email" placeholder="you@email.com" required autocomplete="email" />
               </div>
               <button type="submit" class="btn btn--primary btn--block">Get My Free Analysis</button>
               <p class="form-trust">No obligation — we reply within <strong>one business day</strong>. Your info is never shared.</p>
@@ -1770,16 +1774,17 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           </div>
           <div class="reveal">
             <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Thank you! Your request has been received. A Double MMK specialist will reach out within one business day.</div>
               <div class="field-row">
-                <div class="field"><label for="o-first">First name <span class="req">*</span></label><input id="o-first" name="first" type="text" required /></div>
-                <div class="field"><label for="o-last">Last name <span class="req">*</span></label><input id="o-last" name="last" type="text" required /></div>
+                <div class="field"><label for="o-first">First name <span class="req">*</span></label><input id="o-first" name="first" type="text" required autocomplete="given-name" /></div>
+                <div class="field"><label for="o-last">Last name <span class="req">*</span></label><input id="o-last" name="last" type="text" required autocomplete="family-name" /></div>
               </div>
               <div class="field-row">
-                <div class="field"><label for="o-email">Email <span class="req">*</span></label><input id="o-email" name="email" type="email" required /></div>
-                <div class="field"><label for="o-phone">Phone <span class="req">*</span></label><input id="o-phone" name="phone" type="tel" required /></div>
+                <div class="field"><label for="o-email">Email <span class="req">*</span></label><input id="o-email" name="email" type="email" required autocomplete="email" /></div>
+                <div class="field"><label for="o-phone">Phone <span class="req">*</span></label><input id="o-phone" name="phone" type="tel" required autocomplete="tel" /></div>
               </div>
-              <div class="field"><label for="o-address">Property address <span class="req">*</span></label><input id="o-address" name="address" type="text" placeholder="Street, City, MI" required /></div>
+              <div class="field"><label for="o-address">Property address <span class="req">*</span></label><input id="o-address" name="address" type="text" placeholder="Street, City, MI" required autocomplete="street-address" /></div>
               <div class="field-row">
                 <div class="field">
                   <label for="o-type">Property type</label>
@@ -2090,12 +2095,13 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           </div>
           <div class="reveal">
             <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Got it! Your maintenance request has been submitted. Our team will be in touch to schedule the repair.</div>
               <div class="field-row">
-                <div class="field"><label for="t-name">Full name <span class="req">*</span></label><input id="t-name" name="name" type="text" required /></div>
-                <div class="field"><label for="t-phone">Phone <span class="req">*</span></label><input id="t-phone" name="phone" type="tel" required /></div>
+                <div class="field"><label for="t-name">Full name <span class="req">*</span></label><input id="t-name" name="name" type="text" required autocomplete="name" /></div>
+                <div class="field"><label for="t-phone">Phone <span class="req">*</span></label><input id="t-phone" name="phone" type="tel" required autocomplete="tel" /></div>
               </div>
-              <div class="field"><label for="t-address">Property address <span class="req">*</span></label><input id="t-address" name="address" type="text" required /></div>
+              <div class="field"><label for="t-address">Property address <span class="req">*</span></label><input id="t-address" name="address" type="text" required autocomplete="street-address" /></div>
               <div class="field">
                 <label for="t-cat">Issue type</label>
                 <select id="t-cat" name="category">
@@ -2287,12 +2293,13 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           <!-- Form -->
           <div class="reveal">
             <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Thanks for reaching out! Your message has been sent — we'll get back to you within one business day.</div>
               <div class="field-row">
-                <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" type="text" required /></div>
-                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" /></div>
+                <div class="field"><label for="c-name">Name <span class="req">*</span></label><input id="c-name" name="name" type="text" required autocomplete="name" /></div>
+                <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" /></div>
               </div>
-              <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required /></div>
+              <div class="field"><label for="c-email">Email <span class="req">*</span></label><input id="c-email" name="email" type="email" required autocomplete="email" /></div>
               <div class="field">
                 <label for="c-reason">I'm reaching out as a...</label>
                 <select id="c-reason" name="reason">

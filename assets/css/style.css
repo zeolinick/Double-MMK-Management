@@ -177,7 +177,7 @@ ul { margin: 0 0 1rem; padding-left: 1.2rem; }
 .hero-trust div span { font-size: .85rem; color: #8c8c92; text-transform: uppercase; letter-spacing: .08em; }
 
 .hero-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-lg); }
-.hero-card h3 { color: var(--onyx); margin-bottom: .25rem; }
+.hero-card h3, .hero-card .hero-card-title { color: var(--onyx); font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em; margin-bottom: .25rem; }
 .hero-card > p { color: var(--muted); font-size: .96rem; margin-bottom: 20px; }
 .hero-card label { display: block; font-size: .8rem; color: var(--onyx); margin-bottom: 6px; font-family: var(--font-head); font-weight: 600; }
 .hero-card input, .hero-card select {
@@ -919,3 +919,6 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .footer-area-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .footer-area-links a { color: #b4b4bb; font-size: .88rem; }
 .footer-area-links a:hover { color: #fff; }
+
+/* Spam honeypot — visually gone, still in the form for bots to trip */
+.hp-field { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; }

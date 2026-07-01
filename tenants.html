@@ -187,12 +187,13 @@
           </div>
           <div class="reveal">
             <form class="form-card" data-demo>
+              <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success">Got it! Your maintenance request has been submitted. Our team will be in touch to schedule the repair.</div>
               <div class="field-row">
-                <div class="field"><label for="t-name">Full name <span class="req">*</span></label><input id="t-name" name="name" type="text" required /></div>
-                <div class="field"><label for="t-phone">Phone <span class="req">*</span></label><input id="t-phone" name="phone" type="tel" required /></div>
+                <div class="field"><label for="t-name">Full name <span class="req">*</span></label><input id="t-name" name="name" type="text" required autocomplete="name" /></div>
+                <div class="field"><label for="t-phone">Phone <span class="req">*</span></label><input id="t-phone" name="phone" type="tel" required autocomplete="tel" /></div>
               </div>
-              <div class="field"><label for="t-address">Property address <span class="req">*</span></label><input id="t-address" name="address" type="text" required /></div>
+              <div class="field"><label for="t-address">Property address <span class="req">*</span></label><input id="t-address" name="address" type="text" required autocomplete="street-address" /></div>
               <div class="field">
                 <label for="t-cat">Issue type</label>
                 <select id="t-cat" name="category">
