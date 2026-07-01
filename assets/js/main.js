@@ -24,7 +24,7 @@
     });
     // close menu when a link is tapped (mobile)
     menu.addEventListener("click", function (e) {
-      if (e.target.tagName === "A" && window.innerWidth <= 1000) {
+      if (e.target.tagName === "A" && window.innerWidth <= 1200) {
         menu.classList.remove("open");
         toggle.setAttribute("aria-expanded", "false");
       }
@@ -41,6 +41,10 @@
       answer.style.maxHeight = isOpen ? answer.scrollHeight + "px" : null;
     });
   });
+  // keep open answers un-clipped when the viewport re-wraps (e.g. rotation)
+  window.addEventListener("resize", function () {
+    document.querySelectorAll(".faq-item.open .faq-a").forEach(function (a) { a.style.maxHeight = a.scrollHeight + "px"; });
+  }, { passive: true });
 
   /* ---- Reveal on scroll: handled by immersive.js ---- */
 
@@ -48,7 +52,7 @@
   var toTop = document.createElement("button");
   toTop.className = "to-top";
   toTop.setAttribute("aria-label", "Back to top");
-  toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
+  toTop.innerHTML = '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>';
   document.body.appendChild(toTop);
   toTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: "smooth" }); });
   window.addEventListener("scroll", function () { toTop.classList.toggle("show", window.scrollY > 600); }, { passive: true });
@@ -83,7 +87,7 @@
   function countUp(el) {
     var raw = el.getAttribute("data-count") || el.textContent;
     el.setAttribute("data-count", raw);
-    var m = raw.match(/^([\d.]+)(.*)$/);
+    var m = raw.match(/^([\d.]+)([^\d]*)$/);
     if (!m) return;
     if (reduceMotion) { el.textContent = raw; return; }
     var target = parseFloat(m[1]);
@@ -180,10 +184,10 @@
     filterForm.addEventListener("reset", function () { setTimeout(applyFilters, 0); });
   }
 
-  /* ---- Hero rental search -> listings ---- */
+  /* ---- Hero rental search -> listings (click OR Enter key) ---- */
   var searchGo = document.querySelector("[data-search-go]");
   if (searchGo) {
-    searchGo.addEventListener("click", function (e) {
+    var goSearch = function (e) {
       var form = searchGo.closest("[data-search]");
       if (!form) return;
       e.preventDefault();
@@ -194,7 +198,10 @@
       });
       var qs = p.toString();
       window.location.href = "listings.html" + (qs ? "?" + qs : "") + "#properties";
-    });
+    };
+    searchGo.addEventListener("click", goSearch);
+    var sForm = searchGo.closest("[data-search]");
+    if (sForm) sForm.addEventListener("submit", goSearch);
   }
 
   /* ---- Listings: prefill filter from URL params ---- */

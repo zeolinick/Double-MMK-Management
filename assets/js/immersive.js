@@ -84,14 +84,13 @@
          appears after scrolling. Clear direction, not pushy.
      ============================================================ */
   (function mobileBar() {
-    if (window.innerWidth >= 760) return;
     var spa = !!document.querySelector(".page");           // single-file build uses .page routes
-    var cta = spa ? "#owners" : "owners.html#quote";
+    var cta = spa ? "#quote" : "owners.html#quote";
     var bar = document.createElement("div");
     bar.className = "mobile-bar";
     bar.innerHTML =
       '<a class="mb-call" href="tel:+13136036064">' +
-      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>' +
+      '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.07 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Call</a>' +
       '<a class="mb-cta" href="' + cta + '">Free Rental Analysis</a>';
     document.body.appendChild(bar);
     function toggle() { bar.classList.toggle("show", (window.scrollY || 0) > 560); }
@@ -109,7 +108,7 @@
     if (!sel || !hint) return;
     var spa = !!document.querySelector(".page");
     var L = spa
-      ? { maint: "#tenants", listings: "#properties", estimate: "#owners" }
+      ? { maint: "#request-form", listings: "#properties", estimate: "#estimate" }
       : { maint: "tenants.html#request-form", listings: "listings.html", estimate: "owners.html#estimate" };
     var map = {
       "Current resident": 'Maintenance issue? Fastest path: <a href="' + L.maint + '">submit a request</a>. Emergency? Call <a href="tel:+13136036064">(313) 603-6064</a> now.',
@@ -262,7 +261,6 @@
       for (var s = 0; s < stepGroups.length; s++) {
         var g = stepGroups[s], gr = g.getBoundingClientRect();
         var prog = clamp((vh * 0.85 - gr.top) / (gr.height + vh * 0.2), 0, 1);
-        g.style.setProperty("--progress", prog.toFixed(3));
         var steps = g.children, n = steps.length;
         for (var k = 0; k < n; k++) {
           if (prog >= (k + 0.4) / n) steps[k].classList.add("step--active");
