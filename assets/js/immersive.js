@@ -247,47 +247,6 @@
   document.body.appendChild(bar);
 
   /* ============================================================
-     3) 3D TILT on cards (subtle, refined)
-     ============================================================ */
-  if (finePointer && !reduce) {
-    var tiltEls = document.querySelectorAll(".card, .path-card, .portal-card, .quote");
-    tiltEls.forEach(function (el) {
-      el.classList.add("tilt");
-      var raf = null, tx = 0, ty = 0;
-      el.addEventListener("mousemove", function (ev) {
-        var r = el.getBoundingClientRect();
-        var px = (ev.clientX - r.left) / r.width - 0.5;
-        var py = (ev.clientY - r.top) / r.height - 0.5;
-        tx = clamp(-py * 6, -6, 6);
-        ty = clamp(px * 6, -6, 6);
-        if (!raf) raf = requestAnimationFrame(function apply() {
-          el.style.transform = "perspective(900px) rotateX(" + tx + "deg) rotateY(" + ty + "deg) translateY(-4px)";
-          raf = null;
-        });
-      });
-      el.addEventListener("mouseleave", function () {
-        el.style.transform = "";
-      });
-    });
-  }
-
-  /* ============================================================
-     4) MAGNETIC buttons (primary CTAs)
-     ============================================================ */
-  if (finePointer && !reduce) {
-    document.querySelectorAll(".btn--primary").forEach(function (btn) {
-      btn.classList.add("magnetic");
-      btn.addEventListener("mousemove", function (ev) {
-        var r = btn.getBoundingClientRect();
-        var mx = ev.clientX - (r.left + r.width / 2);
-        var my = ev.clientY - (r.top + r.height / 2);
-        btn.style.transform = "translate(" + (mx * 0.18) + "px," + (my * 0.28) + "px)";
-      });
-      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
-    });
-  }
-
-  /* ============================================================
      5) STEP-BY-STEP progress (How it works / process)
      ============================================================ */
   var stepGroups = [].slice.call(document.querySelectorAll(".steps"));

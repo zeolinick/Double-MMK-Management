@@ -799,12 +799,6 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .js .reveal--left.in, .js .reveal--right.in, .js .reveal--scale.in { transform: none; }
 .js .reveal--blur.in { filter: blur(0); }
 
-/* --- 3D tilt cards -------------------------------------------------------- */
-.js .tilt { transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s ease; }
-.js .tilt:hover { box-shadow: var(--shadow-lg); }
-
-/* --- Magnetic buttons ----------------------------------------------------- */
-.js .magnetic { transition: transform .35s cubic-bezier(.2,.8,.2,1), background var(--t), box-shadow var(--t); }
 
 /* --- Hero cinematic entrance --------------------------------------------- */
 @keyframes heroUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
@@ -1070,3 +1064,16 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 /* card numerals (benefits / values / promise grids) */
 .card-num { display: block; font-family: var(--font-head); font-weight: 900; font-size: 2rem;
   line-height: 1; color: var(--platinum); margin-bottom: 14px; letter-spacing: -.02em; }
+
+/* ==========================================================================
+   UNIFIED PHOTO GRADE — one tonal treatment for all mixed-source imagery
+   ========================================================================== */
+.split-media img, .owner-photo, .founder-photo img {
+  filter: saturate(.82) contrast(1.06) brightness(.97); }
+.listing-photo img { filter: saturate(.88); }
+
+/* ---- Footer brand mark ---------------------------------------------------- */
+.footer-mark { font-family: var(--font-head); font-weight: 900; text-transform: uppercase;
+  font-size: clamp(2.6rem, 8.5vw, 6.4rem); line-height: .9; letter-spacing: -.02em;
+  background: var(--silver); -webkit-background-clip: text; background-clip: text; color: transparent;
+  opacity: .16; margin: 44px 0 6px; white-space: nowrap; overflow: hidden; }
