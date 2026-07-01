@@ -1046,35 +1046,4 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .field-error::before { content: ""; display: inline-block; width: 10px; height: 5px; margin-right: 7px; vertical-align: 2px;
   background: linear-gradient(to bottom, currentColor 0 1.5px, transparent 1.5px 3.5px, currentColor 3.5px 5px); }
 
-/* ==========================================================================
-   DETROIT NEIGHBORHOODS MAP — hand-drawn SVG, desktop; pills stay on mobile
-   ========================================================================== */
-.hood-map { display: none; background: var(--onyx); border-radius: var(--radius);
-  padding: 18px 18px 12px; box-shadow: var(--shadow); margin-bottom: 34px; }
-@media (min-width: 761px) {
-  .hood-map { display: block; }
-  .hood-map + .hoods { display: none; }
-}
-.hood-map svg { display: block; width: 100%; height: auto; }
-.hm-water { fill: #131318; }
-.hm-city { fill: #232329; stroke: rgba(201,201,207,.65); stroke-width: 2; stroke-linejoin: round; }
-.hm-ave { stroke: rgba(255,255,255,.09); stroke-width: 1.6; }
-.hm-isle { fill: #232329; stroke: rgba(201,201,207,.4); stroke-width: 1; }
-.hm-water-label, .hm-road { font-family: var(--font-head); font-weight: 600; font-size: 11px;
-  letter-spacing: .3em; fill: rgba(201,201,207,.35); }
-.hm-compass line { stroke: rgba(201,201,207,.4); stroke-width: 1.5; }
-.hm-compass polygon { fill: rgba(201,201,207,.45); }
-.hm-compass text { font-family: var(--font-head); font-size: 11px; font-weight: 700; fill: rgba(201,201,207,.45); }
-.hm-downtown rect { fill: none; stroke: rgba(201,201,207,.55); stroke-width: 1.5; }
-.hm-downtown text { font-family: var(--font-body); font-size: 11.5px; fill: rgba(201,201,207,.55); }
-.hm-legend circle { fill: var(--red-bright); stroke: rgba(200,32,42,.35); stroke-width: 5; }
-.hm-legend text { font-family: var(--font-body); font-size: 12.5px; fill: rgba(201,201,207,.5); }
-.hm-dot { fill: var(--red-bright); stroke: rgba(200,32,42,.35); stroke-width: 7;
-  transform-box: fill-box; transform-origin: center; transition: transform .25s cubic-bezier(.2,.7,.2,1), fill .2s ease; }
-.hm-label { font-family: var(--font-head); font-weight: 600; font-size: 14px; fill: #c4c4cb;
-  letter-spacing: .02em; transition: fill .2s ease;
-  paint-order: stroke; stroke: rgba(15,15,17,.85); stroke-width: 3px; }
-.hood-map a:hover .hm-dot, .hood-map a:focus-visible .hm-dot { transform: scale(1.45); fill: #fff; }
-.hood-map a:hover .hm-label, .hood-map a:focus-visible .hm-label { fill: #fff; }
-@media (prefers-reduced-motion: reduce) { .hm-dot { transition: fill .2s ease; }
-  .hood-map a:hover .hm-dot { transform: none; } }
+
