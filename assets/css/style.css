@@ -579,7 +579,8 @@ p, .lead { text-wrap: pretty; }
 
 /* Editorial eyebrow with a small leading rule */
 .eyebrow { display: inline-flex; align-items: center; gap: 10px; }
-.eyebrow::before { content: ""; width: 22px; height: 2px; background: currentColor; border-radius: 2px; opacity: .9; }
+.eyebrow::before { content: ""; width: 26px; height: 8px; opacity: .9;
+  background: linear-gradient(to bottom, currentColor 0 2.5px, transparent 2.5px 5.5px, currentColor 5.5px 8px); }
 
 /* Animated nav underline */
 .nav-links a::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 2px; background: var(--red); border-radius: 2px; transform: scaleX(0); transform-origin: left; transition: transform .26s ease; }
@@ -922,3 +923,54 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 
 /* Spam honeypot — visually gone, still in the form for bots to trip */
 .hp-field { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); overflow: hidden; }
+
+/* ==========================================================================
+   CREATIVE PASS — Detroit billboard, direct-line proof, switching, print
+   ========================================================================== */
+
+/* Giant metallic DETROIT in the photo band */
+.photo-band .giant { display: block; font-size: clamp(3.4rem, 11vw, 8.5rem); line-height: .92;
+  letter-spacing: -.03em; text-transform: uppercase; font-weight: 900; }
+.photo-band-title { margin-bottom: .4em; }
+
+/* Hero direct line */
+.hero-phone { margin: 18px 0 0; font-size: .95rem; color: #9a9aa0; }
+.hero-phone a { color: #fff; }
+.hero-phone a:hover { color: var(--red-bright); }
+
+/* Contact reason hint (quiet helper under the dropdown) */
+.reason-hint { margin-top: 8px; font-size: .85rem; color: var(--muted); line-height: 1.5; }
+.reason-hint:empty { display: none; }
+
+/* Honest success states: next-steps list */
+.form-success .next-steps { list-style: none; margin: 10px 0; padding: 0; text-align: left; }
+.form-success .next-steps li { position: relative; padding-left: 22px; margin-bottom: 6px; }
+.form-success .next-steps li::before { content: ""; position: absolute; left: 0; top: .5em; width: 12px; height: 5px;
+  background: linear-gradient(to bottom, currentColor 0 1.5px, transparent 1.5px 3.5px, currentColor 3.5px 5px); }
+
+/* Founder signature underline (echoes the double rule) */
+.founder-sign { display: inline-block; border-top: 2px solid var(--red); padding-top: 12px; }
+
+/* Switching: 5-up steps */
+.steps--5 { grid-template-columns: repeat(5, 1fr); gap: 24px; }
+@media (max-width: 1080px) { .steps--5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .steps--5 { grid-template-columns: 1fr; } }
+
+/* Hanging quotes on testimonials */
+.quote p { hanging-punctuation: first; }
+@supports not (hanging-punctuation: first) { .quote p { text-indent: -.45ch; } }
+
+/* ---- Print: pages were printing half-blank (reveal opacity) -------------- */
+@media print {
+  .js .reveal, .js .reveal * { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .nav-menu, .nav-toggle, .nav-cta, .to-top, .mobile-bar, .scroll-progress,
+  .marquee, .cta-band, .footer-cta, .social, .skip-link, body::before, .hero::after { display: none !important; }
+  .site-header, .page-head, .hero, .section--navy, .photo-band, .site-footer { background: #fff !important; color: #000 !important; }
+  .site-header { position: static; }
+  h1, h2, h3 { color: #000 !important; }
+  .hero h1, .hero p, .page-head h1, .page-head p, .section--navy h2, .section--navy p,
+  .photo-band h2, .photo-band p, .site-footer, .site-footer a { color: #000 !important; }
+  .faq-a { max-height: none !important; overflow: visible !important; }
+  .card, .quote, .faq-item, .step, .listing { break-inside: avoid; }
+  .prose a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .85em; color: #555; }
+}

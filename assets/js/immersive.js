@@ -100,6 +100,28 @@
   })();
 
   /* ============================================================
+     0e) CONTACT REASON HINT — quiet fastest-path helper under the
+         "I'm reaching out as a..." dropdown. Build-aware links.
+     ============================================================ */
+  (function reasonHint() {
+    var sel = document.getElementById("c-reason");
+    var hint = document.querySelector(".reason-hint");
+    if (!sel || !hint) return;
+    var spa = !!document.querySelector(".page");
+    var L = spa
+      ? { maint: "#tenants", listings: "#properties", estimate: "#owners" }
+      : { maint: "tenants.html#request-form", listings: "listings.html", estimate: "owners.html#estimate" };
+    var map = {
+      "Current resident": 'Maintenance issue? Fastest path: <a href="' + L.maint + '">submit a request</a>. Emergency? Call <a href="tel:+13136036064">(313) 603-6064</a> now.',
+      "Prospective tenant": 'Browsing? <a href="' + L.listings + '">See what’s available</a> right now.',
+      "Property owner / investor": 'Want numbers first? Try the <a href="' + L.estimate + '">instant rent estimate</a> — no form required.'
+    };
+    sel.addEventListener("change", function () {
+      hint.innerHTML = map[sel.value] || "";
+    });
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {
