@@ -991,3 +991,12 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
   .hero-badge { font-size: .64rem; letter-spacing: .05em; gap: 8px; padding: 7px 12px; }
   .hero-badge .stars { font-size: .75rem; letter-spacing: 1px; }
 }
+
+/* ---- Calculator: transparent owner math -------------------------------- */
+.calc-breakdown { margin: 4px 0 14px; padding: 14px 0 0; border-top: 1px solid rgba(255,255,255,.14); }
+.calc-breakdown > div { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 7px; }
+.calc-breakdown dt { font-size: .85rem; color: #9a9aa0; }
+.calc-breakdown dd { margin: 0; font-family: var(--font-head); font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
+.calc-breakdown dd span { font-weight: 500; color: #9a9aa0; font-size: .82rem; }
+.calc-note a { color: var(--red-bright); }
+.calc-note a:hover { color: #fff; }

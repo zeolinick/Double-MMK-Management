@@ -64,6 +64,7 @@
     var out = document.getElementById("rc-out");
     var hood = document.getElementById("rc-hood"), beds = document.getElementById("rc-beds"),
         baths = document.getElementById("rc-baths"), sqft = document.getElementById("rc-sqft");
+    var feeEl = document.getElementById("rc-fee"), netEl = document.getElementById("rc-net"), netYrEl = document.getElementById("rc-net-yr");
     function money(n) { return "$" + Math.round(n).toLocaleString(); }
     function calc() {
       var f = parseFloat(hood.value) || 0.85,
@@ -73,6 +74,11 @@
       var est = (sf * 0.78 + b * 170 + ba * 90) * f;
       var lo = Math.round(est * 0.92 / 10) * 10, hi = Math.round(est * 1.09 / 10) * 10;
       out.textContent = money(lo) + " – " + money(hi);
+      // transparent owner math from the midpoint: fee out, net in
+      var mid = (lo + hi) / 2, fee = mid * 0.08, net = mid - fee;
+      if (feeEl) feeEl.textContent = money(fee) + " /mo";
+      if (netEl) netEl.firstChild.textContent = money(net) + " /mo";
+      if (netYrEl) netYrEl.textContent = " · " + money(net * 12) + " /yr";
     }
     form.addEventListener("input", calc);
     form.addEventListener("change", calc);
