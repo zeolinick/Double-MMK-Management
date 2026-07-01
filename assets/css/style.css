@@ -1000,3 +1000,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .calc-breakdown dd span { font-weight: 500; color: #9a9aa0; font-size: .82rem; }
 .calc-note a { color: var(--red-bright); }
 .calc-note a:hover { color: #fff; }
+
+/* ---- Listing cards: "Ask about this home" action ------------------------ */
+.listing-actions { border-top: 1px solid var(--line-soft); margin-top: 14px; padding-top: 12px; }
+.listing-ask { display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-head);
+  font-weight: 700; font-size: .88rem; color: var(--red); }
+.listing-ask svg { width: 15px; height: 15px; transition: transform var(--t); }
+.listing-ask:hover { color: var(--oxblood); }
+.listing-ask:hover svg { transform: translateX(3px); }

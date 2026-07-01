@@ -127,6 +127,28 @@
   })();
 
   /* ============================================================
+     0f) LISTING INQUIRY — "Ask about this home" prefill.
+         Same-document (listings page / SPA) via click; cross-page
+         via the ?ask= URL param.
+     ============================================================ */
+  (function askPrefill() {
+    var home = document.getElementById("inq-home");
+    document.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("[data-ask]");
+      if (!a || !home) return;
+      var card = a.closest(".listing");
+      var addr = card && card.querySelector(".listing-addr");
+      if (addr) home.value = addr.textContent.trim();
+    });
+    if (home && window.location.search) {
+      try {
+        var ask = new URLSearchParams(window.location.search).get("ask");
+        if (ask) home.value = ask;
+      } catch (err) {}
+    }
+  })();
+
+  /* ============================================================
      1) SCROLL-REVEAL — staggered, with directional variants
      ============================================================ */
   (function reveals() {
