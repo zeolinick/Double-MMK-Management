@@ -1077,25 +1077,29 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 /* ==========================================================================
    DETROIT NEIGHBORHOODS MAP — hand-drawn SVG, desktop; pills stay on mobile
    ========================================================================== */
-.hood-map { display: none; background: var(--onyx);
-  background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.4px);
-  background-size: 22px 22px; border-radius: var(--radius); padding: 26px 26px 18px;
-  box-shadow: var(--shadow); margin-bottom: 34px; }
+.hood-map { display: none; background: var(--onyx); border-radius: var(--radius);
+  padding: 18px 18px 12px; box-shadow: var(--shadow); margin-bottom: 34px; }
 @media (min-width: 761px) {
   .hood-map { display: block; }
   .hood-map + .hoods { display: none; }
 }
 .hood-map svg { display: block; width: 100%; height: auto; }
-.hm-city { fill: var(--carbon); stroke: rgba(201,201,207,.55); stroke-width: 1.5; stroke-linejoin: round; }
-.hm-enclave { fill: none; stroke: rgba(201,201,207,.22); stroke-width: 1; }
-.hm-isle { fill: var(--carbon); stroke: rgba(201,201,207,.35); stroke-width: 1; }
-.hm-water, .hm-road { font-family: var(--font-head); font-weight: 600; font-size: 11px;
-  letter-spacing: .3em; fill: rgba(201,201,207,.32); }
-.hm-downtown rect { fill: none; stroke: rgba(201,201,207,.5); stroke-width: 1.5; }
+.hm-water { fill: #131318; }
+.hm-city { fill: #232329; stroke: rgba(201,201,207,.65); stroke-width: 2; stroke-linejoin: round; }
+.hm-ave { stroke: rgba(255,255,255,.09); stroke-width: 1.6; }
+.hm-isle { fill: #232329; stroke: rgba(201,201,207,.4); stroke-width: 1; }
+.hm-water-label, .hm-road { font-family: var(--font-head); font-weight: 600; font-size: 11px;
+  letter-spacing: .3em; fill: rgba(201,201,207,.35); }
+.hm-compass line { stroke: rgba(201,201,207,.4); stroke-width: 1.5; }
+.hm-compass polygon { fill: rgba(201,201,207,.45); }
+.hm-compass text { font-family: var(--font-head); font-size: 11px; font-weight: 700; fill: rgba(201,201,207,.45); }
+.hm-downtown rect { fill: none; stroke: rgba(201,201,207,.55); stroke-width: 1.5; }
 .hm-downtown text { font-family: var(--font-body); font-size: 11.5px; fill: rgba(201,201,207,.55); }
-.hm-dot { fill: var(--red-bright); stroke: rgba(200,32,42,.30); stroke-width: 7;
+.hm-legend circle { fill: var(--red-bright); stroke: rgba(200,32,42,.35); stroke-width: 5; }
+.hm-legend text { font-family: var(--font-body); font-size: 12.5px; fill: rgba(201,201,207,.5); }
+.hm-dot { fill: var(--red-bright); stroke: rgba(200,32,42,.35); stroke-width: 7;
   transform-box: fill-box; transform-origin: center; transition: transform .25s cubic-bezier(.2,.7,.2,1), fill .2s ease; }
-.hm-label { font-family: var(--font-head); font-weight: 600; font-size: 13.5px; fill: #b9b9c0;
+.hm-label { font-family: var(--font-head); font-weight: 600; font-size: 14px; fill: #c4c4cb;
   letter-spacing: .02em; transition: fill .2s ease;
   paint-order: stroke; stroke: rgba(15,15,17,.85); stroke-width: 3px; }
 .hood-map a:hover .hm-dot, .hood-map a:focus-visible .hm-dot { transform: scale(1.45); fill: #fff; }
@@ -1539,66 +1543,71 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
           </div>
         </div>
         <div class="hood-map reveal" aria-label="Map of the Detroit neighborhoods we serve">
-          <svg viewBox="0 0 760 560" role="img" aria-label="Stylized map of Detroit with the neighborhoods Double MMK manages">
+          <svg viewBox="22 2 722 496" role="img" aria-label="Stylized map of Detroit with the neighborhoods Double MMK manages">
+            <polygon class="hm-water" points="715.3,268.1 630.5,312.0 523.2,326.5 419.4,368.6 385.4,425.3 329.9,461.4 329.9,492 742,492 742,268.1"/>
+            <ellipse class="hm-isle" cx="585.8" cy="330.7" rx="21" ry="7" transform="rotate(-22 585.8 330.7)"><title>Belle Isle</title></ellipse>
             <polygon class="hm-city" points="42.5,44.9 630.5,32.4 657.4,131.2 715.3,268.1 630.5,312.0 523.2,326.5 419.4,368.6 385.4,425.3 329.9,461.4 279.8,439.7 258.3,372.3 133.1,333.7 133.1,230.1 42.5,230.1"/>
-            <rect class="hm-enclave" x="442.9" y="150.6" width="34" height="24" transform="rotate(-8 458.9 161.6)"><title>Hamtramck</title></rect>
-            <rect class="hm-enclave" x="368.1" y="129.7" width="36" height="22"><title>Highland Park</title></rect>
-            <ellipse class="hm-isle" cx="585.8" cy="292.7" rx="20" ry="7" transform="rotate(-24 585.8 292.7)"><title>Belle Isle</title></ellipse>
-            <text class="hm-water" x="562" y="368" transform="rotate(16 562 368)">DETROIT RIVER</text>
-            <text class="hm-road" x="330" y="24">8 MILE RD</text>
-            <g class="hm-downtown"><rect x="471.6" y="311.4" width="8" height="8"/><text x="487.6" y="319.4">Downtown</text></g>
+            <line class="hm-ave" x1="475.6" y1="315.4" x2="367" y2="40"><title>Woodward Avenue</title></line>
+            <line class="hm-ave" x1="475.6" y1="315.4" x2="643" y2="80"><title>Gratiot Avenue</title></line>
+            <line class="hm-ave" x1="475.6" y1="315.4" x2="55" y2="52"><title>Grand River Avenue</title></line>
+            <line class="hm-ave" x1="475.6" y1="315.4" x2="242" y2="346"><title>Michigan Avenue</title></line>
+            <text class="hm-water-label" x="596" y="386" transform="rotate(13 596 386)">DETROIT RIVER</text>
+            <text class="hm-road" x="300" y="22">8 MILE RD</text>
+            <g class="hm-compass"><line x1="712" y1="66" x2="712" y2="40"/><polygon points="712,34 707,46 717,46"/><text x="712" y="84" text-anchor="middle">N</text></g>
+            <g class="hm-downtown"><rect x="471.1" y="310.9" width="9" height="9" transform="rotate(45 475.6 315.4)"/><text x="489.6" y="305">Downtown</text></g>
       <a href="#properties" aria-label="Corktown property management">
-        <circle class="hm-dot" cx="432.8" cy="315.4" r="6"/>
-        <text class="hm-label" x="420.8" y="319.4" text-anchor="end">Corktown</text>
+        <circle class="hm-dot" cx="432.8" cy="315.4" r="6.5"/>
+        <text class="hm-label" x="419.8" y="307.4" text-anchor="end">Corktown</text>
       </a>
       <a href="#properties" aria-label="Midtown property management">
-        <circle class="hm-dot" cx="443.0" cy="264.5" r="6"/>
-        <text class="hm-label" x="455.0" y="268.5" text-anchor="start">Midtown</text>
+        <circle class="hm-dot" cx="443.0" cy="264.5" r="6.5"/>
+        <text class="hm-label" x="456.0" y="269.5" text-anchor="start">Midtown</text>
       </a>
       <a href="#properties" aria-label="Woodbridge property management">
-        <circle class="hm-dot" cx="419.4" cy="261.1" r="6"/>
-        <text class="hm-label" x="407.4" y="255.10000000000002" text-anchor="end">Woodbridge</text>
+        <circle class="hm-dot" cx="419.4" cy="261.1" r="6.5"/>
+        <text class="hm-label" x="406.4" y="254.10000000000002" text-anchor="end">Woodbridge</text>
       </a>
       <a href="#properties" aria-label="Hubbard Farms property management">
-        <circle class="hm-dot" cx="401.5" cy="351.3" r="6"/>
-        <text class="hm-label" x="389.5" y="355.3" text-anchor="end">Hubbard Farms</text>
+        <circle class="hm-dot" cx="401.5" cy="351.3" r="6.5"/>
+        <text class="hm-label" x="388.5" y="356.3" text-anchor="end">Hubbard Farms</text>
       </a>
       <a href="#properties" aria-label="Southwest Detroit property management">
-        <circle class="hm-dot" cx="346.0" cy="377.8" r="6"/>
-        <text class="hm-label" x="346.0" y="401.8" text-anchor="middle">Southwest Detroit</text>
+        <circle class="hm-dot" cx="346.0" cy="377.8" r="6.5"/>
+        <text class="hm-label" x="336.0" y="403.8" text-anchor="middle">Southwest Detroit</text>
       </a>
       <a href="#properties" aria-label="Boston-Edison property management">
-        <circle class="hm-dot" cx="400.0" cy="167.1" r="6"/>
-        <text class="hm-label" x="388.0" y="171.1" text-anchor="end">Boston-Edison</text>
+        <circle class="hm-dot" cx="400.0" cy="167.1" r="6.5"/>
+        <text class="hm-label" x="387.0" y="172.1" text-anchor="end">Boston-Edison</text>
       </a>
       <a href="#properties" aria-label="Indian Village property management">
-        <circle class="hm-dot" cx="585.3" cy="250.5" r="6"/>
-        <text class="hm-label" x="597.3" y="254.5" text-anchor="start">Indian Village</text>
+        <circle class="hm-dot" cx="585.3" cy="250.5" r="6.5"/>
+        <text class="hm-label" x="598.3" y="255.5" text-anchor="start">Indian Village</text>
       </a>
       <a href="#properties" aria-label="East English Village property management">
-        <circle class="hm-dot" cx="658.3" cy="143.8" r="6"/>
-        <text class="hm-label" x="646.3" y="147.8" text-anchor="end">East English Village</text>
+        <circle class="hm-dot" cx="658.3" cy="143.8" r="6.5"/>
+        <text class="hm-label" x="645.3" y="148.8" text-anchor="end">East English Village</text>
       </a>
       <a href="#properties" aria-label="Bagley property management">
-        <circle class="hm-dot" cx="228.6" cy="108.8" r="6"/>
-        <text class="hm-label" x="228.6" y="132.8" text-anchor="middle">Bagley</text>
+        <circle class="hm-dot" cx="228.6" cy="108.8" r="6.5"/>
+        <text class="hm-label" x="228.6" y="134.8" text-anchor="middle">Bagley</text>
       </a>
       <a href="#properties" aria-label="Grandmont property management">
-        <circle class="hm-dot" cx="180.1" cy="144.5" r="6"/>
-        <text class="hm-label" x="180.1" y="168.5" text-anchor="middle">Grandmont</text>
+        <circle class="hm-dot" cx="180.1" cy="144.5" r="6.5"/>
+        <text class="hm-label" x="180.1" y="170.5" text-anchor="middle">Grandmont</text>
       </a>
       <a href="#properties" aria-label="Rosedale Park property management">
-        <circle class="hm-dot" cx="164.4" cy="97.0" r="6"/>
-        <text class="hm-label" x="154.4" y="83.0" text-anchor="start">Rosedale Park</text>
+        <circle class="hm-dot" cx="164.4" cy="97.0" r="6.5"/>
+        <text class="hm-label" x="152.4" y="82.0" text-anchor="start">Rosedale Park</text>
       </a>
       <a href="#properties" aria-label="Sherwood Forest property management">
-        <circle class="hm-dot" cx="325.4" cy="76.3" r="6"/>
-        <text class="hm-label" x="337.4" y="80.3" text-anchor="start">Sherwood Forest</text>
+        <circle class="hm-dot" cx="325.4" cy="76.3" r="6.5"/>
+        <text class="hm-label" x="338.4" y="67.3" text-anchor="start">Sherwood Forest</text>
       </a>
       <a href="#properties" aria-label="Palmer Park property management">
-        <circle class="hm-dot" cx="374.3" cy="113.2" r="6"/>
-        <text class="hm-label" x="386.3" y="121.2" text-anchor="start">Palmer Park</text>
+        <circle class="hm-dot" cx="374.3" cy="113.2" r="6.5"/>
+        <text class="hm-label" x="387.3" y="123.2" text-anchor="start">Palmer Park</text>
       </a>
+            <g class="hm-legend"><circle cx="66" cy="472" r="5.5"/><text x="80" y="476">Neighborhoods we manage</text></g>
           </svg>
         </div>
         <div class="hoods reveal">
