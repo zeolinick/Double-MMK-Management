@@ -45,7 +45,8 @@ We're showing these as round figures — confirm they're OK or give real ones:
 - **500+ units managed**, **98% occupancy**, **21 days avg. to lease**,
   **4.9★ satisfaction**.
 - **Pricing** on the Owners page: **50% of one month's rent** (lease-up) and
-  **8% of monthly rent** (full management) — confirm or correct.
+  **10% of monthly rent** (full management), with a **$100 per-door monthly
+  minimum**; custom pricing for large portfolios & apartment buildings.
 - **Rent calculator**: glance at a few estimates and tell us if the ranges
   feel right for your market (easy to fine-tune).
 
