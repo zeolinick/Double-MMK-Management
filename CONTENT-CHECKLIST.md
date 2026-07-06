@@ -60,8 +60,9 @@ We're showing these as round figures — confirm they're OK or give real ones:
   Residents are invited by email when their lease begins.
 
 ### 8. Real rental listings (if any)
-- For each available rental: **address/neighborhood, rent, beds, baths,
-  square footage**, and **photos**. We'll replace the sample listings.
+- Add rentals yourself via a Google Sheet — **address/neighborhood, rent, beds,
+  baths, square footage, a photo, and a Zillow link** — and they show on the
+  site automatically (no login on the website). Setup: **`LISTINGS-SETUP.md`**.
 
 ### 9. Social media
 - Your **Facebook, Instagram, and/or LinkedIn** page URLs (footer icons

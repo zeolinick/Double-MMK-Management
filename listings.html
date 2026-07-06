@@ -208,9 +208,9 @@
           <p class="text-muted">Try adjusting your search — or <a href="#inquire">tell us what you’re looking for</a> and we’ll keep an eye out as homes open up.</p>
         </div>
 
-        <!-- Note for owner -->
-        <div class="card reveal center" style="margin-top:42px; background:var(--paper); border-color:var(--line);">
-          <p class="mb-0 text-muted">These are sample listings. Connect your Landlord Studio or listing feed to display live availability — or we can update this page manually as properties become available.</p>
+        <!-- Note for owner — auto-hidden once the live listings sheet is connected -->
+        <div class="card reveal center" id="listing-source-note" style="margin-top:42px; background:var(--paper); border-color:var(--line);">
+          <p class="mb-0 text-muted">These are sample listings. Add your rentals to the connected Google Sheet — address, rent, beds, photo, and a Zillow link — and they’ll appear here automatically, each with a “View on Zillow” button. Setup steps are in <code>LISTINGS-SETUP.md</code>.</p>
         </div>
       </div>
     </section>
@@ -316,5 +316,6 @@
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/immersive.js" defer></script>
+  <script src="assets/js/listings.js" defer></script>
 </body>
 </html>

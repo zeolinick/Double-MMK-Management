@@ -54,8 +54,9 @@ Search the project for these placeholders and replace them:
    their lease begins.
 3. **Logo & photos** — replace `assets/img/logo.svg` and the `📷` placeholder
    blocks with real imagery (Detroit neighborhoods, properties, your team).
-4. **Listings** — `listings.html` and the homepage use sample properties.
-   Update manually, or wire up a live feed from Landlord Studio.
+4. **Listings** — `listings.html` shows sample properties until you connect a
+   Google Sheet. Add rentals (with a Zillow link) in a sheet and they appear
+   automatically — no code, no login on the site. See **`LISTINGS-SETUP.md`**.
 5. **Stats & testimonials** — replace sample numbers and quotes with real ones.
 6. **Pricing** — `owners.html` shows sample management fees; confirm your rates.
 7. **Forms** — currently show a confirmation message but don't send anywhere.
