@@ -53,9 +53,10 @@ We're showing these as round figures — confirm they're OK or give real ones:
 
 ## Tier 2 — Makes it fuller / sharper
 
-### 7. Landlord Studio links
-- The tenant portal buttons (**Pay Rent**, **Log In to Portal**) need your
-  real **Landlord Studio resident-portal URL(s)**.
+### 7. Landlord Studio links — ✅ done
+- The tenant portal buttons (**Pay Rent**, **Log In to Portal**) now point to
+  the live Landlord Studio resident portal at `https://tenant.landlordstudio.com/`.
+  Residents are invited by email when their lease begins.
 
 ### 8. Real rental listings (if any)
 - For each available rental: **address/neighborhood, rent, beds, baths,
@@ -85,7 +86,7 @@ We're showing these as round figures — confirm they're OK or give real ones:
 - [ ] Office address (or confirm "by appointment")
 - [ ] License #, exact hours, service-area confirmation
 - [ ] Confirm stats + pricing
-- [ ] Landlord Studio portal link(s)
+- [x] Landlord Studio portal link(s) — done (tenant.landlordstudio.com)
 - [ ] Listings (address, rent, beds/baths/sqft, photos)
 - [ ] Facebook / Instagram / LinkedIn URLs
 - [ ] Analytics ID (Clarity / GA4)
