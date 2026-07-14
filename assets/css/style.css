@@ -1026,6 +1026,11 @@ html, body { overflow-x: clip; }                 /* clip (not hidden) keeps stic
 .listing-ask svg { width: 15px; height: 15px; transition: transform var(--t); }
 .listing-ask:hover { color: var(--oxblood); }
 .listing-ask:hover svg { transform: translateX(3px); }
+/* dynamic (sheet-driven) cards: Ask + View on Zillow side by side */
+.listing-actions--dual { display: flex; align-items: center; justify-content: space-between; gap: 12px 16px; flex-wrap: wrap; }
+.listing-zillow { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-head); font-weight: 600; font-size: .82rem; color: var(--muted); transition: color var(--t); }
+.listing-zillow svg { width: 13px; height: 13px; }
+.listing-zillow:hover { color: var(--red); }
 
 /* ---- Designed inline validation ----------------------------------------- */
 .field--error input, .field--error select, .field--error textarea {

@@ -45,7 +45,8 @@ We're showing these as round figures — confirm they're OK or give real ones:
 - **500+ units managed**, **98% occupancy**, **21 days avg. to lease**,
   **4.9★ satisfaction**.
 - **Pricing** on the Owners page: **50% of one month's rent** (lease-up) and
-  **8% of monthly rent** (full management) — confirm or correct.
+  **10% of monthly rent** (full management), with a **$100 per-door monthly
+  minimum**; custom pricing for large portfolios & apartment buildings.
 - **Rent calculator**: glance at a few estimates and tell us if the ranges
   feel right for your market (easy to fine-tune).
 
@@ -53,13 +54,15 @@ We're showing these as round figures — confirm they're OK or give real ones:
 
 ## Tier 2 — Makes it fuller / sharper
 
-### 7. Landlord Studio links
-- The tenant portal buttons (**Pay Rent**, **Log In to Portal**) need your
-  real **Landlord Studio resident-portal URL(s)**.
+### 7. Landlord Studio links — ✅ done
+- The tenant portal buttons (**Pay Rent**, **Log In to Portal**) now point to
+  the live Landlord Studio resident portal at `https://tenant.landlordstudio.com/`.
+  Residents are invited by email when their lease begins.
 
 ### 8. Real rental listings (if any)
-- For each available rental: **address/neighborhood, rent, beds, baths,
-  square footage**, and **photos**. We'll replace the sample listings.
+- Add rentals yourself via a Google Sheet — **address/neighborhood, rent, beds,
+  baths, square footage, a photo, and a Zillow link** — and they show on the
+  site automatically (no login on the website). Setup: **`LISTINGS-SETUP.md`**.
 
 ### 9. Social media
 - Your **Facebook, Instagram, and/or LinkedIn** page URLs (footer icons
@@ -85,7 +88,7 @@ We're showing these as round figures — confirm they're OK or give real ones:
 - [ ] Office address (or confirm "by appointment")
 - [ ] License #, exact hours, service-area confirmation
 - [ ] Confirm stats + pricing
-- [ ] Landlord Studio portal link(s)
+- [x] Landlord Studio portal link(s) — done (tenant.landlordstudio.com)
 - [ ] Listings (address, rent, beds/baths/sqft, photos)
 - [ ] Facebook / Instagram / LinkedIn URLs
 - [ ] Analytics ID (Clarity / GA4)

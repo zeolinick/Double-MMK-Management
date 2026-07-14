@@ -75,7 +75,7 @@
       var lo = Math.round(est * 0.92 / 10) * 10, hi = Math.round(est * 1.09 / 10) * 10;
       out.textContent = money(lo) + " – " + money(hi);
       // transparent owner math from the midpoint: fee out, net in
-      var mid = (lo + hi) / 2, fee = mid * 0.08, net = mid - fee;
+      var mid = (lo + hi) / 2, fee = Math.max(mid * 0.10, 100), net = mid - fee;
       if (feeEl) feeEl.textContent = money(fee) + " /mo";
       if (netEl) netEl.firstChild.textContent = money(net) + " /mo";
       if (netYrEl) netYrEl.textContent = " · " + money(net * 12) + " /yr";

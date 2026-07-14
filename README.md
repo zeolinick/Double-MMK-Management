@@ -47,13 +47,16 @@ Search the project for these placeholders and replace them:
 
 1. **Contact details** — phone `(313) 555-0142`, email `hello@doublemmk.com`,
    and the Detroit office address (in every page footer + `contact.html`).
-2. **Landlord Studio portal links** — in `tenants.html`, the "Pay Rent" and
-   "Tenant Portal Login" buttons use `href="#"`. Replace with your Landlord
-   Studio tenant portal URL (look for the `TODO` comments).
+2. **Landlord Studio portal links** — ✅ done. The "Pay Rent" and "Tenant
+   Portal Login" buttons in `tenants.html` (and the `double-mmk-management.html`
+   single-file build) now link to `https://tenant.landlordstudio.com/`, which
+   starts a fresh Landlord Studio login. Residents are invited by email when
+   their lease begins.
 3. **Logo & photos** — replace `assets/img/logo.svg` and the `📷` placeholder
    blocks with real imagery (Detroit neighborhoods, properties, your team).
-4. **Listings** — `listings.html` and the homepage use sample properties.
-   Update manually, or wire up a live feed from Landlord Studio.
+4. **Listings** — `listings.html` shows sample properties until you connect a
+   Google Sheet. Add rentals (with a Zillow link) in a sheet and they appear
+   automatically — no code, no login on the site. See **`LISTINGS-SETUP.md`**.
 5. **Stats & testimonials** — replace sample numbers and quotes with real ones.
 6. **Pricing** — `owners.html` shows sample management fees; confirm your rates.
 7. **Forms** — currently show a confirmation message but don't send anywhere.

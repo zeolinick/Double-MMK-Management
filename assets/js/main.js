@@ -154,10 +154,11 @@
   /* ---- Simple client-side listing filter ---- */
   var filterForm = document.getElementById("listing-filter");
   if (filterForm) {
-    var cards = Array.prototype.slice.call(document.querySelectorAll("[data-listing]"));
     var countEl = document.getElementById("listing-count");
 
     function applyFilters() {
+      // re-query each time so listings rendered later (from the sheet) are included
+      var cards = Array.prototype.slice.call(document.querySelectorAll("[data-listing]"));
       var type = filterForm.type.value;
       var beds = filterForm.beds.value;
       var max = parseInt(filterForm.price.value, 10);
