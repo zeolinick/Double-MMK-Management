@@ -1,0 +1,5 @@
+# Netlify configuration — Double MMK Management website
+# Static HTML site with no build step; files are served straight from the repo root.
+# Netlify automatically serves /404.html for unknown paths, so no extra rules are needed.
+[build]
+  publish = "."
