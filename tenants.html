@@ -189,7 +189,8 @@
             </ul>
           </div>
           <div class="reveal">
-            <form class="form-card" data-demo>
+            <form class="form-card" data-demo method="POST" name="tenant-inquiry" data-netlify="true" netlify-honeypot="botcheck">
+              <input type="hidden" name="form-name" value="tenant-inquiry" />
               <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
               <div class="form-success" role="status"><strong>Request received.</strong> We’ll confirm receipt, then call to schedule access. If this becomes an emergency — flooding, gas, no heat — call the 24/7 line now: <a href="tel:+13136036064">(313) 603-6064</a>.</div>
               <div class="field-row">

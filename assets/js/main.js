@@ -4,13 +4,11 @@
   "use strict";
 
   /* ============================================================
-     SET THIS to your free Web3Forms access key to start receiving
-     real leads by email. Get one in 30 seconds at https://web3forms.com
-     (enter Doublemmkmanagement@gmail.com, copy the key it emails you,
-     and paste it below). Until it's set, forms show the confirmation
-     message but do NOT send anything.
+     Lead forms post to Netlify Forms (this site is hosted on Netlify).
+     Every submission is captured in the Netlify dashboard (Forms tab)
+     and can be emailed to Doublemmkmanagement@gmail.com via a Netlify
+     form notification. No third-party key required.
      ============================================================ */
-  var WEB3FORMS_KEY = "REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY";
 
   /* ---- Active nav: owned by immersive.js (hash-aware + aria-current) ---- */
 
@@ -116,9 +114,8 @@
     counters.forEach(function (el) { cio.observe(el); });
   }
 
-  /* ---- Form handling: real delivery via Web3Forms when a key is set,
-          graceful confirmation-only fallback until then. ---- */
-  var keyReady = WEB3FORMS_KEY && WEB3FORMS_KEY.indexOf("REPLACE_") !== 0;
+  /* ---- Form handling: submit to Netlify Forms via AJAX; keep the
+          inline success message with no page reload. ---- */
   function showSuccess(form) {
     var success = form.querySelector(".form-success");
     if (success) {
@@ -127,21 +124,26 @@
     }
     form.reset();
   }
-  document.querySelectorAll("form[data-demo]").forEach(function (form) {
+  function encodeForm(form) {
+    var data = new FormData(form);
+    var body = new URLSearchParams();
+    data.forEach(function (v, k) { body.append(k, v); });
+    return body.toString();
+  }
+  document.querySelectorAll("form[data-netlify]").forEach(function (form) {
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      if (!keyReady) { showSuccess(form); return; }
+      if (form.checkValidity && !form.checkValidity()) { form.reportValidity(); return; }
       var btn = form.querySelector("button[type=submit]");
       var orig = btn ? btn.innerHTML : "";
       if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
-      var data = new FormData(form);
-      data.append("access_key", WEB3FORMS_KEY);
-      data.append("subject", "New website lead — Double MMK Management");
-      data.append("from_name", "Double MMK Website");
-      fetch("https://api.web3forms.com/submit", { method: "POST", body: data })
-        .then(function (r) { return r.json(); })
-        .then(function (res) {
-          if (res.success) { showSuccess(form); }
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodeForm(form)
+      })
+        .then(function (r) {
+          if (r.ok) { showSuccess(form); }
           else { alert("Sorry — something went wrong sending your message. Please call us at (313) 603-6064."); }
         })
         .catch(function () {
