@@ -162,8 +162,30 @@
     }
   }
 
-  function init() {
-    if (!SHEET_CSV_URL || !document.querySelector(".listing-grid")) return; // not configured / not the listings page
+  /* map a Supabase `listings` row to the render shape (or null to skip) */
+  function rowToListing(row) {
+    var status = String(row.status == null ? "" : row.status).toLowerCase();
+    if (/leased|rented|unavailable|inactive|hidden|sold/.test(status)) return null;
+    var neighborhood = row.neighborhood || "";
+    var address = row.address || "";
+    if (!neighborhood && !address) return null;
+    return {
+      comingSoon: /coming/.test(status),
+      neighborhood: neighborhood,
+      address: address,
+      rent: toInt(row.rent),
+      beds: toNum(row.beds),
+      baths: toNum(row.baths),
+      sqft: toInt(row.sqft),
+      type: String(row.type == null ? "" : row.type).toLowerCase(),
+      photo: safeUrl(row.photo_url),
+      zillow: safeUrl(row.zillow_url)
+    };
+  }
+
+  /* fallback: published Google Sheet CSV (only runs if a URL is set) */
+  function loadFromSheet() {
+    if (!SHEET_CSV_URL) return; // nothing configured -> keep the built-in sample cards
     fetch(SHEET_CSV_URL, { cache: "no-store" })
       .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.text(); })
       .then(function (text) {
@@ -171,9 +193,32 @@
         if (!objs.length) return; // header only / empty sheet -> keep the sample cards
         var listings = [];
         for (var i = 0; i < objs.length; i++) { var L = toListing(objs[i]); if (L) listings.push(L); }
-        render(listings); // may be [] if everything is Leased -> shows the empty state
+        render(listings);
       })
-      .catch(function (err) { if (root.console) root.console.warn("Live listings not loaded:", err && err.message); });
+      .catch(function (err) { if (root.console) root.console.warn("Sheet listings not loaded:", err && err.message); });
+  }
+
+  /* primary: Supabase listings via the read-only REST endpoint (anon key + RLS).
+     Falls back to the sheet/sample cards on any error or before the DB is wired. */
+  function init() {
+    if (!document.querySelector(".listing-grid")) return; // not the listings page
+    var cfg = root.DMMK || {};
+    var url = cfg.SUPABASE_URL, key = cfg.SUPABASE_ANON_KEY;
+    var haveSupabase = url && key && key.indexOf("PASTE_") !== 0;
+    if (!haveSupabase) { loadFromSheet(); return; } // backend not wired yet
+    var endpoint = url.replace(/\/$/, "") + "/rest/v1/listings?select=*&order=sort_order.asc,created_at.desc";
+    fetch(endpoint, { headers: { apikey: key, Authorization: "Bearer " + key }, cache: "no-store" })
+      .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (rows) {
+        if (!rows || !rows.length) { loadFromSheet(); return; } // no rows yet -> fallback
+        var listings = [];
+        for (var i = 0; i < rows.length; i++) { var L = rowToListing(rows[i]); if (L) listings.push(L); }
+        render(listings); // may be [] if all Leased -> empty state
+      })
+      .catch(function (err) {
+        if (root.console) root.console.warn("Supabase listings not loaded, falling back:", err && err.message);
+        loadFromSheet();
+      });
   }
 
   if (typeof document !== "undefined") init(); // script is deferred, so the DOM is ready

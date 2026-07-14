@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Site Manager · Double MMK Management</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- ===== Login ===== -->
+  <section class="login" id="login-view">
+    <form class="login-card" id="login-form">
+      <div class="brand" style="margin-bottom:1.25rem"><b>Double MMK</b><span>Site Manager</span></div>
+      <h1>Sign in</h1>
+      <p>Manage your rental listings and website content.</p>
+      <div class="msg msg--err" id="login-error"></div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required />
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" type="password" autocomplete="current-password" required />
+      </div>
+      <button class="btn btn--primary" type="submit" id="login-btn" style="width:100%;justify-content:center">Sign in</button>
+    </form>
+  </section>
+
+  <!-- ===== App ===== -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <div class="brand"><b>Double MMK</b><span>Site Manager</span></div>
+      <div class="who"><span id="who-email"></span><button class="btn btn--ghost btn--sm" id="signout">Sign out</button></div>
+    </header>
+
+    <main class="wrap">
+      <div class="banner" id="config-banner" hidden>
+        Backend not connected yet — paste your Supabase publishable key into
+        <code>assets/js/supabase-config.js</code> and apply the database migration to go live.
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="listings" role="tab">Listings</button>
+        <button class="tab" data-tab="content" role="tab">Site content</button>
+      </div>
+
+      <!-- Listings -->
+      <section class="panel active" id="tab-listings">
+        <div class="panel-head">
+          <div><h2>Property listings</h2><p class="sub" id="listings-count">—</p></div>
+          <button class="btn btn--primary" id="add-listing">+ Add property</button>
+        </div>
+        <div class="msg" id="listings-msg"></div>
+        <div class="list" id="listings-list"></div>
+      </section>
+
+      <!-- Content -->
+      <section class="panel" id="tab-content">
+        <div class="panel-head">
+          <div><h2>Site content</h2><p class="sub">Editable text &amp; image blocks used across the site.</p></div>
+          <button class="btn btn--primary" id="add-content">+ Add block</button>
+        </div>
+        <div class="msg" id="content-msg"></div>
+        <div class="list" id="content-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== Property editor ===== -->
+  <div class="modal" id="listing-modal">
+    <form class="modal-card" id="listing-form">
+      <h3 id="listing-modal-title">Add property</h3>
+      <input type="hidden" id="l-id" />
+      <div class="row">
+        <div class="field">
+          <label for="l-status">Status</label>
+          <select id="l-status"><option>Available</option><option>Coming Soon</option><option>Leased</option></select>
+        </div>
+        <div class="field">
+          <label for="l-type">Type</label>
+          <select id="l-type"><option value="">—</option><option value="house">House</option><option value="apartment">Apartment</option><option value="duplex">Duplex</option></select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="l-neighborhood">Neighborhood <span style="color:var(--danger)">*</span></label>
+        <input id="l-neighborhood" type="text" required placeholder="e.g. Corktown" />
+      </div>
+      <div class="field">
+        <label for="l-address">Address</label>
+        <input id="l-address" type="text" placeholder="e.g. 1423 Bagley St" />
+      </div>
+      <div class="row-3">
+        <div class="field"><label for="l-rent">Rent ($/mo)</label><input id="l-rent" type="number" min="0" inputmode="numeric" /></div>
+        <div class="field"><label for="l-beds">Beds</label><input id="l-beds" type="number" min="0" step="0.5" /></div>
+        <div class="field"><label for="l-baths">Baths</label><input id="l-baths" type="number" min="0" step="0.5" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="l-sqft">Sq ft</label><input id="l-sqft" type="number" min="0" inputmode="numeric" /></div>
+        <div class="field"><label for="l-sort">Order on page</label><input id="l-sort" type="number" step="1" value="0" /><p class="hint">Lower shows first.</p></div>
+      </div>
+      <div class="field">
+        <label for="l-zillow">Zillow link (optional)</label>
+        <input id="l-zillow" type="url" placeholder="https://www.zillow.com/homedetails/..." />
+        <p class="hint">Adds a "View on Zillow" button to the card.</p>
+      </div>
+      <div class="field">
+        <label for="l-photo">Photo</label>
+        <input id="l-photo" type="file" accept="image/*" />
+        <p class="hint">Uploaded from your phone or computer; auto-resized so pages stay fast.</p>
+        <img class="photo-preview" id="l-photo-preview" alt="Selected photo preview" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn--ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn--primary" id="listing-save">Save property</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- ===== Content editor ===== -->
+  <div class="modal" id="content-modal">
+    <form class="modal-card" id="content-form">
+      <h3 id="content-modal-title">Add content block</h3>
+      <div class="field">
+        <label for="c-key">Key</label>
+        <input id="c-key" type="text" required placeholder="e.g. home.hero.title" />
+        <p class="hint">A stable name for this block; it can't be changed after creating.</p>
+      </div>
+      <div class="field">
+        <label for="c-value">Value (text or image URL)</label>
+        <textarea id="c-value"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn--ghost" data-close>Cancel</button>
+        <button type="submit" class="btn btn--primary" id="content-save">Save block</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="../assets/js/supabase-config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
