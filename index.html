@@ -100,9 +100,9 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy">
-            <span class="hero-badge"><svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg> Trusted by Detroit landlords</span>
+            <span class="hero-badge"><svg class="stars" viewBox="0 0 120 20" aria-hidden="true"><path d="M10 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M34 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M58 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M82 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/><path d="M106 1.7l2.5 5.1 5.6.8-4 4 .9 5.6-5-2.7-5 2.7.9-5.6-4-4 5.6-.8z"/></svg> <span data-content="home.hero.badge">Trusted by Detroit landlords</span></span>
             <h1 class="hero-title"><span class="line"><span>Detroit property,</span></span><span class="line"><span class="accent">managed right.</span></span></h1>
-            <p>Owning a rental shouldn’t feel like a second job. We keep your Detroit property occupied, maintained, and profitable — and when you call, a real person picks up. No call centers, no runaround.</p>
+            <p data-content="home.hero.subtitle">Owning a rental shouldn’t feel like a second job. We keep your Detroit property occupied, maintained, and profitable — and when you call, a real person picks up. No call centers, no runaround.</p>
             <div class="hero-actions">
               <a href="owners.html#quote" class="btn btn--primary">Get a Free Rental Analysis</a>
               <a href="services.html" class="btn btn--outline-light">Explore Services</a>
@@ -117,8 +117,8 @@
 
           <!-- Quick owner lead form -->
           <div class="hero-card">
-            <h2 class="hero-card-title">Free Rental Analysis</h2>
-            <p>See what your property could earn in today’s Detroit market.</p>
+            <h2 class="hero-card-title" data-content="home.card.title">Free Rental Analysis</h2>
+            <p data-content="home.card.subtitle">See what your property could earn in today’s Detroit market.</p>
             <form data-demo method="POST" name="home-inquiry" data-netlify="true" netlify-honeypot="botcheck">
               <input type="hidden" name="form-name" value="home-inquiry" />
               <input type="checkbox" name="botcheck" class="hp-field" tabindex="-1" aria-hidden="true" />
@@ -564,5 +564,7 @@
 
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/immersive.js" defer></script>
+  <script src="assets/js/supabase-config.js" defer></script>
+  <script src="assets/js/content.js" defer></script>
 </body>
 </html>
