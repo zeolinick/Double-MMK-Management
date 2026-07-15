@@ -12,5 +12,6 @@
    ------------------------------------------------------------------ */
 window.DMMK = {
   SUPABASE_URL: "https://ubtqikgdilmfgtvjrajz.supabase.co",
-  SUPABASE_ANON_KEY: "PASTE_YOUR_SUPABASE_PUBLISHABLE_ANON_KEY"
+  // anon/public key — safe to expose; write access is gated by Row-Level Security.
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVidHFpa2dkaWxtZmd0dmpyYWp6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQwMzM1MTQsImV4cCI6MjA5OTYwOTUxNH0.GTqqoWqF5Z8IqTxT1ILRO5T_Gj9gJnAOYcFl_0ePVJs"
 };
